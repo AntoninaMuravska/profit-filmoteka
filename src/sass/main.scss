@@ -4,10 +4,10 @@
  */
 
 @import '../../node_modules/modern-normalize/modern-normalize.css';
-@import './utils/common';
-@import './components/page-header';
-@import './components/section-gallery/base-styles';
-@import './components/section-gallery/film-cards';
-@import './components/page-footer';
-@import './components/modal/base-styles';
-@import './components/modal/detailed-film-card';
+@import './components/common.scss';
+@import './components/page-header.scss';
+@import './components/section-gallery/base-styles.scss';
+@import './components/section-gallery/film-cards.scss';
+@import './components/page-footer.scss';
+@import './components/modal/base-styles.scss';
+@import './components/modal/detailed-film-card.scss';
