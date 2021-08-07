@@ -3,6 +3,11 @@
  * Все паршалы подключаются сюда.
  */
 
-// Стили для файла с примером HTML-фрагмента
-@import './example';
 @import '../../node_modules/modern-normalize/modern-normalize.css';
+@import './utils/common';
+@import './components/page-header';
+@import './components/section-gallery/base-styles';
+@import './components/section-gallery/film-cards';
+@import './components/page-footer';
+@import './components/modal/base-styles';
+@import './components/modal/detailed-film-card';
