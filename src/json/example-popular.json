@@ -1,0 +1,41 @@
+{
+    "page":1,
+    "results":[
+        {
+            "genre_ids":[28,12,35,878],
+            "id":436969,
+            "original_language":"en",
+            "original_title":"The Suicide Squad",
+            "poster_path":"/lSEr1nphZuCqXli3VziIgCI8Ivf.jpg",
+            "video":false,
+            "vote_average":8.3,
+            "overview":"Supervillains Harley Quinn, Bloodsport, Peacemaker and a collection of nutty cons at Belle Reve prison join the super-secret, super-shady Task Force X as they are dropped off at the remote, enemy-infused island of Corto Maltese.",
+            "release_date":"2021-07-28",
+            "vote_count":592,
+            "adult":false,
+            "backdrop_path":"/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg",
+            "title":"The Suicide Squad",
+            "popularity":2126.65,
+            "media_type":"movie"
+        },
+        {
+            "adult":false,
+            "backdrop_path":"/2BftdeCkD7uf68KUxaKRBxtsmZZ.jpg",
+            "genre_ids":[35,16,10402,10751,12],
+            "id":449406,
+            "original_language":"en",
+            "original_title":"Vivo",
+            "overview":"Vivo, Sony Pictures Animation's first-ever musical adventure featuring all-new original songs from Lin-Manuel Miranda, will take audiences on an epic adventure to gorgeous and vibrant locations never before seen in animation.",
+            "poster_path":"/eRLlrhbdYE7XN6VtcZKy6o2BsOw.jpg",
+            "release_date":"2021-07-30",
+            "title":"Vivo",
+            "video":false,
+            "vote_average":7.6,
+            "vote_count":9,
+            "popularity":54.534,
+            "media_type":"movie"
+        }
+    ],
+    "total_pages":1000,
+    "total_results":20000
+}
