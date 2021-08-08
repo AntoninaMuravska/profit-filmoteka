@@ -1,0 +1,79 @@
+:root {
+  --backdrop-background: rgba(0, 0, 0, 0.2);
+  --modal-background: #ffffff;
+
+  --animation-duration: 250ms;
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.modal-movie__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: var(--backdrop-background);
+  opacity: 1;
+  transition: var(--animation-duration) var(--timing-function);
+}
+
+.modal-movie {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+
+  background-color: var(--modal-background);
+
+  height: 90%;
+  width: 90%;
+
+  padding: 48px 20px 41px 20px;
+  @media screen and (min-width: 768px) {
+    padding: 42px 30px 40px 28px;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 618px;
+    max-height: 562px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    max-width: 882px;
+    max-height: 568px;
+  }
+}
+
+.modal-movie__close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  z-index: 20;
+
+  outline: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  width: 30px;
+  height: 30px;
+}
+
+.modal-movie__close-icon:hover,
+.modal-movie__close-icon:focus {
+  color: #ff6b08;
+}

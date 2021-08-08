@@ -1,0 +1,41 @@
+<div class='movie-card'>
+  <img
+    class='modal-movie__poster'
+    src='https://image.tmdb.org/t/p/w500{{poster_path}}'
+    alt='{{title}}'
+  />
+  <div class='movie-info'>
+    <h2 class='modal-movie__title'>{{title}}</h2>
+    <div class='movie-details'>
+
+      <ul class='movie-info__subtitles'>
+        <li>Vote / Votes</li>
+        <li>Popularity</li>
+        <li>Original title</li>
+        <li>Genre</li>
+      </ul>
+
+      <ul class='movie-info__subtitles-values'>
+        <li class='movie-rating'>
+          <span class='vote'>{{vote}}</span>
+          <span class='votes-slash'>/</span>
+          <span class='votes'>{{votes}}</span>
+        </li>
+
+        <li class='movie-popularity'>{{popularity}}</li>
+        <li class='movie-original-title'>{{original}}</li>
+        <li class='movie-genre'>{{genres}}</li>
+      </ul>
+
+    </div>
+
+    <h3 class='movie-about-subtitle'>ABOUT</h3>
+    <p class='movie-description'>{{description}}</p>
+
+    <div class='modal-movie__buttons'>
+      <button class='watched-btn'>ADD TO WATCHED</button>
+      <button class='queue-btn'>ADD TO QUEUE</button>
+    </div>
+
+  </div>
+</div>
