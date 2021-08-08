@@ -1,0 +1,185 @@
+.movie-card {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.modal-movie__poster {
+  border-radius: 5px;
+  margin-bottom: 30px;
+
+  @media screen and (min-width: 768px) {
+    width: 264px;
+    height: 373.55px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 396px;
+    height: 477.8px;
+  }
+}
+
+.movie-info {
+  @media screen and (min-width: 768px) {
+    margin-left: 32px;
+  }
+}
+
+.modal-movie__title {
+  font-size: 20px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+
+  @media screen and (min-width: 1024px) {
+    font-size: 30px;
+    line-height: 1.16;
+  }
+}
+
+.movie-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.movie-info__subtitles {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+  color: #8c8c8c;
+
+  font-size: 10px;
+
+  @media screen and (max-width: 767px) {
+    font-size: 12px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    font-size: 12px;
+  }
+}
+
+.movie-info__subtitles-values {
+  padding: 0;
+  margin-bottom: 10px;
+  margin-left: 20px;
+
+  @media screen and (min-width: 320px) {
+    margin-left: 32px;
+  }
+  @media screen and (min-width: 1024px) {
+    margin-left: 83px;
+  }
+
+  font-size: 10px;
+
+  @media screen and (max-width: 767px) {
+    font-size: 12px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    font-size: 12px;
+  }
+}
+
+.movie-rating {
+}
+
+.vote {
+  display: inline-block;
+  text-align: center;
+  padding-top: 2px;
+
+  width: 36px;
+  height: 16px;
+
+  border-radius: 5px;
+  background-color: #ff6b08;
+  color: #ffffff;
+}
+
+.votes-slash {
+  color: #8c8c8c;
+}
+
+.votes {
+  display: inline-block;
+  margin-left: 5px;
+  background: #f7f7f7;
+  border-radius: 5px;
+}
+
+.movie-popularity {
+}
+
+.movie-original-title {
+  max-width: 107px;
+  max-height: 15px;
+  text-transform: uppercase;
+
+  @media screen and (min-width: 768px) {
+    max-width: 190px;
+  }
+}
+
+.movie-genre {
+}
+
+.movie-about-subtitle {
+  text-transform: uppercase;
+}
+
+.movie-description {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.modal-movie__buttons {
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (min-width: 1024px) {
+    justify-content: flex-start;
+  }
+}
+
+.watched-btn {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.queue-btn {
+  margin-left: 15px;
+}
+
+.watched-btn,
+.queue-btn {
+  width: 112px;
+  height: 44px;
+
+  border: solid 1px #000000;
+  border-radius: 5px;
+
+  background-color: #ffffff;
+
+  @media screen and (max-width: 319px) {
+    font-size: 10px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 125px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 136px;
+  }
+}
+
+.watched-btn:hover,
+.queue-btn:hover {
+  color: #ffffff;
+  background-color: #ff6b08;
+  border: transparent;
+}

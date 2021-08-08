@@ -11,18 +11,17 @@ class MovieApi {
     //нужно поставить дефолтные картинки, если нет постера
     // this.DEFAULT_IMAGE = '';    ======= для галереи фильмов
     // this.DEFAULT_POSTER = '';   ======= постер для окна с деталями
-
   }
 
-//популярные фильмы на сегодня
-async getTrendingMovies() {
+  //популярные фильмы на сегодня
+  async getTrendingMovies() {
     const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}`);
     const movies = response.data.results;
     console.log(movies);
     return movies;
-}
-//поиск фильма
-async searchMovies(query) {
+  }
+  //поиск фильма
+  async searchMovies(query) {
     const response = await axios.get(
       `${this.BASE_URL}search/movie?query=${query}&api_key=${this.API_KEY}&language=en-US&page=1&include_adult=false`,
     );
@@ -31,8 +30,8 @@ async searchMovies(query) {
     return movies;
   }
 
-//детали фильма 
-async movieDetails(movie_id) {
+  //детали фильма
+  async movieDetails(movie_id) {
     const response = await axios.get(
       `${this.BASE_URL}movie/${movie_id}?api_key=${this.API_KEY}&language=en-US`,
     );
@@ -40,7 +39,6 @@ async movieDetails(movie_id) {
     console.log(data);
     return data;
   }
-
 }
 
 const MyApi = new MovieApi();
