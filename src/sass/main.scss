@@ -6,6 +6,7 @@
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 @import './utils/variables';
 @import './utils/utilities.scss';
+@import './utils/base.scss';
 @import './components/common.scss';
 @import './components/page-header.scss';
 @import './components/section-gallery/base-styles.scss';
@@ -13,4 +14,3 @@
 @import './components/page-footer.scss';
 @import './components/modal/base-styles.scss';
 @import './components/modal/detailed-film-card.scss';
-@import './utils/base.scss';
