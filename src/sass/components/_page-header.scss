@@ -1,0 +1,103 @@
+.header{
+    font-family: Roboto;
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.56);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),url(../images/Rectangle_1x.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    max-width: 1600px;
+    padding-top: 41px;
+    height: 230px;
+
+    @media 	only screen and (-webkit-min-device-pixel-ratio: 1.5),
+            only screen and (min--moz-device-pixel-ratio: 1.5),
+            only screen and (-o-min-device-pixel-ratio: 3/2),
+            only screen and (min-resolution: 1.5dppx),
+            only screen and (min-resolution: 144dpi)  {
+                background-image: url(../images/Rectangle_2x.jpg);
+    }
+    @media screen and (max-width: 767px){
+    padding-top: 46px;
+    }
+
+}
+
+.header__nav{
+    display: flex;
+    justify-content: space-between;
+    height: 24px;
+}
+
+.nav__list{
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+}
+.nav__item{
+    text-transform: uppercase;
+    &:not(:first-child){
+        margin-left: 39px;
+    }
+
+}
+
+.nav__link{
+ text-decoration: none;
+ color: #FFFFFF;
+ font-weight: 500;
+font-size: 12px;
+line-height: 1.167;
+}
+
+.logo{
+font-style: normal;
+font-weight: 500;
+font-size: 30px;
+line-height: 1.167;
+text-decoration: none;
+margin-left: 36px;
+color: #FFFFFF;
+
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
+}
+
+
+.header__form{
+    display: flex;
+    width: 336px;
+    justify-content: space-between;
+    border-bottom: solid 1px white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 37px;
+
+    @media screen and (max-width: 320px) {
+        width: 100%;
+    }
+}
+
+.header__input{
+    background-color:rgba(145, 49, 49, 0);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.143;
+    color: #FFFFFF;
+    border: none;
+    width: 300px;
+    @media screen and (max-width: 767px){
+        width: auto;
+    }
+}
+
+.header__button{
+   width: 12px;
+   height: 12px;
+   background-image: url('../images/search.svg');  
+   background-color:rgba(145, 49, 49, 0);
+   border: none;
+}
+
+
