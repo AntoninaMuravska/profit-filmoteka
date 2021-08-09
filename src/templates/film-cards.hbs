@@ -1,0 +1,12 @@
+{{#each this}}
+<li class="film-card" data-id="{{id}}">
+    <div class="film-thumbs"><img class="film-img" src="backdrop_path" alt="{{title}}" /></div>
+    <div class="film-text-wrapper">
+        <h2 class="title">{{title}}</h2>
+        <div class="film-box">
+            <p class="genre">{{genre_ids}}</p>
+            <p class="release-date">{{release_date}}</p>
+        </div>
+    </div>
+</li>
+{{/each}}
