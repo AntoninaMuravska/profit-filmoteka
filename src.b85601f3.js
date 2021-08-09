@@ -65,4 +65,4 @@ module.exports=require("./lib/axios");
 },{"axios":"dZBD"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/api/fetchApi.js");
 },{"./sass/main.scss":"clu1","./js/api/fetchApi.js":"CjYU"}]},{},["Focm"], null)
-//# sourceMappingURL=/profit-filmoteka/src.314ffd28.js.map
+//# sourceMappingURL=/profit-filmoteka/src.b85601f3.js.map
