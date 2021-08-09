@@ -1,9 +1,9 @@
-/*Функция добавления разметки в переданный елемент*/
+/*Функция добавления разметки в указанный елемент*/
 export const appendMarkup = (elem,data) => {
     elem.insertAdjacentHTML('beforeend', data);
 };
 
-/*Функция очистки галлереи*/
+/*Функция очистки разметки в указанном елементе*/
 export const clearMarkup = (elem) => {
     elem.innerHTML = '';
 };
