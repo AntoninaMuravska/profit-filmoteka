@@ -58,7 +58,7 @@ export const onButtonLibraryContainerClick = e => {
 export const onLibraryButtonClick = e => {
     const elem = e.currentTarget;
     
-    library.setActiveLibrary(elem.dataset.source);
+    library.setActiveLibrary(elem.dataset.name);
     library.resetPage();
     library.resetEndStatus();
     
