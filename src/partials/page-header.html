@@ -8,10 +8,10 @@
             </div>
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a class="nav__link" href="index.html">Home</a>
+                    <a class="nav__link is_active" href="index.html" data-name="home">Home</a>
                 </li>
                 <li class="nav__item">
-                    <a class="nav__link" href="#">my library</a>
+                    <a class="nav__link" href="#" data-name="library">my library</a>
                 </li>
             </ul>
         </div>
@@ -19,6 +19,10 @@
             <input class="header__input" type="text" name="searchQuery" autocomplete="off"
                 placeholder="Поиск фильмов" />
             <button type="submit" class="header__button"></button>
+        </div>
+        <div class="header__library-buttons">
+            <button type="submit" class="header__library-button is_invisible" data-name="watched">Watched</button>
+            <button type="submit" class="header__library-button is_invisible" data-name="queue">queue</button>
         </div>
 
     </div>
