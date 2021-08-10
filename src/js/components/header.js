@@ -15,43 +15,56 @@ queueBtn.addEventListener('click', onQueueBtnClick);
 watchedBtn.addEventListener('click', onWatchedBtnClick);
 
 function onHomeBtnClick(e) {
-    e.preventDefault()
-    headerBack.classList.remove('back_library');
-    libraryBtn.classList.remove('is_active');
-    homeBtn.classList.add('is_active');
-    headerForm.classList.remove('is_invisible');
-    watchedBtn.classList.add('is_invisible');
-    queueBtn.classList.add('is_invisible');
-    console.log('клик по кнопке home')
+  e.preventDefault();
+  headerBack.classList.remove('back_library');
+  libraryBtn.classList.remove('is_active');
+  homeBtn.classList.add('is_active');
+  headerForm.classList.remove('is_invisible');
+  watchedBtn.classList.add('is_invisible');
+  queueBtn.classList.add('is_invisible');
+
+  //убирает рейтинг на страничке home
+  const ratings = document.querySelectorAll('.rating');
+  if (!libraryBtn.classList.contains('is_active')) {
+    ratings.forEach(rating => rating.classList.add('visually-hidden'));
+  }
+  //
+  console.log('клик по кнопке home');
 }
 
 function onLibraryBtnClick(e) {
-    e.preventDefault()
-    headerBack.classList.add('back_library');
-    libraryBtn.classList.add('is_active');
-    homeBtn.classList.remove('is_active');
-    headerForm.classList.add('is_invisible');
-    watchedBtn.classList.remove('is_invisible');
-    watchedBtn.classList.add('is_active_btn');
-    queueBtn.classList.remove('is_invisible');
-    console.log();
-    console.log('клик по кнопке library')
+  e.preventDefault();
+  headerBack.classList.add('back_library');
+  libraryBtn.classList.add('is_active');
+  homeBtn.classList.remove('is_active');
+  headerForm.classList.add('is_invisible');
+  watchedBtn.classList.remove('is_invisible');
+  watchedBtn.classList.add('is_active_btn');
+  queueBtn.classList.remove('is_invisible');
+
+  //добавляет рейтинг на страничке библиотеки
+  const ratings = document.querySelectorAll('.rating');
+  if (libraryBtn.classList.contains('is_active')) {
+    ratings.forEach(rating => rating.classList.remove('visually-hidden'));
+  }
+  //
+  console.log();
+  console.log('клик по кнопке library');
 }
 
 function onSearchBtn(e) {
-    e.preventDefault()
-    console.log('клик по кнопке search')
+  e.preventDefault();
+  console.log('клик по кнопке search');
 }
 
 function onQueueBtnClick(e) {
-    e.preventDefault();
-    watchedBtn.classList.remove('is_active_btn');
-    queueBtn.classList.add('is_active_btn');
+  e.preventDefault();
+  watchedBtn.classList.remove('is_active_btn');
+  queueBtn.classList.add('is_active_btn');
 }
 
-
 function onWatchedBtnClick(e) {
-    e.preventDefault;
-    watchedBtn.classList.add('is_active_btn');
-    queueBtn.classList.remove('is_active_btn');
+  e.preventDefault;
+  watchedBtn.classList.add('is_active_btn');
+  queueBtn.classList.remove('is_active_btn');
 }
