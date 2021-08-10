@@ -4,7 +4,8 @@ export default class MovieApi {
   constructor() {
     this.API_KEY = '16793a08fc468099c942dee45d510578';
     this.BASE_URL = 'https://api.themoviedb.org/3/';
-    this.genres = [];
+    this.genres = {};
+    this.moviesObj = {};
 
     // this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
     // this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
@@ -18,7 +19,8 @@ export default class MovieApi {
   async getTrendingMovies() {
     const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}`);
     const movies = response.data.results;
-    // console.log(movies);
+    this.moviesObj = response.data;
+    // console.log(this.moviesObj);
     return movies;
   }
   //поиск фильма
@@ -46,7 +48,7 @@ export default class MovieApi {
     const response = await axios.get(`
       ${this.BASE_URL}genre/movie/list?api_key=${this.API_KEY}&language=en-US`)
       const data = response.data;
-      console.log(data);
+    //   console.log(data);
       this.genres = data;
       return this.genres;
   }
