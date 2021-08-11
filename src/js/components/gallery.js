@@ -11,12 +11,9 @@ function renderGallery() {
     MyApi.getTrendingMovies().then(data => {
       MyApi.genresList().then(genresObj => {
         genresTransformation(MyApi.moviesObj, genresObj);
-        console.log(data)
-        
+
         createMarkup(data);
-      })
-      // console.log(data)
-      // createMarkup(data);
+      });
     });
   } catch (error) {
     throw error;
@@ -29,8 +26,6 @@ function createMarkup(movies) {
 }
 
 renderGallery();
-
-
 
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
