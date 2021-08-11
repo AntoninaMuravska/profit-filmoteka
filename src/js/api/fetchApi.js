@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { saveGenres } from '../components/session-storage';
 
 export default class MovieApi {
   constructor() {
@@ -46,11 +47,14 @@ export default class MovieApi {
   //жанры
   async genresList() {
     const response = await axios.get(`
-      ${this.BASE_URL}genre/movie/list?api_key=${this.API_KEY}&language=en-US`)
-      const data = response.data;
+      ${this.BASE_URL}genre/movie/list?api_key=${this.API_KEY}&language=en-US`);
+    const data = response.data;
+
     //   console.log(data);
-      this.genres = data;
-      return this.genres;
+    this.genres = data;
+
+    saveGenres('genres', this.genres.genres);
+    return this.genres;
   }
 }
 
