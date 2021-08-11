@@ -14,18 +14,14 @@ import filmDetailedInfo from '../../json/example-detailed-info.json';
 const openModal = async filmId => {
   refs.modal.classList.toggle('is-hidden');
   const modalInfoContainer=refs.modal.querySelector('.modal-movie__info');
-  consile.log(filmId);
+  console.log(filmId);
+  
   /*
   *ТУТ ДОЛЖЕН БЫТЬ ЗАПРОС ПО ID. Возвращенный объект передаем в следующее выражение.
   */
-  let data = null;
-  try {
-    MyApi.movieDetails(filmId).then(data=>data);
-  } catch (error){
-    console.error('KOKOKO');
-  }
-  console.log(data);
-  
+
+  const data = filmDetailedInfo;
+
   clearMarkup(modalInfoContainer);
   appendMarkup(modalInfoContainer, templateFilmDetailedInfo(data)); /** ЗАМЕНИТЬ НА ВХОДЯЩИЕ ДАННЫЕ  */
 
