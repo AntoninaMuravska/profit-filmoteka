@@ -1,3 +1,4 @@
+{{#this}}
 <div class='movie-card'>
   <img
     class='modal-movie__poster'
@@ -17,20 +18,20 @@
 
       <ul class='movie-info__subtitles-values'>
         <li class='movie-rating'>
-          <span class='vote'>{{vote}}</span>
+          <span class='vote'>{{vote_average}}</span>
           <span class='votes-slash'>/</span>
-          <span class='votes'>{{votes}}</span>
+          <span class='votes'>{{vote_count}}</span>
         </li>
 
         <li class='movie-popularity'>{{popularity}}</li>
-        <li class='movie-original-title'>{{original}}</li>
+        <li class='movie-original-title'>{{original_title}}</li>
         <li class='movie-genre'>{{genres}}</li>
       </ul>
 
     </div>
 
     <h3 class='movie-about-subtitle'>about</h3>
-    <p class='movie-description'>{{description}}</p>
+    <p class='movie-description'>{{overview}}</p>
 
     <div class='modal-movie__buttons'>
       <button class='watched-btn' data-active='true' data-name='watched' data-id={{id}}>add to watched</button>
@@ -39,3 +40,4 @@
 
   </div>
 </div>
+{{/this}}
