@@ -14,14 +14,15 @@ const filmId = 436969;
 */
 export const onButtonLibraryContainerClick = e => {
     const elem = e.target;
+    const isLibraryBtns = e.target.dataset.name === 'watched' || e.target.dataset.name === 'queue';
 
-    if (elem.nodeName !== 'BUTTON') {
+    if (elem.nodeName!=='BUTTON' || !isLibraryBtns) {
         return;
     }
 
     const libraryBtns = {
-        watched: libraryBtnContainer.querySelector('[data-name="watched"]'),
-        queue: libraryBtnContainer.querySelector('[data-name="queue"]')
+        watched: e.target.parentNode.querySelector('[data-name="watched"]'),
+        queue: e.target.parentNode.querySelector('[data-name="queue"]')
     };
 
     let librarySource;
@@ -83,6 +84,7 @@ export const onLibraryButtonClick = e => {
     // console.log(data);
 };
 
+
 /* 
  * Функция для реализации пагинации. Подтягивает следующие 20 елементов из активной библиотеки.
 */
@@ -113,6 +115,7 @@ export const loadMoreItems = () => {
     library.incrementPage();
     // console.log(data);
 };
+
 
 /* 
  * Функция для автозапуска при открытии модалки. Проверяет библиотеку на наличие 

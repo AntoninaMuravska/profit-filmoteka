@@ -27,7 +27,7 @@ const genresTransformation = (dataObj, genresObj, genresLimit = 2) => {
         return outputArr;
     };
 
-    data.results.map(elem => { elem.genre_ids=genresChanging(elem.genre_ids,genresObj) });
+    data.results.map(elem => { elem.genre_ids=genresChanging(elem.genre_ids,genresObj).join(', ') });
 
     return data;
 };
