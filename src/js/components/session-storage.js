@@ -3,13 +3,25 @@ const saveGenres = function (key, genres) {
 };
 
 const getItem = function (key) {
-  return sessionStorage.getItem(key);
+  return JSON.parse(sessionStorage.getItem(key));
 };
 
-//принимает масив обьектов фильмов, каждый фильм добавляет в sessionStorage
-//ключ - ID фильма, значение - весь обьект фильма (потом при запросе по ID фильма, можно получить обьект фильма)
-const saveFilmItem = function (array) {
-  array.map(elem => sessionStorage.setItem(elem.id, JSON.stringify(elem)));
+//массив обьектов фильмов добавляет в sessionStorage
+const saveFilmItem = function (key, array) {
+  sessionStorage.setItem(key, JSON.stringify(array));
 };
 
-export { saveGenres, getItem, saveFilmItem };
+//добавляет массив обьектов фильмов поиска, если есть в SS такой ключ,
+// тогда новый результат поиска добавляет к существуюющему
+const saveSerchFilmItem = function (key, array) {
+  const arraySessionStorage = [];
+  if (getItem(key)) {
+    arraySessionStorage.push(...getItem(key));
+    arraySessionStorage.push(...array);
+    sessionStorage.setItem(key, JSON.stringify(arraySessionStorage));
+    return;
+  }
+  sessionStorage.setItem(key, JSON.stringify(array));
+};
+
+export { saveGenres, getItem, saveFilmItem, saveSerchFilmItem };
