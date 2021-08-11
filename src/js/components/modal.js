@@ -5,25 +5,23 @@ import { onButtonLibraryContainerClick } from './library-app';
 import refs from './refs';
 import { MyApi } from './gallery';
 
-
-/**Тестовые данные */
-import filmDetailedInfo from '../../json/example-detailed-info.json';
-
-
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
   refs.modal.classList.toggle('is-hidden');
-  const modalInfoContainer=refs.modal.querySelector('.modal-movie__info');
-  console.log(filmId);
-  
-  /*
-  *ТУТ ДОЛЖЕН БЫТЬ ЗАПРОС ПО ID. Возвращенный объект передаем в следующее выражение.
-  */
-
-  const data = filmDetailedInfo;
+  const modalInfoContainer = refs.modal.querySelector('.modal-movie__info');
 
   clearMarkup(modalInfoContainer);
-  appendMarkup(modalInfoContainer, templateFilmDetailedInfo(data)); /** ЗАМЕНИТЬ НА ВХОДЯЩИЕ ДАННЫЕ  */
+
+  function addCardInfo() {
+    try {
+      MyApi.movieDetails(filmId).then(data => {
+        appendMarkup(modalInfoContainer, templateFilmDetailedInfo(data));
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+  addCardInfo();
 
   refs.modal.addEventListener('click', onButtonLibraryContainerClick);
   refs.modal.addEventListener('click', onModalCloseElemsClick);
@@ -32,8 +30,6 @@ const openModal = async filmId => {
 
 export default openModal;
 
-
-
 /*Функция, отвечающая за закрытие модалки*/
 const сloseModal = () => {
   refs.modal.removeEventListener('click', onButtonLibraryContainerClick);
@@ -41,9 +37,7 @@ const сloseModal = () => {
   window.removeEventListener('keydown', onEscKeyPress);
 
   refs.modal.classList.toggle('is-hidden');
-}
-
-
+};
 
 /*Функция-обработчик клика на кнопку закрытия или пустую площадь модалки*/
 const onModalCloseElemsClick = e => {
@@ -61,12 +55,10 @@ const onModalCloseElemsClick = e => {
   } catch {
     isBackdropArea = false;
   }
-   
+
   if (!isCloseButton && !isBackdropArea) return;
   сloseModal();
-}
-
-
+};
 
 /*Функция-обработчик нажатия клавиши ESC на клавиатуре*/
 const onEscKeyPress = e => {
@@ -74,10 +66,4 @@ const onEscKeyPress = e => {
   if (e.code === 'Escape') {
     сloseModal();
   }
-}
-
-
-
-
-
-
+};
