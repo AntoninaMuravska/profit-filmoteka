@@ -11,24 +11,27 @@ const genresTransformation = (dataObj, genresObj, genresLimit = 2) => {
     const genresChanging = (arr, { genres } = genresObj) => {
         const outputArr = [];
         for (let i = 0; i < arr.length; i += 1) {
+            if (i > genresLimit - 1) {
+                outputArr.push("Other");
+                break;
+            }
+            const currentGenre = genres.find(elem => elem.id === arr[i]);
 
-            if (!isUnlimit) {
-                if (i > genresLimit - 1) {
-                    outputArr.push("Other");
-                    break;
-                }
-                const currentGenre = genres.find(elem => elem.id === arr[i]);
+            if (currentGenre) {
                 outputArr.push(currentGenre.name);
             } else {
-                const currentGenre = genres.find(elem => elem.id ===  arr[i]);
-                outputArr.push(currentGenre.name);
+                outputArr.push("some");
             }
         }
         return outputArr;
     };
-
-    data.results.map(elem => { elem.genre_ids=genresChanging(elem.genre_ids,genresObj).join(', ') });
-
+    
+    if (!isUnlimit) {
+        data.results.map(elem => { elem.genre_ids = genresChanging(elem.genre_ids, genresObj).join(', ') });
+    } else {
+        data.genres = [...data.genres].map(elem => elem.name).join(', ');
+    }
+    
     return data;
 };
 
