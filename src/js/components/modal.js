@@ -1,9 +1,11 @@
 import templateFilmDetailedInfo from '../../templates/detailed-film-card.hbs';
 import { clearMarkup, appendMarkup } from './render-markup';
 import genresTransformation from './genre-transformator';
-import { onButtonLibraryContainerClick } from './library-app';
+import { onButtonLibraryContainerClick, onModalOpenAutorun } from './library-app';
 import refs from './refs';
 import { MyApi } from './gallery';
+
+
 
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
@@ -16,6 +18,11 @@ const openModal = async filmId => {
     try {
       MyApi.movieDetails(filmId).then(data => {
         appendMarkup(modalInfoContainer, templateFilmDetailedInfo(data));
+
+        const watchedBtnRef = refs.modal.querySelector('.watched-btn');
+        const queueBtnRef = refs.modal.querySelector('.queue-btn');
+        
+        onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
       });
     } catch (error) {
       throw error;
@@ -23,12 +30,15 @@ const openModal = async filmId => {
   }
   addCardInfo();
 
+
   refs.modal.addEventListener('click', onButtonLibraryContainerClick);
   refs.modal.addEventListener('click', onModalCloseElemsClick);
   window.addEventListener('keydown', onEscKeyPress);
 };
 
 export default openModal;
+
+
 
 /*Функция, отвечающая за закрытие модалки*/
 const сloseModal = () => {
@@ -38,6 +48,8 @@ const сloseModal = () => {
 
   refs.modal.classList.toggle('is-hidden');
 };
+
+
 
 /*Функция-обработчик клика на кнопку закрытия или пустую площадь модалки*/
 const onModalCloseElemsClick = e => {
@@ -59,6 +71,8 @@ const onModalCloseElemsClick = e => {
   if (!isCloseButton && !isBackdropArea) return;
   сloseModal();
 };
+
+
 
 /*Функция-обработчик нажатия клавиши ESC на клавиатуре*/
 const onEscKeyPress = e => {
