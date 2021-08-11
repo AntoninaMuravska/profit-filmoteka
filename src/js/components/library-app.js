@@ -4,7 +4,7 @@ const library = new LibraryApi();
 
 /*Временные тестовые данные*/
 import singleFilmObj from '../../json/example-single-film-data';
-const filmId = 436969;
+// const filmId = 436969;
 
 
 /* 
@@ -14,6 +14,7 @@ const filmId = 436969;
 */
 export const onButtonLibraryContainerClick = e => {
     const elem = e.target;
+    
     const isLibraryBtns = e.target.dataset.name === 'watched' || e.target.dataset.name === 'queue';
 
     if (elem.nodeName!=='BUTTON' || !isLibraryBtns) {
@@ -25,9 +26,10 @@ export const onButtonLibraryContainerClick = e => {
         queue: e.target.parentNode.querySelector('[data-name="queue"]')
     };
 
+    const filmId=Number(e.target.dataset.id);
     let librarySource;
     let nonTargetBtn;
-
+    
     if (elem.dataset.name === 'watched') {
         librarySource = 'watched';
         nonTargetBtn = libraryBtns.queue;
@@ -35,7 +37,7 @@ export const onButtonLibraryContainerClick = e => {
         librarySource = 'queue';
         nonTargetBtn = libraryBtns.watched;
     }
-            
+         
     const isActive = elem.dataset.active;
 
     if (isActive === 'true') {
@@ -122,30 +124,47 @@ export const loadMoreItems = () => {
  * текущего фильма по id и производит настройку кнопок модалки для корректного отображения 
  * и функционирования. В функцию необходимо передать ссылки на кнопки.
 */
-export const onModalOpenAutorun = (watchBtnLink, queueBtnLink) => {
-    const { isAvailable , library } = library.availabilityChecking(filmId);
+export const onModalOpenAutorun = (watchBtnLink, queueBtnLink, filmId) => {
+    const checkingResult = library.availabilityChecking(filmId);
+    
+    // switch (checkingResult.isAvailable) {
+    //      case false:
+    //         for (const elem of [watchBtnLink, queueBtnLink]) {
+    //             elem.dataset.active = "true";
+    //             elem.removeAttribute("disabled");
+    //             // elem.textContent = 'KOKOKO';
+    //         }
+    //         break;
+    //     case true:
+    //         if (checkingResult.sourceLibrary === 'watched') {
+    //             watchBtnLink.dataset.active = "false";
+    //             watchBtnLink.removeAttribute("disabled");
+    //             watchBtnLink.textContent="Delete from watched"
+    //             queueBtnLink.dataset.active = "true";
+    //             queueBtnLink.setAttribute("disabled", "");
+    //         } else {
+    //             queueBtnLink.dataset.active = "false";
+    //             queueBtnLink.removeAttribute("disabled");
+    //             watchBtnLink.textContent="Delete from queue"
+    //             watchBtnLink.dataset.active = "true";
+    //             watchBtnLink.setAttribute("disabled", "");
+    //         }
+    //         break;
+    // }
 
-    switch (isAvailable) {
-         case false:
-            for (const elem of [watchBtnLink, queueBtnLink]) {
-                elem.dataset.active = "true";
-                elem.setAttribute("enabled", "true");
-            }
-            break;
-        case true:
-            if (library === 'watched') {
-                watchBtnLink.dataset.action = "false";
-                watchBtnLink.removeAttribute("disabled");
-                watchBtnLink.textContent="Delete from watched"
-                queueBtnLink.dataset.action = "true";
-                queueBtnLink.setAttribute("disabled", "");
-            } else {
-                queueBtnLink.dataset.action = "false";
-                queueBtnLink.removeAttribute("disabled");
-                watchBtnLink.textContent="Delete from queue"
-                watchBtnLink.dataset.action = "true";
-                watchBtnLink.setAttribute("disabled", "");
-            }
-            break;
+    if (checkingResult.isAvailable) {
+        if (checkingResult.sourceLibrary === 'watched') {
+            watchBtnLink.dataset.active = "false";
+            watchBtnLink.removeAttribute("disabled");
+            watchBtnLink.textContent="Remove from watched"
+            queueBtnLink.dataset.active = "true";
+            queueBtnLink.setAttribute("disabled", "");
+        } else {
+            queueBtnLink.dataset.active = "false";
+            queueBtnLink.removeAttribute("disabled");
+            queueBtnLink.textContent="Remove from queue"
+            watchBtnLink.dataset.active = "true";
+            watchBtnLink.setAttribute("disabled", "");
+        }
     }
 };
