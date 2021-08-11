@@ -3,6 +3,7 @@ import MovieApi from '../api/fetch-api.js';
 import refs from '../../js/components/refs.js';
 import genresTransformation from './genre-transformator.js';
 import openModal from './modal';
+import { dateTransformation } from '../components/date-transformation';
 
 export const MyApi = new MovieApi();
 
@@ -11,9 +12,9 @@ function renderGallery() {
     MyApi.getTrendingMovies().then(data => {
       MyApi.genresList().then(genresObj => {
         genresTransformation(MyApi.moviesObj, genresObj);
-
         createMarkup(data);
       });
+      dateTransformation(data);
     });
   } catch (error) {
     throw error;
