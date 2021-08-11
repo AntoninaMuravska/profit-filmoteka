@@ -4,6 +4,6 @@ export const appendMarkup = (elem,data) => {
 };
 
 /*Функция очистки разметки в указанном елементе*/
-export const clearMarkup = (elem) => {
+export const clearMarkup = elem => {
     elem.innerHTML = '';
 };
