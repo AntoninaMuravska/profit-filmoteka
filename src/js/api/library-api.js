@@ -6,6 +6,8 @@ export default class LibraryApi {
         this.activeLibrary = null;
     }
 
+
+
     /*метод для получения данных из указанной библиотеки в localStorage*/
     getData(libraryType) {
         const storageData = localStorage.getItem(libraryType);
@@ -20,6 +22,8 @@ export default class LibraryApi {
 
         return null;
     }
+
+
 
     /*метод для записи елемента в указанную библиотеку в localStorage*/
     setData(data, libraryType) {
@@ -43,6 +47,8 @@ export default class LibraryApi {
         localStorage.setItem(libraryType,JSON.stringify(storageData));
     }
 
+
+
     /*метод для удаления елемента из указанной библиотеки в localStorage*/
     removeData(filmId, libraryType) {
         const storageData = this.getData(libraryType);
@@ -54,7 +60,7 @@ export default class LibraryApi {
         
         const isFound=storageData.library.find((el, idx) => {
             if (el.id !== filmId) return false;
-
+            
             storageData.library.splice(idx, 1);
             storageData.total_results -= 1;
             storageData.total_pages = Math.ceil(storageData.total_results / 20);
@@ -67,6 +73,8 @@ export default class LibraryApi {
         }
         localStorage.setItem(libraryType,JSON.stringify(storageData));
     }
+
+
 
     /*метод для получение порции из 20 (или менее) елементов библиотеки */
     fetchData() {
@@ -86,6 +94,8 @@ export default class LibraryApi {
         return JSON.stringify(outputData);
     }
 
+
+
     /*метод для проверки наличия фильма в библиотеке пользователя*/
     availabilityChecking(filmId) {
         const library = {
@@ -94,7 +104,6 @@ export default class LibraryApi {
         }
 
         const keys = Object.keys(library);
-        console.log(keys);
         let isAvailable = false;
         let sourceLibrary = null;
         
@@ -120,6 +129,8 @@ export default class LibraryApi {
         return { isAvailable, sourceLibrary };
     }    
 
+
+    
     /*метод для увеличения значения страницы для пагинации*/
     incrementPage() {
         this.page += 1;
