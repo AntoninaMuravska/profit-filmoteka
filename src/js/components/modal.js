@@ -5,7 +5,8 @@ import { onButtonLibraryContainerClick, onModalOpenAutorun } from './library-app
 import refs from './refs';
 import { MyApi } from './gallery';
 
-
+/**Временные данные*/
+import genresObject from '../../json/example-genres.json';
 
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
@@ -17,7 +18,7 @@ const openModal = async filmId => {
   function addCardInfo() {
     try {
       MyApi.movieDetails(filmId).then(data => {
-        appendMarkup(modalInfoContainer, templateFilmDetailedInfo(data));
+        appendMarkup(modalInfoContainer, templateFilmDetailedInfo(genresTransformation(data, genresObject, "all")));
 
         const watchedBtnRef = refs.modal.querySelector('.watched-btn');
         const queueBtnRef = refs.modal.querySelector('.queue-btn');
