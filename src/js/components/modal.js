@@ -1,49 +1,87 @@
-const refs = {
-  galleryList: document.querySelector('.js-gallery'),
-  modal: document.querySelector('#modal-movie__description'),
-  closeModalBtn: document.querySelector('[data-action="modal-movie__close"]'),
-  backdrop: document.querySelector('.modal-movie__backdrop'),
-  addToWatchedBtn: document.querySelector('button[data-name="watched"]'),
-  addToQueueBtn: document.querySelector('button[data-name="queue"]'),
+import templateFilmDetailedInfo from '../../templates/detailed-film-card.hbs';
+import { clearMarkup, appendMarkup } from './render-markup';
+import genresTransformation from './genre-transformator';
+import { onButtonLibraryContainerClick } from './library-app';
+import refs from './refs';
+import { MyApi } from './gallery';
+
+
+/**Тестовые данные */
+import filmDetailedInfo from '../../json/example-detailed-info.json';
+
+
+/*Функция, отвечающая за открытие и функционирование модалки*/
+const openModal = async filmId => {
+  refs.modal.classList.toggle('is-hidden');
+  const modalInfoContainer=refs.modal.querySelector('.modal-movie__info');
+  consile.log(filmId);
+  /*
+  *ТУТ ДОЛЖЕН БЫТЬ ЗАПРОС ПО ID. Возвращенный объект передаем в следующее выражение.
+  */
+  let data = null;
+  try {
+    MyApi.movieDetails(filmId).then(data=>data);
+  } catch (error){
+    console.error('KOKOKO');
+  }
+  console.log(data);
+  
+  clearMarkup(modalInfoContainer);
+  appendMarkup(modalInfoContainer, templateFilmDetailedInfo(data)); /** ЗАМЕНИТЬ НА ВХОДЯЩИЕ ДАННЫЕ  */
+
+  refs.modal.addEventListener('click', onButtonLibraryContainerClick);
+  refs.modal.addEventListener('click', onModalCloseElemsClick);
+  window.addEventListener('keydown', onEscKeyPress);
 };
 
-refs.galleryList.addEventListener('click', onMovieCardClick);
-refs.closeModalBtn.addEventListener('click', onCloseModal);
-refs.backdrop.addEventListener('click', onBackdropClick);
+export default openModal;
 
-function onMovieCardClick(event) {
-  event.preventDefault();
 
-  const isMovieCard = event.target.classList.contains('js-gallery-item');
-  if (!isMovieCard) {
-    return;
-  }
 
-  onOpenModal(event.target.dataset.id);
-}
-
-function onOpenModal() {
-  refs.modal.classList.remove('is-hidden');
-
-  refs.addToWatchedBtn.addEventListener('click', onAddToWatchedClick);
-  refs.addToQueueBtn.addEventListener('click', onAddToQueueClick);
-}
-
-function onCloseModal() {
-  refs.modal.classList.add('is-hidden');
-  refs.backdrop.removeEventListener('click', onBackdropClick);
+/*Функция, отвечающая за закрытие модалки*/
+const сloseModal = () => {
+  refs.modal.removeEventListener('click', onButtonLibraryContainerClick);
+  refs.modal.removeEventListener('click', onModalCloseElemsClick);
   window.removeEventListener('keydown', onEscKeyPress);
+
+  refs.modal.classList.toggle('is-hidden');
 }
 
-function onBackdropClick(event) {
-  if (event.currentTarget === event.target) {
-    onCloseModal();
+
+
+/*Функция-обработчик клика на кнопку закрытия или пустую площадь модалки*/
+const onModalCloseElemsClick = e => {
+  let isCloseButton = null;
+  let isBackdropArea = null;
+
+  try {
+    isCloseButton = e.target.closest('BUTTON').classList.contains('modal-movie__close-btn');
+  } catch {
+    isCloseButton = false;
+  }
+
+  try {
+    isBackdropArea = e.target.classList.contains('modal-movie__backdrop');
+  } catch {
+    isBackdropArea = false;
+  }
+   
+  if (!isCloseButton && !isBackdropArea) return;
+  сloseModal();
+}
+
+
+
+/*Функция-обработчик нажатия клавиши ESC на клавиатуре*/
+const onEscKeyPress = e => {
+  console.log('ESC');
+  if (e.code === 'Escape') {
+    сloseModal();
   }
 }
 
-function onEscKeyPress(event) {
-  if (event.code === 'Escape') {
-    window.addEventListener('keydown', onEscKeyPress);
-    onCloseModal();
-  }
-}
+
+
+
+
+
