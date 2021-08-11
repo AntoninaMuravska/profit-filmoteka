@@ -1,9 +1,10 @@
 import cardTpl from '../../templates/film-cards.hbs';
-import MovieApi from '../api/fetchApi.js';
+import MovieApi from '../api/fetch-api.js';
 import refs from '../../js/components/refs.js';
 import genresTransformation from './genre-transformator.js';
+import openModal from './modal';
 
-const MyApi = new MovieApi();
+export const MyApi = new MovieApi();
 
 function renderGallery() {
   try {
@@ -28,3 +29,11 @@ function createMarkup(movies) {
 }
 
 renderGallery();
+
+
+
+/*Функция-обработчик клика на елемент галереи*/
+export const onGalleryItemClick = e => {
+  const cardRef = e.target.closest('.film-card___container');
+  openModal(cardRef.dataset.id);
+};
