@@ -1,3 +1,4 @@
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import templateFilmDetailedInfo from '../../templates/detailed-film-card.hbs';
 import { clearMarkup, appendMarkup } from './render-markup';
 import genresTransformation from './genre-transformator';
@@ -11,6 +12,8 @@ import genresObject from '../../json/example-genres.json';
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
   refs.modal.classList.toggle('is-hidden');
+  
+  disableBodyScroll(document.body);
   const modalInfoContainer = refs.modal.querySelector('.modal-movie__info');
 
   clearMarkup(modalInfoContainer);
@@ -46,7 +49,7 @@ const сloseModal = () => {
   refs.modal.removeEventListener('click', onButtonLibraryContainerClick);
   refs.modal.removeEventListener('click', onModalCloseElemsClick);
   window.removeEventListener('keydown', onEscKeyPress);
-
+  enableBodyScroll(document.body);
   refs.modal.classList.toggle('is-hidden');
 };
 
