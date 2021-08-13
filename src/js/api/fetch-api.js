@@ -10,7 +10,6 @@ export default class MovieApi {
     this.currentPage = 1;
     this.rows = 20;
 
-
     // this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
     // this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
 
@@ -57,7 +56,7 @@ export default class MovieApi {
     //   console.log(data);
     this.genres = data;
 
-    saveGenres('genres', this.genres.genres);
+    saveGenres('genres', data);
     return this.genres;
   }
 }

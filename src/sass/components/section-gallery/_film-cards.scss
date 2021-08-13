@@ -18,6 +18,20 @@
 }
 
 .film-thumbs {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.film-card___container:hover .film-thumbs {
+  transform: scale(1.15);
+  cursor: pointer;
+  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px rgb(99, 4, 224), 0 0 40px hsl(221, 98%, 50%),
+    0 0 70px #154afa, 0 0 80px #8d05c4, 0 0 150px #00ff00, 0 0 15px rgba(199, 253, 3, 0.25);
+}
+.film-card___container:hover .film-text-wrapper {
+  opacity: 0;
+}
+
+.film-thumbs {
   height: 402px;
   @media screen and(min-width: 768px) {
     height: 398px;
@@ -31,6 +45,7 @@
 
 .film-text-wrapper {
   padding-top: 10px;
+  transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .title {
