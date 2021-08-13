@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { saveGenres, saveFilmItem, saveSerchFilmItem } from '../components/session-storage';
+import { saveGenres, saveFilms } from '../components/session-storage';
 
 export default class MovieApi {
   constructor() {
@@ -21,7 +21,7 @@ export default class MovieApi {
     const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}`);
     const movies = response.data.results;
     this.moviesObj = response.data;
-    saveFilmItem('popular films', this.moviesObj.results);
+    saveFilms('popular', this.moviesObj.results);
     return movies;
   }
   //поиск фильма
@@ -31,7 +31,7 @@ export default class MovieApi {
     );
     const movies = response.data.results;
     console.log(movies);
-    saveSerchFilmItem('search films', movies);
+    saveFilms('search', movies);
     return movies;
   }
 
