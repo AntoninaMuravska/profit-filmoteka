@@ -1,9 +1,8 @@
 import LibraryApi from '../api/library-api';
+import { getFilm } from './session-storage'
 
 const library = new LibraryApi();
 
-/*Временные тестовые данные*/
-import singleFilmObj from '../../json/example-single-film-data';
 
 
 /* 
@@ -25,7 +24,8 @@ export const onButtonLibraryContainerClick = e => {
         queue: e.target.parentNode.querySelector('[data-name="queue"]')
     };
 
-    const filmId=Number(e.target.dataset.id);
+    const filmId = Number(e.target.dataset.id);
+    const targetFilm =getFilm('popular',filmId);
     let librarySource;
     let nonTargetBtn;
     
@@ -40,7 +40,7 @@ export const onButtonLibraryContainerClick = e => {
     const isActive = elem.dataset.active;
 
     if (isActive === 'true') {
-        library.setData(singleFilmObj, librarySource);
+        library.setData(targetFilm, librarySource);
         elem.dataset.active = 'false';
         elem.textContent = `remove from ${librarySource}`;
         nonTargetBtn.setAttribute('disabled','');
