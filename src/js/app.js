@@ -78,6 +78,7 @@ const makeGalleryFromLibraryItems = e => {
   clearMarkup(refs.filmCardRef);
   if (data) {
     renderLibrary(genresTransformation(data, genres));
+    return;
   }
   refs.filmCardRef.innerHTML =
     '<div class="empty"><div class="img-thumb"></div><p class="empty-text">your library is empty...</p></div>';
