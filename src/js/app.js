@@ -70,16 +70,10 @@ function onWatchedBtnClick(e) {
 * Функция формирования галлереи фильмов из библиотеки
 */
 const makeGalleryFromLibraryItems = e => {
-  // const data = getLibraryItems(e);
-  // const genres = getGenres();
-  // // console.log(data);
-  // // console.log(genres);
-  // if (!data) {
-  //   return alert("По какойто причине данные не получены");
-  // }
-  
-  // const dataForRendering = genresTransformation(data,genres);
-  // console.log(dataForRendering);
+  const data = getLibraryItems(e);
+  const genres = getGenres();
+  const dataForRendering = genresTransformation(data,genres);
+  console.log(dataForRendering);
 
   /*ТУТ ВСТАВИТЬ ФУНКЦИИ ДЛЯ РЕНДЕРИНГА ГАЛЛЕРЕИ*/
 };
