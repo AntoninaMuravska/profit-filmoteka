@@ -23,6 +23,7 @@ export default class MovieApi {
     const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}`);
     const movies = response.data.results;
     this.moviesObj = response.data;
+    saveFilms(movies, 'popular');
     saveFilms(this.moviesObj.results);
     return movies;
   }
