@@ -4,6 +4,7 @@ import refs from '../../js/components/refs.js';
 import genresTransformation from './genre-transformator.js';
 import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
+import { getItemFromSessionStorage } from '../components/session-storage';
 
 export const MyApi = new MovieApi();
 
@@ -32,4 +33,15 @@ renderGallery();
 export const onGalleryItemClick = e => {
   const cardRef = e.target.closest('.film-card___container');
   openModal(cardRef.dataset.id);
+};
+
+//Отрисовка библиотеки
+export const renderLibrary = function (data) {
+  refs.filmCardRef.innerHTML = cardTpl(data.results);
+};
+
+//рисует галерею при нажатии HOME
+export const createMarkupHome = function () {
+  const movieCard = cardTpl(getItemFromSessionStorage('movies'));
+  refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
 };

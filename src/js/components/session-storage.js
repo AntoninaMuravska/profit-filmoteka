@@ -52,4 +52,4 @@ const getGenres = function () {
   return null;
 };
 
-export { saveGenres, saveFilms, getFilm, getGenres };
+export { saveGenres, saveFilms, getFilm, getGenres, getItemFromSessionStorage };
