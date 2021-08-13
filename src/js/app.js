@@ -1,9 +1,8 @@
 import refs from './components/refs';
-import { onGalleryItemClick } from './components/gallery';
+import { onGalleryItemClick, renderLibrary, createMarkupHome } from './components/gallery';
 import { getLibraryItems } from './components/library-app';
 import genresTransformation from './components/genre-transformator';
 import { getGenres } from './components/session-storage';
-
 
 refs.filmCardRef.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
@@ -26,7 +25,9 @@ function onHomeBtnClick(e) {
   if (!refs.libraryBtn.classList.contains('is_active')) {
     ratings.forEach(rating => rating.classList.add('visually-hidden'));
   }
-  
+  refs.filmCardRef.innerHTML = '';
+
+  createMarkupHome();
 }
 
 function onLibraryBtnClick(e) {
@@ -37,15 +38,14 @@ function onLibraryBtnClick(e) {
   refs.headerForm.classList.add('is_invisible');
   refs.watchedBtn.classList.remove('is_invisible');
   refs.watchedBtn.classList.add('is_active_btn');
-    refs.queueBtn.classList.remove('is_invisible');
-    refs.queueBtn.classList.remove('is_active_btn');
-console.log('клик по my library');
+  refs.queueBtn.classList.remove('is_invisible');
+  refs.queueBtn.classList.remove('is_active_btn');
+  console.log('клик по my library');
   //добавляет рейтинг на страничке библиотеки
   const ratings = document.querySelectorAll('.rating');
   if (refs.libraryBtn.classList.contains('is_active')) {
     ratings.forEach(rating => rating.classList.remove('visually-hidden'));
   }
-  
 }
 
 function onSearchBtn(e) {
@@ -67,14 +67,15 @@ function onWatchedBtnClick(e) {
 
 /*============================================================================================*/
 /*
-* Функция формирования галлереи фильмов из библиотеки
-*/
+ * Функция формирования галлереи фильмов из библиотеки
+ */
 const makeGalleryFromLibraryItems = e => {
   const data = getLibraryItems(e);
   const genres = getGenres();
-  const dataForRendering = genresTransformation(data,genres);
+  const dataForRendering = genresTransformation(data, genres);
   console.log(dataForRendering);
 
+  renderLibrary(data);
   /*ТУТ ВСТАВИТЬ ФУНКЦИИ ДЛЯ РЕНДЕРИНГА ГАЛЛЕРЕИ*/
 };
 /*==============================================================================================*/

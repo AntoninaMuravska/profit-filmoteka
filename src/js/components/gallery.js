@@ -5,6 +5,8 @@ import genresTransformation from './genre-transformator.js';
 import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
 import Notiflix from 'notiflix';
+import { getItemFromSessionStorage } from '../components/session-storage';
+
 
 export const MyApi = new MovieApi();
 
@@ -41,4 +43,15 @@ export const onGalleryItemClick = e => {
   Notiflix.Block.standard('.modal-movie__backdrop', 'Loading...');
   openModal(cardRef.dataset.id);
   Notiflix.Block.remove('.modal-movie__backdrop');
+};
+
+//Отрисовка библиотеки
+export const renderLibrary = function (data) {
+  refs.filmCardRef.innerHTML = cardTpl(data.results);
+};
+
+//рисует галерею при нажатии HOME
+export const createMarkupHome = function () {
+  const movieCard = cardTpl(getItemFromSessionStorage('popular'));
+  refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
 };

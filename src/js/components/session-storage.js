@@ -6,10 +6,14 @@ const getItemFromSessionStorage = function (key) {
   return JSON.parse(sessionStorage.getItem(key));
 };
 
-const saveFilms = function (array) {
+const saveFilms = function (array, key) {
   const arraySessionStorage = [];
-  if (getItemFromSessionStorage('movies')) {
-    arraySessionStorage.push(...getItemFromSessionStorage('movies'));
+
+  if (!key) {
+    key = 'movies';
+  }
+  if (getItemFromSessionStorage(key)) {
+    arraySessionStorage.push(...getItemFromSessionStorage(key));
 
     array.map(film => {
       if (!arraySessionStorage.find(x => x.id === film.id)) {
@@ -17,10 +21,10 @@ const saveFilms = function (array) {
       }
     });
 
-    sessionStorage.setItem('movies', JSON.stringify(arraySessionStorage));
+    sessionStorage.setItem(key, JSON.stringify(arraySessionStorage));
     return;
   }
-  sessionStorage.setItem('movies', JSON.stringify(array));
+  sessionStorage.setItem(key, JSON.stringify(array));
 };
 
 const getFilm = function (id) {
@@ -52,4 +56,4 @@ const getGenres = function () {
   return null;
 };
 
-export { saveGenres, saveFilms, getFilm, getGenres };
+export { saveGenres, saveFilms, getFilm, getGenres, getItemFromSessionStorage };
