@@ -3,6 +3,9 @@ import { onGalleryItemClick, renderLibrary, createMarkupHome } from './component
 import { getLibraryItems } from './components/library-app';
 import genresTransformation from './components/genre-transformator';
 import { getGenres } from './components/session-storage';
+import { clearMarkup } from './components/render-markup';
+import {showWarningMessage } from './components/notification';
+
 
 refs.filmCardRef.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
@@ -72,11 +75,11 @@ function onWatchedBtnClick(e) {
 const makeGalleryFromLibraryItems = e => {
   const data = getLibraryItems(e);
   const genres = getGenres();
-  const dataForRendering = genresTransformation(data, genres);
-  console.log(dataForRendering);
-
-  renderLibrary(data);
-  /*ТУТ ВСТАВИТЬ ФУНКЦИИ ДЛЯ РЕНДЕРИНГА ГАЛЛЕРЕИ*/
+  
+  clearMarkup(refs.filmCardRef);
+  if (data) {
+    renderLibrary(genresTransformation(data, genres));
+  } 
 };
 /*==============================================================================================*/
 
