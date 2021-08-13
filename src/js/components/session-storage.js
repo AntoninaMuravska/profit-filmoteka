@@ -1,15 +1,15 @@
-const saveGenres = function (key, genres) {
-  sessionStorage.setItem(key, JSON.stringify(genres));
+const saveGenres = function (genres) {
+  sessionStorage.setItem('genres', JSON.stringify(genres));
 };
 
 const getItemFromSessionStorage = function (key) {
   return JSON.parse(sessionStorage.getItem(key));
 };
 
-const saveFilms = function (key, array) {
+const saveFilms = function (array) {
   const arraySessionStorage = [];
-  if (getItemFromSessionStorage(key)) {
-    arraySessionStorage.push(...getItemFromSessionStorage(key));
+  if (getItemFromSessionStorage('movies')) {
+    arraySessionStorage.push(...getItemFromSessionStorage('movies'));
 
     array.map(film => {
       if (!arraySessionStorage.find(x => x.id === film.id)) {
@@ -17,14 +17,14 @@ const saveFilms = function (key, array) {
       }
     });
 
-    sessionStorage.setItem(key, JSON.stringify(arraySessionStorage));
+    sessionStorage.setItem('movies', JSON.stringify(arraySessionStorage));
     return;
   }
-  sessionStorage.setItem(key, JSON.stringify(array));
+  sessionStorage.setItem('movies', JSON.stringify(array));
 };
 
-const getFilm = function (key, id) {
-  const films = sessionStorage.getItem(key);
+const getFilm = function (id) {
+  const films = sessionStorage.getItem('movies');
   if (films) {
     try {
       const availabilityFilm = JSON.parse(films).find(film => film.id === id);

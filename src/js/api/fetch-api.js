@@ -23,7 +23,7 @@ export default class MovieApi {
     const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}`);
     const movies = response.data.results;
     this.moviesObj = response.data;
-    saveFilms('popular', this.moviesObj.results);
+    saveFilms(this.moviesObj.results);
     return movies;
   }
   //поиск фильма
@@ -33,7 +33,7 @@ export default class MovieApi {
     );
     const movies = response.data.results;
     console.log(movies);
-    saveFilms('search', movies);
+    saveFilms(movies);
     return movies;
   }
 
@@ -56,7 +56,7 @@ export default class MovieApi {
     //   console.log(data);
     this.genres = data;
 
-    saveGenres('genres', data);
+    saveGenres(data);
     return this.genres;
   }
 }
