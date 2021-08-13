@@ -64,7 +64,6 @@ const onModalCloseElemsClick = e => {
 
 /*Функция-обработчик нажатия клавиши ESC на клавиатуре*/
 const onEscKeyPress = e => {
-  console.log('ESC');
   if (e.code === 'Escape') {
     сloseModal();
   }
@@ -88,6 +87,6 @@ const addModalDetailedInfo = (containerLink,filmId) => {
       onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
     });
   } catch (error) {
-    throw new Error;
+    throw new Error;   /********* РАЗОБРАТЬСЯ **** */
   }
 }

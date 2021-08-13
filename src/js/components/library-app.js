@@ -1,6 +1,6 @@
 import LibraryApi from '../api/library-api';
 import { getFilm } from './session-storage';
-
+import { showWarningMessage, showFailureMessage, showSuccesMessage } from './notification';
 const library = new LibraryApi();
 
 /*
@@ -39,11 +39,13 @@ export const onButtonLibraryContainerClick = e => {
 
   if (isActive === 'true') {
     library.setData(targetFilm, librarySource);
+    showSuccesMessage(`Фильм успешно добавлен в библиотеку ${librarySource.toUpperCase()}`);
     elem.dataset.active = 'false';
     elem.textContent = `remove from ${librarySource}`;
     nonTargetBtn.setAttribute('disabled', '');
   } else {
     library.removeData(filmId, librarySource);
+    showSuccesMessage(`Фильм успешно удален из библиотеки ${librarySource.toUpperCase()}`);
     elem.dataset.active = 'true';
     elem.textContent = `add to ${librarySource}`;
     nonTargetBtn.removeAttribute('disabled');
@@ -68,17 +70,16 @@ export const getLibraryItems = e => {
   }
 
   if (!data) {
-    alert('No elements found!');
+    showFailureMessage('Ваша текущая галерея пуста!');
     return data;
   }
 
   if (data.page === data.total_pages) {
-    alert('You get the last one!');
+    showWarningMessage('Это последние элементы в текущей галерее!');
     library.setEndStatus();
   }
 
   library.incrementPage();
-  // console.log(data);
   return data;
 };
 
@@ -89,7 +90,7 @@ export const loadMoreItems = () => {
   let data = null;
 
   if (library.isEndStatus) {
-    alert('no more items!!');
+    showFailureMessage('В вашей библиотеке больше нет элементов!');
     return data;
   }
 
@@ -100,17 +101,16 @@ export const loadMoreItems = () => {
   }
 
   if (!data) {
-    alert('No elements found!');
+    showFailureMessage('Упс, чтото пошло не так...');
     return data;
   }
 
   if (data.page === data.total_pages) {
-    alert('You get the last one!');
+    showWarningMessage('Это последние элементы в текущей галерее!');
     library.setEndStatus();
   }
 
   library.incrementPage();
-  // console.log(data);
   return data;
 };
 
@@ -138,6 +138,7 @@ const changingElemsProperties = (elemForEnabling, elemForDisabling, sourceLibrar
   elemForEnabling.dataset.active = 'false';
   elemForEnabling.removeAttribute('disabled');
   elemForEnabling.textContent = `Remove from ${sourceLibrary}`;
+  
   elemForDisabling.dataset.active = 'true';
   elemForDisabling.setAttribute('disabled', '');
 };

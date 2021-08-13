@@ -4,8 +4,8 @@ import refs from '../../js/components/refs.js';
 import genresTransformation from './genre-transformator.js';
 import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
-import Notiflix from 'notiflix';
 import { getItemFromSessionStorage } from '../components/session-storage';
+import { enableLoader,disableLoader } from './notification';
 
 
 export const MyApi = new MovieApi();
@@ -29,20 +29,20 @@ function createMarkup(movies) {
   refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
 }
 
-Notiflix.Block.init({svgSize:"80px",svgColor:"#2835e3",fontFamily:"Roboto",useGoogleFont:true,});
-Notiflix.Block.standard('.gallery', 'Loading...');
+
+enableLoader('.gallery', 'Loading...');
 renderGallery();
-Notiflix.Block.remove('.gallery');
+disableLoader('.gallery');
+
 
 
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
   const cardRef = e.target.closest('.film-card___container');
 
-  Notiflix.Block.init({svgSize:"80px",svgColor:"#2835e3",fontFamily:"Roboto",useGoogleFont:true,});
-  Notiflix.Block.standard('.modal-movie__backdrop', 'Loading...');
+  enableLoader('.modal-movie__backdrop', 'Loading...');
   openModal(cardRef.dataset.id);
-  Notiflix.Block.remove('.modal-movie__backdrop');
+  disableLoader('.modal-movie__backdrop');
 };
 
 //Отрисовка библиотеки
