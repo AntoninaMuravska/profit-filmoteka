@@ -6,6 +6,7 @@ import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
 import { getItemFromSessionStorage } from '../components/session-storage';
 import { enableLoader,disableLoader } from './notification';
+import { getItemFromSessionStorage, getGenres } from '../components/session-storage';
 
 
 export const MyApi = new MovieApi();
@@ -35,23 +36,31 @@ renderGallery();
 disableLoader('.gallery');
 
 
-
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
   const cardRef = e.target.closest('.film-card___container');
 
+
   enableLoader('.modal-movie__backdrop', 'Loading...');
+
   openModal(cardRef.dataset.id);
   disableLoader('.modal-movie__backdrop');
 };
 
 //Отрисовка библиотеки
 export const renderLibrary = function (data) {
+  dateTransformation(data.results);
   refs.filmCardRef.innerHTML = cardTpl(data.results);
 };
 
 //рисует галерею при нажатии HOME
 export const createMarkupHome = function () {
-  const movieCard = cardTpl(getItemFromSessionStorage('popular'));
+  const arrayFilms = getItemFromSessionStorage('popular');
+  const genres = getGenres();
+
+  genresTransformation(arrayFilms, genres);
+  dateTransformation(arrayFilms.results);
+
+  const movieCard = cardTpl(arrayFilms.results);
   refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
 };
