@@ -12,38 +12,17 @@ import { getGenres } from './session-storage';
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
   refs.modal.classList.toggle('is-hidden');
-  
   disableBodyScroll(document.body);
+
   const modalInfoContainer = refs.modal.querySelector('.modal-movie__info');
-
   clearMarkup(modalInfoContainer);
+  addModalDetailedInfo(modalInfoContainer, filmId);
 
-  function addCardInfo() {
-    try {
-      MyApi.movieDetails(filmId).then(data => {
-        const genres = getGenres();
-        console.log(genres);
-        if (genres) {
-          appendMarkup(modalInfoContainer, templateFilmDetailedInfo(genresTransformation(data, genres, "all")));
-        }
-        
-        const watchedBtnRef = refs.modal.querySelector('.watched-btn');
-        const queueBtnRef = refs.modal.querySelector('.queue-btn');
-        
-        onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
-      });
-    } catch (error) {
-      throw error;
-    }
-  }
-  addCardInfo();
-
-
+  refs.modal.firstElementChild.classList.remove('is-hidden');
   refs.modal.addEventListener('click', onButtonLibraryContainerClick);
   refs.modal.addEventListener('click', onModalCloseElemsClick);
   window.addEventListener('keydown', onEscKeyPress);
 };
-
 export default openModal;
 
 
@@ -54,7 +33,8 @@ const сloseModal = () => {
   refs.modal.removeEventListener('click', onModalCloseElemsClick);
   window.removeEventListener('keydown', onEscKeyPress);
   enableBodyScroll(document.body);
-  refs.modal.classList.toggle('is-hidden');
+  refs.modal.firstElementChild.classList.toggle('is-hidden');
+  refs.modal.classList.add('is-hidden');
 };
 
 
@@ -89,3 +69,25 @@ const onEscKeyPress = e => {
     сloseModal();
   }
 };
+
+
+
+/*Функция для получения данных с детальной информацией про фильм с последующим рендерингом*/
+const addModalDetailedInfo = (containerLink,filmId) => {
+  try {
+    MyApi.movieDetails(filmId).then(data => {
+      const genres = getGenres();
+        
+      if (genres) {
+        appendMarkup(containerLink, templateFilmDetailedInfo(genresTransformation(data, genres, "all")));
+      }
+        
+      const watchedBtnRef = refs.modal.querySelector('.watched-btn');
+      const queueBtnRef = refs.modal.querySelector('.queue-btn');
+        
+      onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
+    });
+  } catch (error) {
+    throw new Error;
+  }
+}
