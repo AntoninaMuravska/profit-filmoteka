@@ -1,40 +1,49 @@
 <div class='movie-card'>
-  <img
-    class='modal-movie__poster'
+  <div class="movie-card__img-container">
+    <img
+    class='movie-card__poster'
     src='https://image.tmdb.org/t/p/w500{{poster_path}}'
     alt='{{title}}'
+    width='500'
   />
-  <div class='movie-info'>
-    <h2 class='modal-movie__title'>{{title}}</h2>
-    <div class='movie-details'>
+  </div>
 
-      <ul class='movie-info__subtitles'>
-        <li>Vote / Votes</li>
-        <li>Popularity</li>
-        <li>Original title</li>
-        <li>Genre</li>
-      </ul>
+  <div class='movie-card__info-container'>
+    <h2 class='movie-card__title'><b>{{title}}</b></h2>
 
-      <ul class='movie-info__subtitles-values'>
-        <li class='movie-rating'>
-          <span class='vote'>{{vote}}</span>
-          <span class='votes-slash'>/</span>
-          <span class='votes'>{{votes}}</span>
-        </li>
+    <table class='movie-card__table'>
+      <tr>
+        <td class='movie-card__cell'>Vote / Votes</td>
+        <td class='movie-card__cell'>
+          <b><span class='movie-card__text movie-card__text--vote'>{{vote_average}}</span></b>
+          <span class="movie-card__text movie-card__text--slash-line">/</span>
+          <b><span class='movie-card__text movie-card__text--votes'>{{vote_count}}</span></b>
+        </td>
+      </tr>
+      <tr>
+        <td class='movie-card__cell'>Popularity</td>
+        <td class='movie-card__cell'>
+          <b><span class='movie-card__text movie-card__text--popularity'>{{popularity}}</span></b>
+        </td>
+      </tr>
+      <tr>
+        <td class='movie-card__cell'>Original title</td>
+        <td class='movie-card__cell'>
+          <b><span class='movie-card__text movie-card__text--title'>{{original_title}}</span></b>
+        </td>
+      </tr>
+      <tr>
+        <td class='movie-card__cell'>Genre</td>
+        <td class='movie-card__cell'><b>{{genres}}</b></td>
+      </tr>
+    </table>
 
-        <li class='movie-popularity'>{{popularity}}</li>
-        <li class='movie-original-title'>{{original}}</li>
-        <li class='movie-genre'>{{genres}}</li>
-      </ul>
+    <h3 class='movie-card__subtitle'><b>About</b></h3>
+    <p class='movie-card__description'><b>{{overview}}</b></p>
 
-    </div>
-
-    <h3 class='movie-about-subtitle'>about</h3>
-    <p class='movie-description'>{{description}}</p>
-
-    <div class='modal-movie__buttons'>
-      <button class='watched-btn' data-active='true' data-name='watched' data-id={{id}}>add to watched</button>
-      <button class='queue-btn' data-active='true' data-name='queue' data-id={{id}}>add to queue</button>
+    <div class='movie-card__buttons-container'>
+      <button class='watched-btn' data-active='true' data-name='watched' data-id={{id}}>Add to watched</button>
+      <button class='queue-btn' data-active='true' data-name='queue' data-id={{id}}>Add to queue</button>
     </div>
 
   </div>
