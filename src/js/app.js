@@ -1,5 +1,8 @@
 import refs from './components/refs';
 import { onGalleryItemClick } from './components/gallery';
+import { getLibraryItems } from './components/library-app';
+import genresTransformation from './components/genre-transformator';
+import { getGenres } from './components/session-storage';
 
 
 refs.filmCardRef.addEventListener('click', onGalleryItemClick);
@@ -61,3 +64,26 @@ function onWatchedBtnClick(e) {
   refs.watchedBtn.classList.add('is_active_btn');
   refs.queueBtn.classList.remove('is_active_btn');
 }
+
+/*============================================================================================*/
+/*
+* Функция формирования галлереи фильмов из библиотеки
+*/
+const makeGalleryFromLibraryItems = e => {
+  // const data = getLibraryItems(e);
+  // const genres = getGenres();
+  // // console.log(data);
+  // // console.log(genres);
+  // if (!data) {
+  //   return alert("По какойто причине данные не получены");
+  // }
+  
+  // const dataForRendering = genresTransformation(data,genres);
+  // console.log(dataForRendering);
+
+  /*ТУТ ВСТАВИТЬ ФУНКЦИИ ДЛЯ РЕНДЕРИНГА ГАЛЛЕРЕИ*/
+};
+/*==============================================================================================*/
+
+refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
+refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
