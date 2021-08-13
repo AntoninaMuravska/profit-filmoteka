@@ -5,9 +5,10 @@ import genresTransformation from './genre-transformator';
 import { onButtonLibraryContainerClick, onModalOpenAutorun } from './library-app';
 import refs from './refs';
 import { MyApi } from './gallery';
+import { getGenres } from './session-storage';
 
 /**Временные данные*/
-import genresObject from '../../json/example-genres.json';
+// import genresObject from '../../json/example-genres.json';
 
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
@@ -21,8 +22,12 @@ const openModal = async filmId => {
   function addCardInfo() {
     try {
       MyApi.movieDetails(filmId).then(data => {
-        appendMarkup(modalInfoContainer, templateFilmDetailedInfo(genresTransformation(data, genresObject, "all")));
-
+        const genres = getGenres();
+        console.log(genres);
+        if (genres) {
+          appendMarkup(modalInfoContainer, templateFilmDetailedInfo(genresTransformation(data, genres, "all")));
+        }
+        
         const watchedBtnRef = refs.modal.querySelector('.watched-btn');
         const queueBtnRef = refs.modal.querySelector('.queue-btn');
         
