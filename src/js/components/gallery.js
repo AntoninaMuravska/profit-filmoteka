@@ -4,7 +4,6 @@ import refs from '../../js/components/refs.js';
 import genresTransformation from './genre-transformator.js';
 import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
-import { getItemFromSessionStorage } from '../components/session-storage';
 import { enableLoader,disableLoader } from './notification';
 import { getItemFromSessionStorage, getGenres } from '../components/session-storage';
 
