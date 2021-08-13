@@ -40,7 +40,7 @@ const getFilm = function (key, id) {
 };
 
 const getGenres = function () {
-  const genres = sessionStorage.getItem('gednres');
+  const genres = sessionStorage.getItem('genres');
 
   if (genres) {
     try {
