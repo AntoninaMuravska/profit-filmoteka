@@ -42,6 +42,6 @@ export const renderLibrary = function (data) {
 
 //рисует галерею при нажатии HOME
 export const createMarkupHome = function () {
-  const movieCard = cardTpl(getItemFromSessionStorage('movies'));
+  const movieCard = cardTpl(getItemFromSessionStorage('popular'));
   refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
 };
