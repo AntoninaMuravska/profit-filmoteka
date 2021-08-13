@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { saveGenres, saveFilms } from '../components/session-storage';
+import { saveGenres, saveFilms, savePopularFilms } from '../components/session-storage';
 
 export default class MovieApi {
   constructor() {
@@ -23,7 +23,8 @@ export default class MovieApi {
     const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}`);
     const movies = response.data.results;
     this.moviesObj = response.data;
-    saveFilms(movies, 'popular');
+
+    savePopularFilms(this.moviesObj);
     saveFilms(this.moviesObj.results);
     return movies;
   }
