@@ -27,6 +27,24 @@ const saveFilms = function (array, key) {
   sessionStorage.setItem(key, JSON.stringify(array));
 };
 
+const savePopularFilms = function (objFilms, key = 'popular') {
+  const arraySessionStorage = [];
+  const filmsPage = getItemFromSessionStorage(key);
+
+  if (filmsPage) {
+    arraySessionStorage.push(filmsPage);
+
+    if (objFilms.page === filmsPage.page) {
+      return;
+    }
+    arraySessionStorage.push(objFilms);
+    sessionStorage.setItem(key, JSON.stringify(arraySessionStorage));
+    return;
+  }
+
+  sessionStorage.setItem(key, JSON.stringify(objFilms));
+};
+
 const getFilm = function (id) {
   const films = sessionStorage.getItem('movies');
   if (films) {
@@ -56,4 +74,4 @@ const getGenres = function () {
   return null;
 };
 
-export { saveGenres, saveFilms, getFilm, getGenres, getItemFromSessionStorage };
+export { saveGenres, saveFilms, savePopularFilms, getFilm, getGenres, getItemFromSessionStorage };

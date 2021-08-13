@@ -5,8 +5,7 @@ import genresTransformation from './genre-transformator.js';
 import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
 import Notiflix from 'notiflix';
-import { getItemFromSessionStorage } from '../components/session-storage';
-
+import { getItemFromSessionStorage, getGenres } from '../components/session-storage';
 
 export const MyApi = new MovieApi();
 
@@ -29,17 +28,26 @@ function createMarkup(movies) {
   refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
 }
 
-Notiflix.Block.init({svgSize:"80px",svgColor:"#2835e3",fontFamily:"Roboto",useGoogleFont:true,});
+Notiflix.Block.init({
+  svgSize: '80px',
+  svgColor: '#2835e3',
+  fontFamily: 'Roboto',
+  useGoogleFont: true,
+});
 Notiflix.Block.standard('.gallery', 'Loading...');
 renderGallery();
 Notiflix.Block.remove('.gallery');
-
 
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
   const cardRef = e.target.closest('.film-card___container');
 
-  Notiflix.Block.init({svgSize:"80px",svgColor:"#2835e3",fontFamily:"Roboto",useGoogleFont:true,});
+  Notiflix.Block.init({
+    svgSize: '80px',
+    svgColor: '#2835e3',
+    fontFamily: 'Roboto',
+    useGoogleFont: true,
+  });
   Notiflix.Block.standard('.modal-movie__backdrop', 'Loading...');
   openModal(cardRef.dataset.id);
   Notiflix.Block.remove('.modal-movie__backdrop');
@@ -47,11 +55,18 @@ export const onGalleryItemClick = e => {
 
 //Отрисовка библиотеки
 export const renderLibrary = function (data) {
+  dateTransformation(data.results);
   refs.filmCardRef.innerHTML = cardTpl(data.results);
 };
 
 //рисует галерею при нажатии HOME
 export const createMarkupHome = function () {
-  const movieCard = cardTpl(getItemFromSessionStorage('popular'));
+  const arrayFilms = getItemFromSessionStorage('popular');
+  const genres = getGenres();
+
+  genresTransformation(arrayFilms, genres);
+  dateTransformation(arrayFilms.results);
+
+  const movieCard = cardTpl(arrayFilms.results);
   refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
 };
