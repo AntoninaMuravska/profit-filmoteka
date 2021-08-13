@@ -9,7 +9,7 @@ import { showWarningMessage } from './components/notification';
 refs.filmCardRef.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
 refs.libraryBtn.addEventListener('click', onLibraryBtnClick);
-refs.searchBtn.addEventListener('click', onSearchBtn);
+// refs.searchBtn.addEventListener('click', onSearchBtn);
 refs.queueBtn.addEventListener('click', onQueueBtnClick);
 refs.watchedBtn.addEventListener('click', onWatchedBtnClick);
 
@@ -50,10 +50,10 @@ function onLibraryBtnClick(e) {
   }
 }
 
-function onSearchBtn(e) {
-  e.preventDefault();
-  console.log('клик по кнопке search');
-}
+// function onSearchBtn(e) {
+//   e.preventDefault();
+//   console.log('клик по кнопке search');
+// }
 
 function onQueueBtnClick(e) {
   e.preventDefault();
