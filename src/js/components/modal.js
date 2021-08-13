@@ -7,8 +7,7 @@ import refs from './refs';
 import { MyApi } from './gallery';
 import { getGenres } from './session-storage';
 
-/**Временные данные*/
-// import genresObject from '../../json/example-genres.json';
+
 
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
