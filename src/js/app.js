@@ -4,8 +4,7 @@ import { getLibraryItems } from './components/library-app';
 import genresTransformation from './components/genre-transformator';
 import { getGenres } from './components/session-storage';
 import { clearMarkup } from './components/render-markup';
-import {showWarningMessage } from './components/notification';
-
+import { showWarningMessage } from './components/notification';
 
 refs.filmCardRef.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
@@ -75,11 +74,14 @@ function onWatchedBtnClick(e) {
 const makeGalleryFromLibraryItems = e => {
   const data = getLibraryItems(e);
   const genres = getGenres();
-  
+
   clearMarkup(refs.filmCardRef);
   if (data) {
     renderLibrary(genresTransformation(data, genres));
-  } 
+    return;
+  }
+  refs.filmCardRef.innerHTML =
+    '<div class="empty"><div class="img-thumb"></div><p class="empty-text">your library is empty...</p></div>';
 };
 /*==============================================================================================*/
 
