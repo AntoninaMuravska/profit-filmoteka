@@ -1,5 +1,5 @@
 export default {
-  filmCardRef: document.querySelector('.gallery'),
+  gallery: document.querySelector('.gallery'),
   modal: document.querySelector('#modal-movie__description'),
   input: document.querySelector('.header__input'),
   searchBtn: document.querySelector('.header__button'),

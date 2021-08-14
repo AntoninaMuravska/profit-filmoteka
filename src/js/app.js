@@ -6,7 +6,7 @@ import { getGenres } from './components/session-storage';
 import { clearMarkup } from './components/render-markup';
 import { showWarningMessage } from './components/notification';
 
-refs.filmCardRef.addEventListener('click', onGalleryItemClick);
+refs.gallery.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
 refs.libraryBtn.addEventListener('click', onLibraryBtnClick);
 // refs.searchBtn.addEventListener('click', onSearchBtn);

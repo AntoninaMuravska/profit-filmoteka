@@ -47,7 +47,7 @@ export const showSuccesMessage = message => {
 
 /*Функция показа уведомления об ошибке  */
 export const showFailureMessage = message => {
-    Notiflix.Notify.Failure(message);
+    Notify.failure(message);
 };
 
 
