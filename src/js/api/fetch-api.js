@@ -12,10 +12,10 @@ export default class MovieApi {
     this.query = '';
 
     // this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
-    // this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+    this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
     //нужно поставить дефолтные картинки, если нет постера
-    this.DEFAULT_POSTER = '../images/default-img.png';
+    this.DEFAULT_POSTER = './images/default-img.png';
     // this.DEFAULT_POSTER = '';   ======= постер для окна с деталями
   }
 
@@ -26,10 +26,13 @@ export default class MovieApi {
     this.moviesObj = response.data;
     movies.map(el => {
       const posterImageExist = el.poster_path;
+      el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path;
+
       if (!posterImageExist) {
         el.poster_path = MyApi.DEFAULT_POSTER;
       }
     });
+
     savePopularFilms(this.moviesObj);
     saveFilms(this.moviesObj.results);
     return movies;
@@ -46,6 +49,7 @@ export default class MovieApi {
     // console.log(movies);
     movies.map(el => {
       const posterImageExist = el.poster_path;
+      el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path;
       if (!posterImageExist) {
         el.poster_path = MyApi.DEFAULT_POSTER;
       }
