@@ -27,7 +27,7 @@ import ScrollReveal from 'scrollreveal';
 //   }, 75);
 // };
 
-export const scrollReveal = (className='.film-card') => {
+export const scrollReveal = (className='.film-card___container') => {
   var slideUp = {
     distance: '150%',
     origin: 'bottom',
