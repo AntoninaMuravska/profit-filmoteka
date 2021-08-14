@@ -3,6 +3,7 @@ import { getFilm } from './session-storage';
 import { showWarningMessage, showFailureMessage, showSuccesMessage } from './notification';
 import { removeElemFromGallery, createMarkup, getCurrentGalleryName } from './gallery';
 
+
 const library = new LibraryApi();
 
 /*

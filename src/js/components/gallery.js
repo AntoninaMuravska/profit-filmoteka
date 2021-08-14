@@ -30,6 +30,7 @@ function renderGallery() {
 function createMarkup(movies) {
   const movieCard = cardTpl(movies);
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
+  scrollReveal();
 }
 
 enableLoader('.gallery', 'Loading...');
@@ -51,6 +52,7 @@ export const onGalleryItemClick = e => {
 export const renderLibrary = function (data) {
   dateTransformation(data.results);
   refs.gallery.innerHTML = cardTpl(data.results);
+  scrollReveal();
 };
 
 //рисует галерею при нажатии HOME
@@ -63,6 +65,7 @@ export const createMarkupHome = function () {
 
   const movieCard = cardTpl(arrayFilms.results);
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
+  scrollReveal();
 };
 
 /*Функция для удаления заданного по id елемента из галереи*/
