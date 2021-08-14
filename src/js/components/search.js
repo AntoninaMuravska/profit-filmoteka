@@ -4,7 +4,7 @@ import MovieApi from '../api/fetch-api.js';
 import cardTpl from '../../templates/film-cards.hbs';
 import genresTransformation from './genre-transformator.js';
 import { dateTransformation } from '../components/date-transformation';
-import {enableLoader, showFailureMessage} from './notification';
+import { enableLoader, showFailureMessage } from './notification';
 
 refs.headerForm.addEventListener('submit', onSearch);
 const MyApi = new MovieApi();
@@ -27,6 +27,14 @@ function onSearch(e) {
         MyApi.genresList().then(genresObj => {
           genresTransformation(MyApi.moviesObj, genresObj);
           createSearchMarkup(data);
+
+          //Добавляет оформление пустого контейнера
+          const filmCard = document.querySelector('.film-card');
+
+          if (!filmCard) {
+            refs.filmCardRef.innerHTML =
+              '<div class="empty"><div class="img-thumb"></div><p class="empty-text">The search has not given any results...</p></div>';
+          }
         });
         dateTransformation(data);
       });
@@ -37,7 +45,7 @@ function onSearch(e) {
 }
 
 function createSearchMarkup(movies) {
-    const movieCard = cardTpl(movies);
-    refs.filmCardRef.innerHTML = '';
-    refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
-  }
+  const movieCard = cardTpl(movies);
+  refs.filmCardRef.innerHTML = '';
+  refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
+}

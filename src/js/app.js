@@ -39,9 +39,9 @@ function onLibraryBtnClick(e) {
   refs.homeBtn.classList.remove('is_active');
   refs.headerForm.classList.add('is_invisible');
   refs.watchedBtn.classList.remove('is_invisible');
-  refs.watchedBtn.classList.add('is_active_btn');
+  refs.watchedBtn.classList.remove('is_active_btn');
   refs.queueBtn.classList.remove('is_invisible');
-  refs.queueBtn.classList.remove('is_active_btn');
+  refs.queueBtn.classList.add('is_active_btn');
   console.log('клик по my library');
   //добавляет рейтинг на страничке библиотеки
   const ratings = document.querySelectorAll('.rating');
@@ -87,3 +87,4 @@ const makeGalleryFromLibraryItems = e => {
 
 refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
 refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
+refs.libraryBtn.addEventListener('click', () => refs.queueBtn.click());
