@@ -4,7 +4,7 @@ import { getLibraryItems } from './components/library-app';
 import genresTransformation from './components/genre-transformator';
 import { getGenres } from './components/session-storage';
 import { clearMarkup } from './components/render-markup';
-import { showWarningMessage } from './components/notification';
+import {applyTheme, onChangeThemeSwitcherClick} from './components/theme';
 
 refs.filmCardRef.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
@@ -87,3 +87,7 @@ const makeGalleryFromLibraryItems = e => {
 
 refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
 refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
+
+// applyTheme();
+document.addEventListener('DOMContentLoaded', applyTheme);
+refs.themeSwitcher.addEventListener('change', onChangeThemeSwitcherClick);

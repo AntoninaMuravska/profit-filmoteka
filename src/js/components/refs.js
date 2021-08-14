@@ -9,4 +9,6 @@ export default {
   headerForm: document.querySelector('.header__form'),
   watchedBtn: document.querySelector('[data-name="watched"]'),
   queueBtn: document.querySelector('[data-name="queue"]'),
+  body: document.querySelector('body'),
+  themeSwitcher: document.querySelector('#theme-switch-toggle')
 };
