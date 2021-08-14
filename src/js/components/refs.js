@@ -10,5 +10,6 @@ export default {
   watchedBtn: document.querySelector('[data-name="watched"]'),
   queueBtn: document.querySelector('[data-name="queue"]'),
   body: document.querySelector('body'),
-  themeSwitcher: document.querySelector('#theme-switch-toggle')
+  themeSwitcher: document.querySelector('#theme-switch-toggle'),
+  footerLink: document.querySelector('.footer__link'),
 };

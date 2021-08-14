@@ -15,7 +15,7 @@ export default class MovieApi {
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
     //нужно поставить дефолтные картинки, если нет постера
-    this.DEFAULT_POSTER = './images/default-img.png';
+    this.DEFAULT_POSTER = 'https://clipartmag.com/images/old-camera-clipart-27.jpg';
     // this.DEFAULT_POSTER = '';   ======= постер для окна с деталями
   }
 
