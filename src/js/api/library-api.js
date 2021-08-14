@@ -76,8 +76,11 @@ export default class LibraryApi {
 
 
 
-    /*метод для получение порции из 20 (или менее) елементов библиотеки */
-    fetchData() {
+    /*
+     * Метод для получение порции елементов из библиотеки. По дефолту - до 20 шт.
+     * Для получения определенного количества надо передать аргумент с количеством
+    */
+    fetchData(quantity = 20) {
         const storageData = this.getData(this.activeLibrary);
 
         if (!storageData || storageData.total_results===0) {
@@ -86,7 +89,7 @@ export default class LibraryApi {
 
         const outputData = {
             page: this.page,
-            results: [...storageData.library.slice(((this.page - 1) * 20), (this.page - 1) * 20 + 20)],
+            results: [...storageData.library.slice(((this.page - 1) * 20), (this.page - 1) * 20 + quantity)],
             total_pages: storageData.total_pages,
             total_results: storageData.total_results
         };
