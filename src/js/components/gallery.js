@@ -4,7 +4,7 @@ import refs from '../../js/components/refs.js';
 import genresTransformation from './genre-transformator.js';
 import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
-import { enableLoader,disableLoader } from './notification';
+import { enableLoader, disableLoader } from './notification';
 import { getItemFromSessionStorage, getGenres } from '../components/session-storage';
 import { appendMarkup } from './render-markup';
 
@@ -29,16 +29,13 @@ function createMarkup(movies) {
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
 }
 
-
 enableLoader('.gallery', 'Loading...');
 renderGallery();
 disableLoader('.gallery');
 
-
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
   const cardRef = e.target.closest('.film-card___container');
-
 
   enableLoader('.modal-movie__backdrop', 'Loading...');
 
@@ -49,7 +46,7 @@ export const onGalleryItemClick = e => {
 //Отрисовка библиотеки
 export const renderLibrary = function (data) {
   dateTransformation(data.results);
-  refs.filmCardRef.innerHTML = cardTpl(data.results);
+  refs.gallery.innerHTML = cardTpl(data.results);
 };
 
 //рисует галерею при нажатии HOME
@@ -61,26 +58,22 @@ export const createMarkupHome = function () {
   dateTransformation(arrayFilms.results);
 
   const movieCard = cardTpl(arrayFilms.results);
-  refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
+  refs.gallery.insertAdjacentHTML('beforeend', movieCard);
 };
-
-
 
 /*Функция для удаления заданного по id елемента из галереи*/
 export const removeElemFromGallery = function (filmId) {
-  const elemToRemoveRef = refs.filmCardRef.querySelector(`li[data-id="${filmId}"]`);
-   
+  const elemToRemoveRef = refs.gallery.querySelector(`li[data-id="${filmId}"]`);
+
   if (!elemToRemoveRef) {
     return;
   }
-  
+
   elemToRemoveRef.remove();
 };
-
-
 
 /*Функция определения названия текущей активной галереи*/
 export const getCurrentGalleryName = function () {
   const galleryName = document.querySelector('.header .nav__link.is_active').dataset.name;
-  return (galleryName === 'home') ? 'Home' : 'MyLibrary';
+  return galleryName === 'home' ? 'Home' : 'MyLibrary';
 };
