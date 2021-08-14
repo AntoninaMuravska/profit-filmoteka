@@ -4,7 +4,8 @@ import { getLibraryItems } from './components/library-app';
 import genresTransformation from './components/genre-transformator';
 import { getGenres } from './components/session-storage';
 import { clearMarkup } from './components/render-markup';
-import {applyTheme, onChangeThemeSwitcherClick} from './components/theme';
+import { applyTheme, onChangeThemeSwitcherClick } from './components/theme';
+
 
 refs.gallery.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
