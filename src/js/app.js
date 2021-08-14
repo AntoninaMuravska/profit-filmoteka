@@ -4,7 +4,8 @@ import { getLibraryItems } from './components/library-app';
 import genresTransformation from './components/genre-transformator';
 import { getGenres } from './components/session-storage';
 import { clearMarkup } from './components/render-markup';
-import { applyTheme, onChangeThemeSwitcherClick } from './components/theme';
+import {applyTheme, onChangeThemeSwitcherClick} from './components/theme';
+
 
 refs.gallery.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
@@ -67,7 +68,7 @@ function onWatchedBtnClick(e) {
   refs.queueBtn.classList.remove('is_active_btn');
 }
 
-/*============================================================================================*/
+
 /*
  * Функция формирования галлереи фильмов из библиотеки
  */
@@ -83,8 +84,13 @@ const makeGalleryFromLibraryItems = e => {
   refs.gallery.innerHTML =
     '<div class="empty"><div class="img-thumb"></div><p class="empty-text">your library is empty...</p></div>';
 };
-/*==============================================================================================*/
+
 
 refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
 refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
 refs.libraryBtn.addEventListener('click', () => refs.queueBtn.click());
+
+
+document.addEventListener('DOMContentLoaded', applyTheme);
+refs.themeSwitcher.addEventListener('change', onChangeThemeSwitcherClick);
+

@@ -4,7 +4,7 @@ import MovieApi from '../api/fetch-api.js';
 import cardTpl from '../../templates/film-cards.hbs';
 import genresTransformation from './genre-transformator.js';
 import { dateTransformation } from '../components/date-transformation';
-import { showWarningMessage } from './notification';
+import {showWarningMessage } from './notification';
 import { clearMarkup } from './render-markup';
 
 refs.headerForm.addEventListener('submit', onSearch);
@@ -14,11 +14,20 @@ const MyApi = new MovieApi();
 function onSearch(e) {
   e.preventDefault();
   let inputValue = e.target.elements.searchQuery.value;
-  let errorMessage = 'Can not find such a movie. Please, try again.';
+  let warningMessage = 'We do not know such a movie. Please, try again.';
+
+  if (!inputValue) {
+    clearMarkup(refs.gallery);
+    showWarningMessage(warningMessage);
+    return;
+  }
+
+  MyApi.resetPage();
 
   if (inputValue.trim() === '') {
+    clearMarkup(refs.gallery);
     console.log(errorMessage);
-    // showFailureMessage(errorMessage);
+    showWarningMessage(warningMessage);
   } else {
     MyApi.resetPage();
     // enableLoader();

@@ -26,7 +26,7 @@ function renderGallery() {
 
 function createMarkup(movies) {
   const movieCard = cardTpl(movies);
-  refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
+  refs.gallery.insertAdjacentHTML('beforeend', movieCard);
 }
 
 
