@@ -4,7 +4,8 @@ import MovieApi from '../api/fetch-api.js';
 import cardTpl from '../../templates/film-cards.hbs';
 import genresTransformation from './genre-transformator.js';
 import { dateTransformation } from '../components/date-transformation';
-import { enableLoader, showFailureMessage } from './notification';
+import { showWarningMessage } from './notification';
+import { clearMarkup } from './render-markup';
 
 refs.headerForm.addEventListener('submit', onSearch);
 const MyApi = new MovieApi();
@@ -32,7 +33,7 @@ function onSearch(e) {
           const filmCard = document.querySelector('.film-card');
 
           if (!filmCard) {
-            refs.filmCardRef.innerHTML =
+            refs.gallery.innerHTML =
               '<div class="empty"><div class="img-thumb"></div><p class="empty-text">The search has not given any results...</p></div>';
           }
         });
@@ -46,6 +47,6 @@ function onSearch(e) {
 
 function createSearchMarkup(movies) {
   const movieCard = cardTpl(movies);
-  refs.filmCardRef.innerHTML = '';
-  refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
+  refs.gallery.innerHTML = '';
+  refs.gallery.insertAdjacentHTML('beforeend', movieCard);
 }

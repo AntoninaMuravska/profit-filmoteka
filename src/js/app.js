@@ -4,9 +4,9 @@ import { getLibraryItems } from './components/library-app';
 import genresTransformation from './components/genre-transformator';
 import { getGenres } from './components/session-storage';
 import { clearMarkup } from './components/render-markup';
-import { showWarningMessage } from './components/notification';
+import { applyTheme, onChangeThemeSwitcherClick } from './components/theme';
 
-refs.filmCardRef.addEventListener('click', onGalleryItemClick);
+refs.gallery.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
 refs.libraryBtn.addEventListener('click', onLibraryBtnClick);
 // refs.searchBtn.addEventListener('click', onSearchBtn);
@@ -27,7 +27,7 @@ function onHomeBtnClick(e) {
   if (!refs.libraryBtn.classList.contains('is_active')) {
     ratings.forEach(rating => rating.classList.add('visually-hidden'));
   }
-  refs.filmCardRef.innerHTML = '';
+  refs.gallery.innerHTML = '';
 
   createMarkupHome();
 }
@@ -75,12 +75,12 @@ const makeGalleryFromLibraryItems = e => {
   const data = getLibraryItems(e);
   const genres = getGenres();
 
-  clearMarkup(refs.filmCardRef);
+  clearMarkup(refs.gallery);
   if (data) {
     renderLibrary(genresTransformation(data, genres));
     return;
   }
-  refs.filmCardRef.innerHTML =
+  refs.gallery.innerHTML =
     '<div class="empty"><div class="img-thumb"></div><p class="empty-text">your library is empty...</p></div>';
 };
 /*==============================================================================================*/
