@@ -7,6 +7,7 @@ import { clearMarkup } from './components/render-markup';
 import { applyTheme, onChangeThemeSwitcherClick } from './components/theme';
 
 
+
 refs.gallery.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
 refs.libraryBtn.addEventListener('click', onLibraryBtnClick);
@@ -28,7 +29,7 @@ function onHomeBtnClick(e) {
   if (!refs.libraryBtn.classList.contains('is_active')) {
     ratings.forEach(rating => rating.classList.add('visually-hidden'));
   }
-  refs.filmCardRef.innerHTML = '';
+  refs.gallery.innerHTML = '';
 
   createMarkupHome();
 }
@@ -40,9 +41,9 @@ function onLibraryBtnClick(e) {
   refs.homeBtn.classList.remove('is_active');
   refs.headerForm.classList.add('is_invisible');
   refs.watchedBtn.classList.remove('is_invisible');
-  refs.watchedBtn.classList.add('is_active_btn');
+  refs.watchedBtn.classList.remove('is_active_btn');
   refs.queueBtn.classList.remove('is_invisible');
-  refs.queueBtn.classList.remove('is_active_btn');
+  refs.queueBtn.classList.add('is_active_btn');
   console.log('клик по my library');
   //добавляет рейтинг на страничке библиотеки
   const ratings = document.querySelectorAll('.rating');
@@ -68,7 +69,7 @@ function onWatchedBtnClick(e) {
   refs.queueBtn.classList.remove('is_active_btn');
 }
 
-/*============================================================================================*/
+
 /*
  * Функция формирования галлереи фильмов из библиотеки
  */
@@ -76,18 +77,21 @@ const makeGalleryFromLibraryItems = e => {
   const data = getLibraryItems(e);
   const genres = getGenres();
 
-  clearMarkup(refs.filmCardRef);
+  clearMarkup(refs.gallery);
   if (data) {
     renderLibrary(genresTransformation(data, genres));
     return;
   }
-  refs.filmCardRef.innerHTML =
+  refs.gallery.innerHTML =
     '<div class="empty"><div class="img-thumb"></div><p class="empty-text">your library is empty...</p></div>';
 };
-/*==============================================================================================*/
+
 
 refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
 refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
+refs.libraryBtn.addEventListener('click', () => refs.queueBtn.click());
+
 
 document.addEventListener('DOMContentLoaded', applyTheme);
 refs.themeSwitcher.addEventListener('change', onChangeThemeSwitcherClick);
+
