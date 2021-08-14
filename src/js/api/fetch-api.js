@@ -9,6 +9,7 @@ export default class MovieApi {
     this.moviesObj = {};
     this.currentPage = 1;
     this.rows = 20;
+    this.query = '';
 
     // this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
     // this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
@@ -30,10 +31,12 @@ export default class MovieApi {
   }
   //поиск фильма
   async searchMovies(query) {
+    console.log(query)
     const response = await axios.get(
-      `${this.BASE_URL}search/movie?query=${query}&api_key=${this.API_KEY}&language=en-US&page=1&include_adult=false`,
+      `${this.BASE_URL}search/movie?query=${query}&api_key=${this.API_KEY}&language=en-US&page=${this.currentPage}&include_adult=false`,
     );
     const movies = response.data.results;
+    this.moviesObj = response.data;
     console.log(movies);
     saveFilms(movies);
     return movies;
@@ -61,6 +64,12 @@ export default class MovieApi {
     saveGenres(data);
     return this.genres;
   }
+
+  resetPage() {
+    return (this.currentPage = 1);
+  }
+
+
 }
 
 // Тестовые запросы
