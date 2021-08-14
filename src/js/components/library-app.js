@@ -1,7 +1,7 @@
 import LibraryApi from '../api/library-api';
 import { getFilm } from './session-storage';
 import { showWarningMessage, showFailureMessage, showSuccesMessage } from './notification';
-import { removeElemFromGallery, createMarkup, getCurrentGalleryName} from './gallery';
+import { removeElemFromGallery, createMarkup, getCurrentGalleryName } from './gallery';
 
 const library = new LibraryApi();
 
@@ -52,6 +52,16 @@ export const onButtonLibraryContainerClick = e => {
     elem.dataset.active = 'true';
     elem.textContent = `add to ${librarySource}`;
     nonTargetBtn.removeAttribute('disabled');
+
+    //Добавляет оформление пустого контейнера
+    const filmCard = document.querySelector('.film-card');
+
+    if (!filmCard) {
+      const filmCardRef = document.querySelector('.gallery');
+
+      filmCardRef.innerHTML =
+        '<div class="empty"><div class="img-thumb"></div><p class="empty-text">your library is empty...</p></div>';
+    }
   }
 };
 
@@ -81,7 +91,7 @@ export const getLibraryItems = e => {
     showWarningMessage('Это последние элементы в текущей галерее!');
     library.setEndStatus();
   }
-  
+
   library.incrementPage();
   return data;
 };
@@ -141,12 +151,10 @@ const changingElemsProperties = (elemForEnabling, elemForDisabling, sourceLibrar
   elemForEnabling.dataset.active = 'false';
   elemForEnabling.removeAttribute('disabled');
   elemForEnabling.textContent = `Remove from ${sourceLibrary}`;
-  
+
   elemForDisabling.dataset.active = 'true';
   elemForDisabling.setAttribute('disabled', '');
 };
-
-
 
 /* Функция получения 1 елемента из библиотеки */
 const getSingleItem = () => {
@@ -175,21 +183,18 @@ const getSingleItem = () => {
   return data;
 };
 
-
-
 /* Функция удаления елемента из библиотеки и из галлереи */
-const smartRemovingFromLibrary = (filmId, librarySource,activeGallery="Home") => {
-  if (activeGallery !== "Home") {
+const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home') => {
+  if (activeGallery !== 'Home') {
     removeElemFromGallery(filmId);
     const data = getSingleItem();
-  
+
     /** КАК БУДЕТ ФУНКЦИОНИРОВАТЬ ПАГИНАЦИЯ И БИБЛИОТЕКА НАПОЛНИТЬСЯ 20+ ЕЛЕМЕНТАМИ - ПОТЕСТИТЬ*/
     // console.log('попытка получить фильм из библиотеки для замены. объект фильма:', data);
     if (data) {
       createMarkup(data);
     }
   }
-  
+
   library.removeData(filmId, librarySource);
 };
-

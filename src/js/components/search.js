@@ -37,6 +37,14 @@ function onSearch(e) {
         MyApi.genresList().then(genresObj => {
           genresTransformation(MyApi.moviesObj, genresObj);
           createSearchMarkup(data);
+
+          //Добавляет оформление пустого контейнера
+          const filmCard = document.querySelector('.film-card');
+
+          if (!filmCard) {
+            refs.gallery.innerHTML =
+              '<div class="empty"><div class="img-thumb"></div><p class="empty-text">The search has not given any results...</p></div>';
+          }
         });
         dateTransformation(data);
       });
