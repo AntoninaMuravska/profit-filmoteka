@@ -88,6 +88,5 @@ const makeGalleryFromLibraryItems = e => {
 refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
 refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
 
-// applyTheme();
 document.addEventListener('DOMContentLoaded', applyTheme);
 refs.themeSwitcher.addEventListener('change', onChangeThemeSwitcherClick);
