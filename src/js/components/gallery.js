@@ -6,7 +6,7 @@ import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
 import { enableLoader, disableLoader } from './notification';
 import { getItemFromSessionStorage, getGenres } from '../components/session-storage';
-import { appendMarkup } from './render-markup';
+import { scrollReveal } from './scroll-reveal';
 
 export const MyApi = new MovieApi();
 
@@ -15,7 +15,10 @@ function renderGallery() {
     MyApi.getTrendingMovies().then(data => {
       MyApi.genresList().then(genresObj => {
         genresTransformation(MyApi.moviesObj, genresObj);
+                
         createMarkup(data);
+        scrollReveal();
+        
       });
       dateTransformation(data);
     });
@@ -32,6 +35,7 @@ function createMarkup(movies) {
 enableLoader('.gallery', 'Loading...');
 renderGallery();
 disableLoader('.gallery');
+
 
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
