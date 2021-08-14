@@ -6,7 +6,7 @@ import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
 import { enableLoader,disableLoader } from './notification';
 import { getItemFromSessionStorage, getGenres } from '../components/session-storage';
-
+import { appendMarkup } from './render-markup';
 
 export const MyApi = new MovieApi();
 
@@ -62,4 +62,25 @@ export const createMarkupHome = function () {
 
   const movieCard = cardTpl(arrayFilms.results);
   refs.filmCardRef.insertAdjacentHTML('beforeend', movieCard);
+};
+
+
+
+/*Функция для удаления заданного по id елемента из галереи*/
+export const removeElemFromGallery = function (filmId) {
+  const elemToRemoveRef = refs.filmCardRef.querySelector(`li[data-id="${filmId}"]`);
+   
+  if (!elemToRemoveRef) {
+    return;
+  }
+  
+  elemToRemoveRef.remove();
+};
+
+
+
+/*Функция определения названия текущей активной галереи*/
+export const getCurrentGalleryName = function () {
+  const galleryName = document.querySelector('.header .nav__link.is_active').dataset.name;
+  return (galleryName === 'home') ? 'Home' : 'MyLibrary';
 };
