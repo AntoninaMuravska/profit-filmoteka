@@ -8,6 +8,7 @@ import { enableLoader, disableLoader } from './notification';
 import { getItemFromSessionStorage, getGenres } from '../components/session-storage';
 import { appendMarkup } from './render-markup';
 
+
 export const MyApi = new MovieApi();
 
 function renderGallery() {
@@ -15,6 +16,7 @@ function renderGallery() {
     MyApi.getTrendingMovies().then(data => {
       MyApi.genresList().then(genresObj => {
         genresTransformation(MyApi.moviesObj, genresObj);
+        
         createMarkup(data);
       });
       dateTransformation(data);
@@ -23,6 +25,7 @@ function renderGallery() {
     throw error;
   }
 }
+
 
 function createMarkup(movies) {
   const movieCard = cardTpl(movies);
