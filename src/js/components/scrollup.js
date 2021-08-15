@@ -1,6 +1,6 @@
 import { addBackToTop } from 'vanilla-back-to-top';
 
-const scrollUpInit = () => {
+export const scrollUpInit = () => {
     const settings = {
         diameter: 56,
         backgroundColor: '#ff6b01',
@@ -21,4 +21,7 @@ const scrollUpInit = () => {
     addBackToTop(settings);
 };
 
-export default scrollUpInit;
+export const scrollupBtnChangeVisibility = () => {
+    const scrollupBtnRef = document.querySelector('#back-to-top');
+    scrollupBtnRef.classList.toggle('visually-hidden');
+};
