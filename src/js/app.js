@@ -40,8 +40,10 @@ export const makeGalleryFromLibraryItems = e => {
 
 
 
-refs.libraryBtn.addEventListener('click', () => refs.queueBtn.click());
+// refs.libraryBtn.addEventListener('click', () => refs.queueBtn.click());
 
+refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
+refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
 
 document.addEventListener('DOMContentLoaded', applyTheme);
 window.addEventListener('load', scrollUpInit);
