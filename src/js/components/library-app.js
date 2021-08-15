@@ -199,3 +199,33 @@ const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home')
 
   library.removeData(filmId, librarySource);
 };
+
+
+
+/*
+ * Функция для реализации пагинации. Подтягивает следующие елементы из заданной страницы.
+ */
+export const loadNextPageFromLibrary = (page) => {
+  let data = null;
+  
+  library.setPage(page);
+  
+  try {
+    data = JSON.parse(library.fetchData());
+  } catch (error) {
+    console.error(error);
+  }
+
+  if (!data) {
+    showFailureMessage('Упс, чтото пошло не так...');
+    return data;
+  }
+
+  if (data.page === data.total_pages) {
+    showWarningMessage('Это последние элементы в текущей галерее!');
+    library.setEndStatus();
+  }
+
+  library.incrementPage();
+  return data;
+};

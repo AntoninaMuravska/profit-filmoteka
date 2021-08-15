@@ -7,31 +7,32 @@ import { clearMarkup } from './components/render-markup';
 import { applyTheme, onChangeThemeSwitcherClick } from './components/theme';
 import { scrollUpInit } from './components/scrollup';
 import { onHomeBtnClick, onLibraryBtnClick } from './components/header';
+import { paginationInit } from './components/pagination';
 
 refs.gallery.addEventListener('click', onGalleryItemClick);
 refs.homeBtn.addEventListener('click', onHomeBtnClick);
 refs.libraryBtn.addEventListener('click', onLibraryBtnClick);
-// refs.searchBtn.addEventListener('click', onSearchBtn);
-
-
-
-// function onSearchBtn(e) {
-//   e.preventDefault();
-//   console.log('клик по кнопке search');
-// }
-
 
 
 /*
  * Функция формирования галлереи фильмов из библиотеки
  */
-export const makeGalleryFromLibraryItems = e => {
+const makeGalleryFromLibraryItems = e => {
   const data = getLibraryItems(e);
   const genres = getGenres();
 
   clearMarkup(refs.gallery);
+
   if (data) {
+    const paginationLibraryWatched = paginationInit(data.total_results);
+
+    paginationLibraryWatched.on('afterMove', (event) => {
+      const data = loadNextPageFromLibrary(event.page);
+      renderLibrary(genresTransformation(data, genres));
+    });
+
     renderLibrary(genresTransformation(data, genres));
+    
     return;
   }
   refs.gallery.innerHTML =
