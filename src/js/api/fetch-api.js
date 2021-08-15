@@ -1,5 +1,17 @@
 import axios from 'axios';
 import { saveGenres, saveFilms, savePopularFilms } from '../components/session-storage';
+import Pagination from 'tui-pagination';
+import options from '../../js/components/pagination';
+import renderGallary from '../../js/components/gallery';
+const pagination = new Pagination('pagination', options);
+// const page = pagination.getCurrentPage;
+
+ pagination.on('afterMove', (event) => {
+   MovieApi.currentPage = event.page;
+   console.log(MovieApi.currentPage);
+   const MyApi = new MovieApi();
+   MovieApi.getTrendingMovies();
+});
 
 export default class MovieApi {
   constructor() {
@@ -8,7 +20,6 @@ export default class MovieApi {
     this.genres = {};
     this.moviesObj = {};
     this.currentPage = 1;
-    this.rows = 20;
     this.query = '';
 
     // this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
@@ -21,7 +32,9 @@ export default class MovieApi {
 
   //популярные фильмы на сегодня
   async getTrendingMovies() {
-    const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}`);
+    console.log(this.currentPage);
+    const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${this.currentPage}`);
+    pagination.reset(response.data.total_results);
     const movies = response.data.results;
     this.moviesObj = response.data;
     movies.map(el => {
@@ -37,10 +50,15 @@ export default class MovieApi {
     saveFilms(this.moviesObj.results);
     return movies;
   }
+ 
+  //поиск фильма
+  async searchMovies(query) {
+    console.log(query);
 
   //поиск фильма
   async searchMovies(query) {
     console.log(query);
+
     const response = await axios.get(
       `${this.BASE_URL}search/movie?query=${query}&api_key=${this.API_KEY}&language=en-US&page=${this.currentPage}&include_adult=false`,
     );
