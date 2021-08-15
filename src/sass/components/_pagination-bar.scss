@@ -1,0 +1,32 @@
+.tui-pagination {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+body.dark-theme .tui-page-btn {
+  color: #000;
+  border-color: #000;
+  background-color: gray;
+}
+
+body.dark-theme .tui-page-btn.tui-is-selected {
+  background-color: #ff6b01;
+  transition: background-color 250ms linear;
+
+  &:hover {
+    background-color: #fa501c;
+  }
+}
+
+body.light-theme .tui-page-btn.tui-is-selected {
+  background-color: #ff6b01;
+  transition: background-color 250ms linear;
+
+  &:hover {
+    background-color: #fa501c;
+  }
+}
+
+.tui-page-btn {
+  transition: background-color 250ms linear;
+}
