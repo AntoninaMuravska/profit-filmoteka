@@ -1,5 +1,5 @@
 import refs from './refs';
-import makeGalleryFromLibraryItems from '../app';
+// import makeGalleryFromLibraryItems from '../app';
 import createMarkupHome from './gallery';
 
 export const onHomeBtnClick = e => {
@@ -21,9 +21,9 @@ export const onHomeBtnClick = e => {
 
 export const onLibraryBtnClick = e => {
   refs.queueBtn.addEventListener('click', onQueueBtnClick);
-  refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
+  // refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
   refs.watchedBtn.addEventListener('click', onWatchedBtnClick);
-  refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
+  // refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
   refs.headerBack.classList.add('back_library');
   refs.libraryBtn.classList.add('is_active');
   refs.homeBtn.classList.remove('is_active');
@@ -47,5 +47,5 @@ export const onQueueBtnClick = e => {
 export const onWatchedBtnClick = e => {
   refs.watchedBtn.classList.add('is_active_btn');
   refs.queueBtn.classList.remove('is_active_btn');
-  makeGalleryFromLibraryItems();
+  // makeGalleryFromLibraryItems();
 }
