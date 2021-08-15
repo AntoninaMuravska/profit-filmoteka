@@ -33,5 +33,6 @@
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.0.1",
     "tui-pagination": "^3.4.1"
+    "scrollreveal": "^4.0.9"
   }
 }

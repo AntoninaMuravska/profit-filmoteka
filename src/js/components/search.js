@@ -6,6 +6,7 @@ import genresTransformation from './genre-transformator.js';
 import { dateTransformation } from '../components/date-transformation';
 import {showWarningMessage } from './notification';
 import { clearMarkup } from './render-markup';
+import { scrollReveal } from './scroll-reveal';
 
 refs.headerForm.addEventListener('submit', onSearch);
 const MyApi = new MovieApi();
@@ -58,4 +59,5 @@ function createSearchMarkup(movies) {
   const movieCard = cardTpl(movies);
   refs.gallery.innerHTML = '';
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
+  scrollReveal();
 }

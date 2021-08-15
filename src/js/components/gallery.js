@@ -6,7 +6,7 @@ import openModal from './modal';
 import { dateTransformation } from '../components/date-transformation';
 import { enableLoader, disableLoader } from './notification';
 import { getItemFromSessionStorage, getGenres } from '../components/session-storage';
-import { appendMarkup } from './render-markup';
+import { scrollReveal } from './scroll-reveal';
 
 
 export const MyApi = new MovieApi();
@@ -16,8 +16,10 @@ export const renderGallery = function () {
     MyApi.getTrendingMovies().then(data => {
       MyApi.genresList().then(genresObj => {
         genresTransformation(MyApi.moviesObj, genresObj);
-        
+
         createMarkup(data);
+        scrollReveal();
+        
       });
       dateTransformation(data);
     });
@@ -30,11 +32,13 @@ export const renderGallery = function () {
 function createMarkup(movies) {
   const movieCard = cardTpl(movies);
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
+  scrollReveal();
 }
 
 enableLoader('.gallery', 'Loading...');
 renderGallery();
 disableLoader('.gallery');
+
 
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
@@ -50,6 +54,7 @@ export const onGalleryItemClick = e => {
 export const renderLibrary = function (data) {
   dateTransformation(data.results);
   refs.gallery.innerHTML = cardTpl(data.results);
+  scrollReveal();
 };
 
 //рисует галерею при нажатии HOME
@@ -62,6 +67,7 @@ export const createMarkupHome = function () {
 
   const movieCard = cardTpl(arrayFilms.results);
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
+  scrollReveal();
 };
 
 /*Функция для удаления заданного по id елемента из галереи*/

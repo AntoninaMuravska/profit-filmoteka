@@ -26,7 +26,7 @@ export default class MovieApi {
     this.IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
     //нужно поставить дефолтные картинки, если нет постера
-    this.DEFAULT_POSTER = '../images/default-img.png';   
+    this.DEFAULT_POSTER = 'https://clipartmag.com/images/old-camera-clipart-27.jpg';
     // this.DEFAULT_POSTER = '';   ======= постер для окна с деталями
   }
 
@@ -39,18 +39,22 @@ export default class MovieApi {
     this.moviesObj = response.data;
     movies.map(el => {
       const posterImageExist = el.poster_path;
-      if (posterImageExist) {
-        el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path
-      } else {
+      el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path;
+
+      if (!posterImageExist) {
         el.poster_path = MyApi.DEFAULT_POSTER;
       }
-    })
+    });
+
     savePopularFilms(this.moviesObj);
     saveFilms(this.moviesObj.results);
     return movies;
   }
+ 
+  //поиск фильма
+  async searchMovies(query) {
+    console.log(query);
 
-  
   //поиск фильма
   async searchMovies(query) {
     console.log(query);
@@ -63,12 +67,11 @@ export default class MovieApi {
     // console.log(movies);
     movies.map(el => {
       const posterImageExist = el.poster_path;
-      if (posterImageExist) {
-        el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path
-      } else {
+      el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path;
+      if (!posterImageExist) {
         el.poster_path = MyApi.DEFAULT_POSTER;
       }
-    })
+    });
     saveFilms(movies);
     return movies;
   }
@@ -99,8 +102,6 @@ export default class MovieApi {
   resetPage() {
     return (this.currentPage = 1);
   }
-
-
 }
 
 // Тестовые запросы
