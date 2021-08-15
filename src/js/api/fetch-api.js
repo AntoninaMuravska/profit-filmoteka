@@ -54,7 +54,8 @@ export default class MovieApi {
   //поиск фильма
   async searchMovies(query) {
     console.log(query);
-
+  }
+  
   //поиск фильма
   async searchMovies(query) {
     console.log(query);
