@@ -6,12 +6,13 @@ import { onButtonLibraryContainerClick, onModalOpenAutorun } from './library-app
 import refs from './refs';
 import { MyApi } from './gallery';
 import { getGenres } from './session-storage';
-
+import { scrollupBtnChangeVisibility } from './scrollup';
 
 
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
   refs.modal.classList.toggle('is-hidden');
+  scrollupBtnChangeVisibility();
   disableBodyScroll(document.body);
 
   const modalInfoContainer = refs.modal.querySelector('.modal-movie__info');
@@ -35,6 +36,7 @@ const сloseModal = () => {
   enableBodyScroll(document.body);
   refs.modal.firstElementChild.classList.toggle('is-hidden');
   refs.modal.classList.add('is-hidden');
+  scrollupBtnChangeVisibility();
 };
 
 
@@ -90,3 +92,4 @@ const addModalDetailedInfo = (containerLink,filmId) => {
     throw new Error;   /********* РАЗОБРАТЬСЯ **** */
   }
 }
+
