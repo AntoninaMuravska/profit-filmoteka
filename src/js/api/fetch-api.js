@@ -2,12 +2,14 @@ import axios from 'axios';
 import { saveGenres, saveFilms, savePopularFilms } from '../components/session-storage';
 import Pagination from 'tui-pagination';
 import options from '../../js/components/pagination';
+import renderGallary from '../../js/components/gallery';
 const pagination = new Pagination('pagination', options);
 // const page = pagination.getCurrentPage;
 
  pagination.on('afterMove', (event) => {
    MovieApi.currentPage = event.page;
    console.log(MovieApi.currentPage);
+   const MyApi = new MovieApi();
    MovieApi.getTrendingMovies();
 });
 

@@ -39,12 +39,12 @@ export const onLibraryBtnClick = e => {
   }
 }
 
-export const onQueueBtnClick= e => {
+export const onQueueBtnClick = e => {
   refs.watchedBtn.classList.remove('is_active_btn');
   refs.queueBtn.classList.add('is_active_btn');
 }
 
-export const onWatchedBtnClick= e => {
+export const onWatchedBtnClick = e => {
   refs.watchedBtn.classList.add('is_active_btn');
   refs.queueBtn.classList.remove('is_active_btn');
   makeGalleryFromLibraryItems();

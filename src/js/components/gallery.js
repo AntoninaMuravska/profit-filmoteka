@@ -11,7 +11,7 @@ import { appendMarkup } from './render-markup';
 
 export const MyApi = new MovieApi();
 
-function renderGallery() {
+export const renderGallery = function () {
   try {
     MyApi.getTrendingMovies().then(data => {
       MyApi.genresList().then(genresObj => {
