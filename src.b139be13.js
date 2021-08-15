@@ -131,4 +131,4 @@ var o;function t(o){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.
 },{"./refs":"EVoz","../api/fetch-api.js":"zEAs","../../templates/film-cards.hbs":"emJv","./genre-transformator.js":"rRl1","../components/date-transformation":"FLkS","./notification":"WOXE","./render-markup":"qtlO","./scroll-reveal":"QXkk"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/app.js"),require("./js/components/search");
 },{"./sass/main.scss":"clu1","./js/app.js":"QdeU","./js/components/search":"A7jH"}]},{},["Focm"], null)
-//# sourceMappingURL=/profit-filmoteka/src.0e6035f4.js.map
+//# sourceMappingURL=/profit-filmoteka/src.b139be13.js.map
