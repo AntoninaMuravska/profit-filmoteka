@@ -5,7 +5,7 @@ import genresTransformation from './components/genre-transformator';
 import { getGenres } from './components/session-storage';
 import { clearMarkup } from './components/render-markup';
 import { applyTheme, onChangeThemeSwitcherClick } from './components/theme';
-
+import scrollUpInit from './components/scrollup';
 
 
 refs.gallery.addEventListener('click', onGalleryItemClick);
@@ -93,5 +93,6 @@ refs.libraryBtn.addEventListener('click', () => refs.queueBtn.click());
 
 
 document.addEventListener('DOMContentLoaded', applyTheme);
+window.addEventListener('load', scrollUpInit);
 refs.themeSwitcher.addEventListener('change', onChangeThemeSwitcherClick);
 
