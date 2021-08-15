@@ -89,7 +89,8 @@ export default class LibraryApi {
 
         const outputData = {
             page: this.page,
-            results: [...storageData.library.slice(((this.page - 1) * 20), (this.page - 1) * 20 + quantity)],
+            // results: [...storageData.library.slice(((this.page - 1) * 20), (this.page - 1) * 20 + quantity)],
+            results: [...storageData.library.slice(((this.page - 1) * quantity), (this.page - 1) * quantity + quantity)],
             total_pages: storageData.total_pages,
             total_results: storageData.total_results
         };
