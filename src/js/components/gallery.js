@@ -8,14 +8,15 @@ import { enableLoader, disableLoader } from './notification';
 import { getItemFromSessionStorage, getGenres } from '../components/session-storage';
 import { scrollReveal } from './scroll-reveal';
 
+
 export const MyApi = new MovieApi();
 
-function renderGallery() {
+export const renderGallery = function () {
   try {
     MyApi.getTrendingMovies().then(data => {
       MyApi.genresList().then(genresObj => {
         genresTransformation(MyApi.moviesObj, genresObj);
-                
+
         createMarkup(data);
         scrollReveal();
         
@@ -26,6 +27,7 @@ function renderGallery() {
     throw error;
   }
 }
+
 
 function createMarkup(movies) {
   const movieCard = cardTpl(movies);
