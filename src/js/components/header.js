@@ -16,13 +16,13 @@ export const onHomeBtnClick = e => {
     ratings.forEach(rating => rating.classList.add('visually-hidden'));
   }
   refs.gallery.innerHTML = '';
-  createMarkupHome();
+  // createMarkupHome();
 }
 
 export const onLibraryBtnClick = e => {
-  refs.queueBtn.addEventListener('click', onQueueBtnClick);
+  // refs.queueBtn.addEventListener('click', onQueueBtnClick);
   // refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
-  refs.watchedBtn.addEventListener('click', onWatchedBtnClick);
+  // refs.watchedBtn.addEventListener('click', onWatchedBtnClick);
   // refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
   refs.headerBack.classList.add('back_library');
   refs.libraryBtn.classList.add('is_active');
