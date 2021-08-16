@@ -25,3 +25,10 @@ export const scrollupBtnChangeVisibility = () => {
     const scrollupBtnRef = document.querySelector('#back-to-top');
     scrollupBtnRef.classList.toggle('visually-hidden');
 };
+
+export const scrollToHeader = () => {
+    window.scroll({
+        top: 1,
+        behavior: 'smooth',
+    });
+};
