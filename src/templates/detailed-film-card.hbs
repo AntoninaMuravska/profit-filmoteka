@@ -2,7 +2,7 @@
   <div class="movie-card__img-container">
     <img
     class='movie-card__poster'
-    src='https://image.tmdb.org/t/p/w500{{poster_path}}'
+    src="{{#if poster_path}}https://image.tmdb.org/t/p/w500{{poster_path}}{{else}}https://clipartmag.com/images/old-camera-clipart-27.jpg{{/if}}"
     alt='{{title}}'
     width='500'
   />

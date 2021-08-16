@@ -84,13 +84,13 @@ export default class MovieApi {
     const movies = response.data.results;
     this.moviesObj = response.data;
     // console.log(movies);
-    movies.map(el => {
-      const posterImageExist = el.poster_path;
-      el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path;
-      if (!posterImageExist) {
-        el.poster_path = MyApi.DEFAULT_POSTER;
-      }
-    });
+    // movies.map(el => {
+    //   const posterImageExist = el.poster_path;
+    //   el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path;
+    //   if (!posterImageExist) {
+    //     el.poster_path = MyApi.DEFAULT_POSTER;
+    //   }
+    // });
     saveFilms(movies);
     return movies;
   }
