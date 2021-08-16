@@ -57,6 +57,14 @@ export default class MovieApi {
     );
     const fetchData = response.data;
     // console.log('проверка получения данных с сервера ', fetchData);
+
+  //async getTrendingMovies() {
+    //const response = await axios.get(
+      //`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${this.currentPage}`,
+    //);
+    //const fetchData = response.data;
+    //console.log('проверка получения данных с сервера ', fetchData);
+
     // pagination.reset(response.data.total_results);
     // this.moviesObj = response.data;
 
@@ -69,8 +77,8 @@ export default class MovieApi {
     //   }
     // });
 
-    // savePopularFilms(this.moviesObj);
-    // saveFilms(this.moviesObj.results);
+    savePopularFilms(fetchData);
+    saveFilms(fetchData.results);
     return fetchData;
   }
 

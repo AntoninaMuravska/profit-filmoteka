@@ -4,7 +4,7 @@ import MovieApi from '../api/fetch-api.js';
 import cardTpl from '../../templates/film-cards.hbs';
 import genresTransformation from './genre-transformator.js';
 import { dateTransformation } from '../components/date-transformation';
-import {showWarningMessage } from './notification';
+import { showWarningMessage } from './notification';
 import { clearMarkup } from './render-markup';
 import { scrollReveal } from './scroll-reveal';
 
@@ -15,7 +15,7 @@ refs.clearInputBtn.addEventListener('click', () => {
 const MyApi = new MovieApi();
 
 //функция отрисовки фильмов по ключевому слову
-function onSearch(e) {
+export function onSearch(e) {
   e.preventDefault();
   let inputValue = e.target.elements.searchQuery.value;
   let warningMessage = 'We do not know such a movie. Please, try again.';
@@ -65,4 +65,3 @@ function createSearchMarkup(movies) {
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
   scrollReveal();
 }
-

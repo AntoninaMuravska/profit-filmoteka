@@ -10,6 +10,7 @@ import { paginationInit } from './pagination';
 import { clearMarkup } from './render-markup';
 import { getLibraryItems } from './library-app';
 import { getGenres, getItemFromSessionStorage } from './session-storage';
+import {scrollToHeader} from './scrollup';
 
 export const MyApi = new MovieApi();
 
@@ -160,9 +161,22 @@ export const makeGalleryFromLibraryItems = e => {
   if (data) {
     const paginationLibraryWatched = paginationInit(data.total_results);
 
-    paginationLibraryWatched.on('afterMove', event => {
-      const data = loadNextPageFromLibrary(event.page);
-      renderLibrary(genresTransformation(data, genres));
+
+    //paginationLibraryWatched.on('afterMove', event => {
+      //const data = loadNextPageFromLibrary(event.page);
+      //renderLibrary(genresTransformation(data, genres));
+
+    
+    paginationLibraryWatched.on('afterMove', (event) => {
+      clearMarkup(refs.gallery);
+      setTimeout(scrollToHeader(), 0);
+      setTimeout(() => {
+        enableLoader('.section-gallery', 'Loading...');
+        const data = loadNextPageFromLibrary(event.page);
+        enableLoader('.section-gallery', 'Loading...');
+        renderLibrary(genresTransformation(data, genres));
+      }, 100);
+
     });
 
     renderLibrary(genresTransformation(data, genres));
@@ -179,20 +193,39 @@ export const makeGalleryFromLibraryItems = e => {
 export const makeGalleryFromThrendesFilms = async e => {
   e.preventDefault();
   const genres = getGenres();
+
   // enableLoader('.gallery', 'Loading...');
-  const data = await getThrendesFilms();
+  //const data = await getThrendesFilms();
   // disableLoader('.gallery');
 
+  //if (data) {
+    //const paginationThrendesFilms = paginationInit(data.total_results);
+
+   // paginationThrendesFilms.on('afterMove', event => {
+      /**const data = <НАЗВАНИЕ ФУНКЦИИ ПОЛУЧЕНИЯ ПОРЦИИ ТРЕНДОВЫХ ФИЛЬМОВ ПО ЗАДАНОМУ НОВМЕРУ СТРАНИЦЫ>(event.page);**/
+     // const data = getThrendesFilms(event.page);
+    //  console.log('В функции makeGalleryFromThrendesFilms event.page:', event.page)
+     // console.log('В функции makeGalleryFromThrendesFilms data: ', data);
+      // alert('KOKOKO');
+     // renderLibrary(genresTransformation(data, genres));
+
+  
+  enableLoader('.section-gallery', 'Loading...');
+  const data = await getThrendesFilms();
+  disableLoader('.section-gallery');
+  console.log('приход даты: ',data);
   if (data) {
     const paginationThrendesFilms = paginationInit(data.total_results);
 
-    paginationThrendesFilms.on('afterMove', event => {
-      /**const data = <НАЗВАНИЕ ФУНКЦИИ ПОЛУЧЕНИЯ ПОРЦИИ ТРЕНДОВЫХ ФИЛЬМОВ ПО ЗАДАНОМУ НОВМЕРУ СТРАНИЦЫ>(event.page);**/
-      const data = getThrendesFilms(event.page);
-      console.log('В функции makeGalleryFromThrendesFilms event.page:', event.page)
-      console.log('В функции makeGalleryFromThrendesFilms data: ', data);
-      // alert('KOKOKO');
-      renderLibrary(genresTransformation(data, genres));
+    paginationThrendesFilms.on('afterMove', (event) => {
+      clearMarkup(refs.gallery);
+      setTimeout(scrollToHeader(),0);
+      setTimeout(() => {
+        enableLoader('.section-gallery', 'Loading...');
+        /**const data = <НАЗВАНИЕ ФУНКЦИИ ПОЛУЧЕНИЯ ПОРЦИИ ТРЕНДОВЫХ ФИЛЬМОВ ПО ЗАДАНОМУ НОВМЕРУ СТРАНИЦЫ>(event.page);**/
+        disableLoader('.section-gallery');
+        renderLibrary(genresTransformation(data, genres));
+      }, 100);
     });
 
     renderLibrary(genresTransformation(data, genres));
@@ -208,21 +241,40 @@ export const makeGalleryFromSearchedFilms = async e => {
   // e.preventDefault();
   const genres = getGenres();
   console.log('запускаем функцию для поиска');
-  // enableLoader('.gallery', 'Loading...');
+  enableLoader('.section-gallery', 'Loading...');
   const data = await getSearchedFilms(); /**ПОМЕНЯТЬ ФУНКЦИЮ НА ТУ ЧТО ТЯНЕТ ДАННЫЕ С ПОИСКА**** */
-  console.log('Попытка получить данные для инициализации пагинации', data);
+
+  //console.log('Попытка получить данные для инициализации пагинации', data);
   // disableLoader('.gallery');
 
-  console.log(dara.results.length);
+  //console.log(dara.results.length);
+
+  console.log('Попытка получить данные для инициализации пагинации',data);
+  disableLoader('.section-gallery');
+  
+  console.log(data.results.length);
+
   // clearMarkup(refs.gallery);
 
   if (data) {
     const paginationSearchedFilms = paginationInit(data.results.length);
 
-    paginationSearchedFilms.on('afterMove', event => {
+
+    //paginationSearchedFilms.on('afterMove', event => {
       /**const data = <НАЗВАНИЕ ФУНКЦИИ ПОЛУЧЕНИЯ ПОРЦИИ ПОИСКОВЫХ ФИЛЬМОВ ПО ЗАДАНОМУ НОВМЕРУ СТРАНИЦЫ>(event.page);**/
-      alert('KOKOKO');
-      renderLibrary(genresTransformation(data, genres));
+    //  alert('KOKOKO');
+    //  renderLibrary(genresTransformation(data, genres));
+
+    paginationSearchedFilms.on('afterMove', (event) => {
+      clearMarkup(refs.gallery);
+      setTimeout(scrollToHeader(),0);
+      setTimeout(() => {
+        enableLoader('.section-gallery', 'Loading...');
+        /**const data = <НАЗВАНИЕ ФУНКЦИИ ПОЛУЧЕНИЯ ПОРЦИИ ТРЕНДОВЫХ ФИЛЬМОВ ПО ЗАДАНОМУ НОВМЕРУ СТРАНИЦЫ>(event.page);**/
+        disableLoader('.section-gallery');
+        renderLibrary(genresTransformation(data, genres));
+      }, 100);
+
     });
 
     renderLibrary(genresTransformation(data, genres));
