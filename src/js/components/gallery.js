@@ -14,8 +14,8 @@ import { getGenres, getItemFromSessionStorage } from './session-storage';
 
 
 
-// export const MyApi = new MovieApi();
-const MyApi = new MovieApi();
+
+export const MyApi = new MovieApi();
 
 export const renderGallery = function () {
   try {
