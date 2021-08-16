@@ -1,4 +1,5 @@
 import Pagination from 'tui-pagination';
+import refs from './refs';
 
 export const paginationInit = totalItems => {
   const optionsTemplate = {
@@ -28,4 +29,11 @@ export const paginationInit = totalItems => {
 // pagination.on('afterMove', ({ page }) => console.log(page));
 
 
+export const paginationBarShow = () => {
+  refs.paginationBar.classList.remove('is-notvisible');
+};
 
+
+export const paginationBarHide = () => {
+  refs.paginationBar.classList.add('is-notvisible');
+};
