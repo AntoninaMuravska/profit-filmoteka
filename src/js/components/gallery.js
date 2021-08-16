@@ -9,7 +9,7 @@ import { scrollReveal } from './scroll-reveal';
 import { paginationInit } from './pagination';
 import { clearMarkup } from './render-markup';
 import { getLibraryItems } from './library-app';
-import { getGenres,getItemFromSessionStorage } from './session-storage';
+import { getGenres, getItemFromSessionStorage } from './session-storage';
 
 
 
@@ -152,21 +152,18 @@ export const getSearchedFilms = async () => {
  * инициализирует пагинацию, рендерит
  */
 export const makeGalleryFromLibraryItems = e => {
-  const data = getLibraryItems(e);
   const genres = getGenres();
-
-  clearMarkup(refs.gallery);
-
+  const data = getLibraryItems(e);
+    
   if (data) {
     const paginationLibraryWatched = paginationInit(data.total_results);
-
+    
     paginationLibraryWatched.on('afterMove', (event) => {
       const data = loadNextPageFromLibrary(event.page);
       renderLibrary(genresTransformation(data, genres));
     });
-
-    renderLibrary(genresTransformation(data, genres));
     
+    renderLibrary(genresTransformation(data, genres));
     return;
   }
   refs.gallery.innerHTML =
@@ -181,15 +178,11 @@ export const makeGalleryFromLibraryItems = e => {
  */
 export const makeGalleryFromThrendesFilms = async e => {
   e.preventDefault();
-
+  const genres = getGenres();
   // enableLoader('.gallery', 'Loading...');
   const data = await getThrendesFilms();
-  console.log('Попытка получить данные для инициализации пагинации',data);
   // disableLoader('.gallery');
-  const genres = getGenres();
-
-  clearMarkup(refs.gallery);
-
+  
   if (data) {
     const paginationThrendesFilms = paginationInit(data.total_results);
 
@@ -200,8 +193,7 @@ export const makeGalleryFromThrendesFilms = async e => {
     });
 
     renderLibrary(genresTransformation(data, genres));
-    
-  // return;
+    // return;
   }
 };
 
@@ -213,14 +205,15 @@ export const makeGalleryFromThrendesFilms = async e => {
  */
 export const makeGalleryFromSearchedFilms = async e => {
   // e.preventDefault();
+  const genres = getGenres();
   console.log('запускаем функцию для поиска');
   // enableLoader('.gallery', 'Loading...');
   const data = await getSearchedFilms(); /**ПОМЕНЯТЬ ФУНКЦИЮ НА ТУ ЧТО ТЯНЕТ ДАННЫЕ С ПОИСКА**** */
   console.log('Попытка получить данные для инициализации пагинации',data);
   // disableLoader('.gallery');
-  const genres = getGenres();
+  
   console.log(dara.results.length);
-  clearMarkup(refs.gallery);
+  // clearMarkup(refs.gallery);
 
   if (data) {
     const paginationSearchedFilms = paginationInit(data.results.length);
@@ -235,4 +228,11 @@ export const makeGalleryFromSearchedFilms = async e => {
     
   // return;
   }
+};
+
+
+
+/*Функция получения объекта с жанрами и помещения его в session-storage*/
+export const fetchGenres = async () => {
+  MyApi.genresList();
 };
