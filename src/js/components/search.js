@@ -9,6 +9,9 @@ import { clearMarkup } from './render-markup';
 import { scrollReveal } from './scroll-reveal';
 
 refs.headerForm.addEventListener('submit', onSearch);
+refs.clearInputBtn.addEventListener('click', () => {
+  refs.input.value = '';
+});
 const MyApi = new MovieApi();
 
 //функция отрисовки фильмов по ключевому слову
@@ -61,3 +64,4 @@ function createSearchMarkup(movies) {
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
   scrollReveal();
 }
+

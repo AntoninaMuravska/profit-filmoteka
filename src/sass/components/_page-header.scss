@@ -97,13 +97,10 @@
 }
 
 .header__form {
-  display: flex;
-  width: 336px;
-  justify-content: space-between;
-  border-bottom: solid 1px white;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  margin: 0 auto;
   margin-top: 37px;
+  width: 300px;
 
   @media screen and (max-width: 320px) {
     width: 100%;
@@ -111,24 +108,58 @@
 }
 
 .header__input {
-  background-color: rgba(145, 49, 49, 0);
+  width: 100%;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.143;
+  background-color: rgba(145, 49, 49, 0);
   color: #ffffff;
   border: none;
-  width: 300px;
-  @media screen and (max-width: 767px) {
-    width: auto;
-  }
+  border-bottom: solid 1px white;
+}
+
+.header__input:focus,
+.header__input:hover {
+  outline: none;
+  border-color: #ff6b01;
 }
 
 .header__button {
+  position: absolute;
+  top: 3px;
+  right: 0;
   width: 12px;
   height: 12px;
   background-image: url('../images/search.svg');
   background-color: rgba(145, 49, 49, 0);
   border: none;
+  cursor: pointer;
+}
+
+//проверить почему не работает
+.header__button:hover, 
+.header__button:focus {
+  fill: #ff6b01;
+}
+
+.clear-input {
+  position: absolute;
+  right: -10%;
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 17px;
+
+  @media screen and (max-width: 320px) {
+    right: -7%;
+  }
+}
+
+.clear-input:hover, 
+.clear-input:focus {
+color: #ff6b01;
 }
 
 .header__library-buttons {
