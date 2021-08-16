@@ -1,17 +1,17 @@
 import axios from 'axios';
 import { saveGenres, saveFilms, savePopularFilms } from '../components/session-storage';
-import Pagination from 'tui-pagination';
-import options from '../../js/components/pagination';
-import renderGallary from '../../js/components/gallery';
-const pagination = new Pagination('pagination', options);
+// import Pagination from 'tui-pagination';
+// import options from '../../js/components/pagination';
+// import renderGallary from '../../js/components/gallery';
+// const pagination = new Pagination('pagination', options);
 // const page = pagination.getCurrentPage;
 
- pagination.on('afterMove', (event) => {
-   MovieApi.currentPage = event.page;
-   console.log(MovieApi.currentPage);
-   const MyApi = new MovieApi();
-   MovieApi.getTrendingMovies();
-});
+//  pagination.on('afterMove', (event) => {
+//    MovieApi.currentPage = event.page;
+//    console.log(MovieApi.currentPage);
+//    const MyApi = new MovieApi();
+//    MovieApi.getTrendingMovies();
+// });
 
 export default class MovieApi {
   constructor() {
@@ -31,24 +31,46 @@ export default class MovieApi {
   }
 
   //популярные фильмы на сегодня
-  async getTrendingMovies() {
-    console.log(this.currentPage);
+  // async getTrendingMovies() {
+  //   console.log(this.currentPage);
+  //   const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${this.currentPage}`);
+  //   // pagination.reset(response.data.total_results);
+  //   const movies = response.data.results;
+  //   this.moviesObj = response.data;
+  //   movies.map(el => {
+  //     const posterImageExist = el.poster_path;
+  //     el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path;
+
+  //     if (!posterImageExist) {
+  //       el.poster_path = MyApi.DEFAULT_POSTER;
+  //     }
+  //   });
+
+  //   savePopularFilms(this.moviesObj);
+  //   saveFilms(this.moviesObj.results);
+  //   return movies;
+  // }
+
+    async getTrendingMovies() {
     const response = await axios.get(`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${this.currentPage}`);
-    pagination.reset(response.data.total_results);
-    const movies = response.data.results;
-    this.moviesObj = response.data;
-    movies.map(el => {
-      const posterImageExist = el.poster_path;
-      el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path;
+      const fetchData = response.data;
+      console.log('проверка получения данных с сервера ',fetchData);
+    // pagination.reset(response.data.total_results);
+    // this.moviesObj = response.data;
+    
+    
+    // movies.map(el => {
+    //   const posterImageExist = el.poster_path;
+    //   el.poster_path = MyApi.IMAGE_BASE_URL + el.poster_path;
 
-      if (!posterImageExist) {
-        el.poster_path = MyApi.DEFAULT_POSTER;
-      }
-    });
+    //   if (!posterImageExist) {
+    //     el.poster_path = MyApi.DEFAULT_POSTER;
+    //   }
+    // });
 
-    savePopularFilms(this.moviesObj);
-    saveFilms(this.moviesObj.results);
-    return movies;
+    // savePopularFilms(this.moviesObj);
+    // saveFilms(this.moviesObj.results);
+    return fetchData;
   }
  
 
