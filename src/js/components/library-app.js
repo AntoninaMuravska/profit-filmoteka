@@ -208,10 +208,8 @@ const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home')
 export const loadNextPageFromLibrary = (page) => {
   let data = null;
   
-  library.setPage(page);
-  
   try {
-    data = JSON.parse(library.fetchData());
+    data = JSON.parse(library.fetchData(page));
   } catch (error) {
     console.error(error);
   }
