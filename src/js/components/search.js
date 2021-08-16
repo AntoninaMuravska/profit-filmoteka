@@ -35,9 +35,10 @@ export function onSearch(e) {
   } else {
     MyApi.resetPage();
     // enableLoader();
-    MyApi.query = inputValue;
+    MyApi.searchQuery(inputValue)
+    // MyApi.query = inputValue;
     try {
-      MyApi.searchMovies(MyApi.query).then(data => {
+      MyApi.searchMovies().then(data => {
         MyApi.genresList().then(genresObj => {
           genresTransformation(MyApi.moviesObj, genresObj);
           createSearchMarkup(data);

@@ -19,7 +19,7 @@ export default class MovieApi {
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.genres = {};
     this.moviesObj = {};
-    this.currentPage = 1;
+    this.page = 1;
     this.query = '';
 
     // this.VIDEO_BASE_URL = 'https://api.themoviedb.org/3/movie/';
@@ -51,12 +51,20 @@ export default class MovieApi {
   //   return movies;
   // }
 
-  async getTrendingMovies() {
+  async getTrendingMovies(page = 1) {
     const response = await axios.get(
-      `${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${this.currentPage}`,
+      `${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${page}`,
     );
     const fetchData = response.data;
-    console.log('проверка получения данных с сервера ', fetchData);
+    // console.log('проверка получения данных с сервера ', fetchData);
+
+  //async getTrendingMovies() {
+    //const response = await axios.get(
+      //`${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${this.currentPage}`,
+    //);
+    //const fetchData = response.data;
+    //console.log('проверка получения данных с сервера ', fetchData);
+
     // pagination.reset(response.data.total_results);
     // this.moviesObj = response.data;
 
@@ -75,11 +83,12 @@ export default class MovieApi {
   }
 
   //поиск фильма
-  async searchMovies(query) {
-    console.log(query);
+  async searchMovies(page) {
+    // console.log(query);
+ 
 
     const response = await axios.get(
-      `${this.BASE_URL}search/movie?query=${query}&api_key=${this.API_KEY}&language=en-US&page=${this.currentPage}&include_adult=false`,
+      `${this.BASE_URL}search/movie?query=${this.query}&api_key=${this.API_KEY}&language=en-US&page=${page}&include_adult=false`,
     );
     const movies = response.data.results;
     this.moviesObj = response.data;
@@ -118,9 +127,14 @@ export default class MovieApi {
     return this.genres;
   }
 
-  resetPage() {
-    return (this.currentPage = 1);
+  searchQuery(query) {
+    return (this.query = query);
   }
+
+  resetPage() {
+    return (this.page = 1);
+  }
+
 }
 
 // Тестовые запросы
