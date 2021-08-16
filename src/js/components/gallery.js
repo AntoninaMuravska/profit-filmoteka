@@ -160,7 +160,8 @@ export const makeGalleryFromLibraryItems = e => {
   const genres = getGenres();
   const data = getLibraryItems(e);
   disableLoader('.section-gallery');
-
+  paginationBarHide();
+  
   if (data) {
     const paginationLibraryWatched = paginationInit(data.total_results);
     paginationLibraryWatched.on('afterMove', (event) => {
@@ -177,8 +178,10 @@ export const makeGalleryFromLibraryItems = e => {
     });
 
     renderLibrary(genresTransformation(data, genres));
+    paginationBarShow();
     return;
   }
+  
   refs.gallery.innerHTML =
     '<div class="empty"><div class="img-thumb"></div><p class="empty-text">your library is empty...</p></div>';
 };
@@ -194,6 +197,7 @@ export const makeGalleryFromThrendesFilms = async e => {
   const genres = getGenres();
   const data = await getThrendesFilms();
   disableLoader('.section-gallery');
+  paginationBarHide();
 
   if (data) {
     const paginationThrendesFilms = paginationInit(data.total_results);
@@ -210,6 +214,7 @@ export const makeGalleryFromThrendesFilms = async e => {
       }, 100);
     });
     renderLibrary(genresTransformation(data, genres));
+    paginationBarShow();
   }
 };
 
@@ -225,6 +230,7 @@ export const makeGalleryFromSearchedFilms = async e => {
   const genres = getGenres();
   const data = await getSearchedFilms(); /**ПОМЕНЯТЬ ФУНКЦИЮ НА ТУ ЧТО ТЯНЕТ ДАННЫЕ С ПОИСКА**** */
   disableLoader('.section-gallery');
+  paginationBarHide();
 
   console.log('Попытка получить данные для инициализации пагинации',data);
   console.log(data.results.length);
@@ -244,6 +250,7 @@ export const makeGalleryFromSearchedFilms = async e => {
       }, 100);
     });
     renderLibrary(genresTransformation(data, genres));
+    paginationBarShow();
   }
 };
 
