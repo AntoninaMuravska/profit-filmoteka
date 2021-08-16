@@ -26,6 +26,10 @@ body.dark-theme .tui-page-btn {
   background-color: gray;
 }
 
+body.light-theme .tui-page-btn {
+  color: #000;
+}
+
 body.dark-theme .tui-page-btn.tui-is-selected {
   background-color: #ff6b01;
   transition: background-color 250ms linear;
@@ -36,6 +40,7 @@ body.dark-theme .tui-page-btn.tui-is-selected {
 }
 
 body .section-gallery #pagination .tui-page-btn.tui-is-selected {
+  color: #fff;
   background-color: #ff6b01;
   transition: background-color 250ms linear;
 
@@ -78,5 +83,11 @@ body.dark-theme #pagination .tui-first-child,
 body.dark-theme #pagination .tui-last-child,
 body.dark-theme #pagination .tui-prev,
 body.dark-theme #pagination .tui-next {
+  color: #fff;
   background-color: rgb(133, 131, 131);
+}
+
+body.light-theme #pagination .tui-first-child,
+body.light-theme #pagination .tui-last-child {
+  color: #000;
 }
