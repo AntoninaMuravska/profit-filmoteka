@@ -24,8 +24,14 @@
 .film-card___container:hover .film-thumbs {
   transform: scale(1.15);
   cursor: pointer;
-  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px rgb(99, 4, 224), 0 0 40px hsl(221, 98%, 50%),
-    0 0 70px #154afa, 0 0 80px #8d05c4, 0 0 150px #eecd3b, 0 0 15px rgb(255, 102, 31);
+  // box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px rgb(99, 4, 224), 0 0 40px hsl(221, 98%, 50%),
+  //   0 0 70px #154afa, 0 0 80px #8d05c4, 0 0 150px #eecd3b, 0 0 15px rgb(255, 102, 31);
+  box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff3c00, 0 0 40px hsl(24, 98%, 50%),
+    0 0 70px #fa1580, 0 0 80px #ffee00, 0 0 80px #eecd3b, 0 0 15px rgb(255, 102, 31);
+
+  @media screen and (max-width: 320px) {
+    transform: scale(1.05);
+  }
 }
 .film-card___container:hover .film-text-wrapper {
   opacity: 0;
