@@ -1,5 +1,18 @@
+#pagination {
+  height: 40px;
+}
+
 #pagination.is-notvisible {
   opacity: 0;
+}
+
+#pagination .tui-page-btn {
+  padding-top: 15px;
+  width: 40px;
+  height: 40px;
+  font-weight: 700;
+  border: none;
+  background-color: inherit;
 }
 
 .tui-pagination {
@@ -13,6 +26,10 @@ body.dark-theme .tui-page-btn {
   background-color: gray;
 }
 
+body.light-theme .tui-page-btn {
+  color: #000;
+}
+
 body.dark-theme .tui-page-btn.tui-is-selected {
   background-color: #ff6b01;
   transition: background-color 250ms linear;
@@ -22,7 +39,8 @@ body.dark-theme .tui-page-btn.tui-is-selected {
   }
 }
 
-body.light-theme .tui-page-btn.tui-is-selected {
+body .section-gallery #pagination .tui-page-btn.tui-is-selected {
+  color: #fff;
   background-color: #ff6b01;
   transition: background-color 250ms linear;
 
@@ -33,4 +51,43 @@ body.light-theme .tui-page-btn.tui-is-selected {
 
 .tui-page-btn {
   transition: background-color 250ms linear;
+}
+
+.tui-page-btn {
+  transition: background-color 250ms linear;
+}
+
+body.dark-theme .tui-page-btn {
+  color: #fff;
+}
+
+body #pagination .tui-page-btn.tui-is-selected {
+  background-color: #ff6b01;
+}
+
+#pagination .tui-page-btn.tui-last-child {
+  color: #fff;
+}
+
+#pagination .tui-page-btn span {
+  margin-top: -15px;
+}
+
+#pagination .tui-page-btn span.tui-ico-ellip {
+  margin-top: 5px;
+}
+
+body.dark-theme #pagination .tui-first,
+body.dark-theme #pagination .tui-last,
+body.dark-theme #pagination .tui-first-child,
+body.dark-theme #pagination .tui-last-child,
+body.dark-theme #pagination .tui-prev,
+body.dark-theme #pagination .tui-next {
+  color: #fff;
+  background-color: rgb(133, 131, 131);
+}
+
+body.light-theme #pagination .tui-first-child,
+body.light-theme #pagination .tui-last-child {
+  color: #000;
 }
