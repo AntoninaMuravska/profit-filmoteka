@@ -227,17 +227,8 @@ export const makeGalleryFromLibraryItems = e => {
   
   if (data) {
     const paginationLibraryWatched = paginationInit(data.total_results);
-
-
-    //paginationLibraryWatched.on('afterMove', event => {
-    //const data = loadNextPageFromLibrary(event.page);
-    //renderLibrary(genresTransformation(data, genres));
-
-    //paginationLibraryWatched.on('afterMove', event => {
-
     paginationLibraryWatched.on('afterMove', event => {
       paginationBarHide();
-
       clearMarkup(refs.gallery);
       setTimeout(scrollToHeader(), 0);
       setTimeout(() => {
@@ -265,40 +256,10 @@ export const makeGalleryFromLibraryItems = e => {
 export const makeGalleryFromThrendesFilms = async e => {
   e.preventDefault();
 
-  //const genres = getGenres();
-
-  // enableLoader('.gallery', 'Loading...');
-  //const data = await getThrendesFilms();
-  // disableLoader('.gallery');
-
-  //if (data) {
-  //const paginationThrendesFilms = paginationInit(data.total_results);
-
-  // paginationThrendesFilms.on('afterMove', event => {
-  /**const data = <НАЗВАНИЕ ФУНКЦИИ ПОЛУЧЕНИЯ ПОРЦИИ ТРЕНДОВЫХ ФИЛЬМОВ ПО ЗАДАНОМУ НОВМЕРУ СТРАНИЦЫ>(event.page);**/
-  // const data = getThrendesFilms(event.page);
-  //  console.log('В функции makeGalleryFromThrendesFilms event.page:', event.page)
-  // console.log('В функции makeGalleryFromThrendesFilms data: ', data);
-  // alert('KOKOKO');
-  // renderLibrary(genresTransformation(data, genres));
-
-
-  
-
   enableLoader('.section-gallery', 'Loading...');
   const genres = getGenres();
   const data = await getThrendesFilms();
   disableLoader('.section-gallery');
-
-  // console.log('приход даты: ', data);
- // if (data) {
- //   const paginationThrendesFilms = paginationInit(data.total_results);
-
- //   paginationThrendesFilms.on('afterMove', event => {
- //     clearMarkup(refs.gallery);
-  //    setTimeout(scrollToHeader(), 0);
-  //    setTimeout(() => {
-
   paginationBarHide();
 
   if (data) {
@@ -308,7 +269,6 @@ export const makeGalleryFromThrendesFilms = async e => {
       clearMarkup(refs.gallery);
       setTimeout(scrollToHeader(),0);
       setTimeout(async () => {
-
         enableLoader('.section-gallery', 'Loading...');
         const data = await getThrendesFilms(event.page);
         renderLibrary(genresTransformation(data, genres));
@@ -326,43 +286,20 @@ export const makeGalleryFromThrendesFilms = async e => {
  * инициализирует пагинацию и рендерит галлерею)
  */
 export const makeGalleryFromSearchedFilms = async e => {
-  // e.preventDefault();
+  e.preventDefault();
   console.log('запускаем функцию для поиска');
 
   enableLoader('.section-gallery', 'Loading...');
-
-  // const data = onSearch(e); /**ПОМЕНЯТЬ ФУНКЦИЮ НА ТУ ЧТО ТЯНЕТ ДАННЫЕ С ПОИСКА**** */
-  // console.log(data);
-
-  //console.log('Попытка получить данные для инициализации пагинации', data);
-  // disableLoader('.gallery');
-
-  //console.log(dara.results.length);
-
- // console.log('Попытка получить данные для инициализации пагинации', data);
- // disableLoader('.section-gallery');
-
-
   const genres = getGenres();
   const data = await getSearchedFilms(); /**ПОМЕНЯТЬ ФУНКЦИЮ НА ТУ ЧТО ТЯНЕТ ДАННЫЕ С ПОИСКА**** */
   disableLoader('.section-gallery');
   paginationBarHide();
 
   console.log('Попытка получить данные для инициализации пагинации',data);
-
   console.log(data.results.length);
 
   if (data) {
     const paginationSearchedFilms = paginationInit(data.results.length);
-
-
-    //paginationSearchedFilms.on('afterMove', event => {
-    /**const data = <НАЗВАНИЕ ФУНКЦИИ ПОЛУЧЕНИЯ ПОРЦИИ ПОИСКОВЫХ ФИЛЬМОВ ПО ЗАДАНОМУ НОВМЕРУ СТРАНИЦЫ>(event.page);**/
-    //  alert('KOKOKO');
-    //  renderLibrary(genresTransformation(data, genres));
-
-    //paginationSearchedFilms.on('afterMove', event => {
-
     paginationSearchedFilms.on('afterMove', event => {
       paginationBarHide();
 
