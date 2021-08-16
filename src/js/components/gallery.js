@@ -6,7 +6,7 @@ import openModal from './modal';
 import { dateTransformation } from './date-transformation';
 import { enableLoader, disableLoader } from './notification';
 import { scrollReveal } from './scroll-reveal';
-import { paginationInit } from './pagination';
+import { paginationInit, paginationBarShow, paginationBarHide} from './pagination';
 import { clearMarkup } from './render-markup';
 import { getLibraryItems } from './library-app';
 import { getGenres, getItemFromSessionStorage } from './session-storage';
@@ -164,12 +164,14 @@ export const makeGalleryFromLibraryItems = e => {
   if (data) {
     const paginationLibraryWatched = paginationInit(data.total_results);
     paginationLibraryWatched.on('afterMove', (event) => {
+      paginationBarHide();
       clearMarkup(refs.gallery);
       setTimeout(scrollToHeader(), 0);
       setTimeout(() => {
         enableLoader('.section-gallery', 'Loading...');
         const data = loadNextPageFromLibrary(event.page);
         renderLibrary(genresTransformation(data, genres));
+        paginationBarShow();
         disableLoader('.section-gallery', 'Loading...');
       }, 100);
     });
@@ -187,7 +189,7 @@ export const makeGalleryFromLibraryItems = e => {
  */
 export const makeGalleryFromThrendesFilms = async e => {
   e.preventDefault();
-   
+  
   enableLoader('.section-gallery', 'Loading...');
   const genres = getGenres();
   const data = await getThrendesFilms();
@@ -196,12 +198,14 @@ export const makeGalleryFromThrendesFilms = async e => {
   if (data) {
     const paginationThrendesFilms = paginationInit(data.total_results);
     paginationThrendesFilms.on('afterMove', event => {
+      paginationBarHide();
       clearMarkup(refs.gallery);
       setTimeout(scrollToHeader(),0);
       setTimeout(async () => {
         enableLoader('.section-gallery', 'Loading...');
         const data = await getThrendesFilms(event.page);
         renderLibrary(genresTransformation(data, genres));
+        paginationBarShow();
         disableLoader('.section-gallery');
       }, 100);
     });
@@ -228,12 +232,14 @@ export const makeGalleryFromSearchedFilms = async e => {
   if (data) {
     const paginationSearchedFilms = paginationInit(data.results.length);
     paginationSearchedFilms.on('afterMove', (event) => {
+      paginationBarHide();
       clearMarkup(refs.gallery);
       setTimeout(scrollToHeader(),0);
       setTimeout(() => {
         enableLoader('.section-gallery', 'Loading...');
         /**const data = <НАЗВАНИЕ ФУНКЦИИ ПОЛУЧЕНИЯ ПОРЦИИ ТРЕНДОВЫХ ФИЛЬМОВ ПО ЗАДАНОМУ НОВМЕРУ СТРАНИЦЫ>(event.page);**/
         renderLibrary(genresTransformation(data, genres));
+        paginationBarShow();
         disableLoader('.section-gallery');
       }, 100);
     });

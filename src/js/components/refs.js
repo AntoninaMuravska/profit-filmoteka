@@ -12,5 +12,6 @@ export default {
   body: document.querySelector('body'),
   themeSwitcher: document.querySelector('#theme-switch-toggle'),
   footerLink: document.querySelector('.footer__link'),
-  clearInputBtn: document.querySelector('.clear-input')
+  clearInputBtn: document.querySelector('.clear-input'),
+  paginationBar: document.querySelector('#pagination')
 };
