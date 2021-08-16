@@ -46,7 +46,14 @@
   display: flex;
   align-items: center;
 }
-
+.header__logo {
+  transition: 500ms;
+}
+.header__logo:hover {
+  width: 30px;
+  height: 30px;
+  fill: #ff6b08;
+}
 .is_invisible {
   opacity: 0;
 }
@@ -81,6 +88,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.167;
+  transition: 500ms;
 }
 
 .logo {
@@ -90,10 +98,16 @@
   text-decoration: none;
   margin-left: 36px;
   color: #ffffff;
+  transition: 500ms;
 
   @media screen and (max-width: 767px) {
     display: none;
   }
+}
+
+.logo:hover {
+  font-size: 40px;
+  color: #ff6b08;
 }
 
 .header__form {
@@ -116,12 +130,14 @@
   color: #ffffff;
   border: none;
   border-bottom: solid 1px white;
+  transition: 500ms;
 }
 
 .header__input:focus,
 .header__input:hover {
   outline: none;
   border-color: #ff6b01;
+  font-size: 16px;
 }
 
 .header__button {
@@ -137,9 +153,8 @@
 }
 
 //проверить почему не работает
-.header__button:hover, 
-.header__button:focus {
-  fill: #ff6b01;
+.nav__link:hover {
+  color: #ff6b01;
 }
 
 .clear-input {
@@ -157,9 +172,9 @@
   }
 }
 
-.clear-input:hover, 
+.clear-input:hover,
 .clear-input:focus {
-color: #ff6b01;
+  color: #ff6b01;
 }
 
 .header__library-buttons {
@@ -180,9 +195,14 @@ color: #ff6b01;
   background-color: rgba(145, 49, 49, 0);
   border: 1px solid #ffffff;
   border-radius: 5px;
+  transition: 500ms;
   &:not(:last-child) {
     margin-right: 15px;
   }
+}
+.header__library-button:hover {
+  border: 1px solid #ff6b01;
+  color: #ff6b01;
 }
 
 .is_active_btn {
