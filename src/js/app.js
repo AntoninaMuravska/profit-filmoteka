@@ -16,21 +16,13 @@ refs.libraryBtn.addEventListener('click', onLibraryBtnClick);
 // refs.homeBtn.addEventListener('click', makeGalleryFromThrendesFilms);
 // refs.queueBtn.addEventListener('click', makeGalleryFromLibraryItems);
 // refs.watchedBtn.addEventListener('click', makeGalleryFromLibraryItems);
-// refs.themeSwitcher.addEventListener('change', onChangeThemeSwitcherClick);
 
-// document.addEventListener('DOMContentLoaded', applyTheme);
-// window.addEventListener('load', (e) => {
-//   fetchGenres();
-//   makeGalleryFromThrendesFilms(e);
-//   scrollUpInit();
-// });
 
 refs.themeSwitcher.addEventListener('change', onChangeThemeSwitcherClick);
 
 document.addEventListener('DOMContentLoaded', applyTheme);
-document.addEventListener('DOMContentLoaded', fetchGenres);
-window.addEventListener('load', e => {
-  // fetchGenres();
-  makeGalleryFromThrendesFilms(e);
-  scrollUpInit();
+window.addEventListener('load', async e => {
+  setTimeout(fetchGenres,0);
+  setTimeout(makeGalleryFromThrendesFilms,150,e);
+  setTimeout(scrollUpInit,250);
 });
