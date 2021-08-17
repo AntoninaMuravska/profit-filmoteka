@@ -13,7 +13,6 @@ const library = new LibraryApi();
  */
 export const onButtonLibraryContainerClick = e => {
   const elem = e.target;
-
   const isLibraryBtns = e.target.dataset.name === 'watched' || e.target.dataset.name === 'queue';
 
   if (elem.nodeName !== 'BUTTON' || !isLibraryBtns) {
