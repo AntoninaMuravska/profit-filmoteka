@@ -51,7 +51,7 @@ export default class MovieApi {
   //   return movies;
   // }
 
-  async getTrendingMovies(page = 1) {
+  async getTrendingMovies(page) {
     const response = await axios.get(
       `${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${page}`,
     );
@@ -84,14 +84,12 @@ export default class MovieApi {
 
   //поиск фильма
   async searchMovies(page) {
-    // console.log(query);
- 
+    const response = await axios.get(`${this.BASE_URL}search/movie?query=${this.query}&api_key=${this.API_KEY}&language=en-US&page=${page}&include_adult=false`);
+    const fetchData = response.data;
 
-    const response = await axios.get(
-      `${this.BASE_URL}search/movie?query=${this.query}&api_key=${this.API_KEY}&language=en-US&page=${page}&include_adult=false`,
-    );
-    const movies = response.data.results;
-    this.moviesObj = response.data;
+    // const movies = response.data;
+    
+    this.moviesObj = fetchData;
     // console.log(movies);
     // movies.map(el => {
     //   const posterImageExist = el.poster_path;
@@ -100,8 +98,8 @@ export default class MovieApi {
     //     el.poster_path = MyApi.DEFAULT_POSTER;
     //   }
     // });
-    saveFilms(movies);
-    return movies;
+    saveFilms(fetchData.results);
+    return fetchData;
   }
 
   //детали фильма

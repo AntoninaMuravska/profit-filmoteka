@@ -110,28 +110,36 @@ export const getCurrentGalleryName = function () {
 //   return fetchData;
 // }
 
-export const getThrendesFilms = async page => {
-  if (page === 1) {
-    try {
-      const data = await MyApi.getTrendingMovies().then(movies => {
-        return movies;
-      });
-      // console.log(data)
+export const getThrendesFilms = async (page = 1) => {
+  const fetchData=MyApi.getTrendingMovies(page)
+    .then(data => {
+      console.log('data',data);
       return data;
-    } catch (eror) {
-      throw error;
-    }
-  } else {
-    try {
-      const data = await MyApi.getTrendingMovies(page).then(movies => {
-        return movies;
-      });
-      // console.log('В функции getThrendesFilms data: ', data);
-      return data;
-    } catch (eror) {
-      throw error;
-    }
-  }
+    })
+    .catch(error => console.log(error));
+  return fetchData;
+
+  // if (page === 1) {
+  //   try {
+  //     const data = await MyApi.getTrendingMovies().then(movies => {
+  //       return movies;
+  //     });
+  //     // console.log(data)
+  //     return data;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // } else {
+  //   try {
+  //     const data = await MyApi.getTrendingMovies(page).then(movies => {
+  //       return movies;
+  //     });
+  //     // console.log('В функции getThrendesFilms data: ', data);
+  //     return data;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   // MyApi.getTrendingMovies().then(data => {
   //   MyApi.genresList().then(genresObj => {
@@ -149,16 +157,14 @@ export const getThrendesFilms = async page => {
 
 
 
-export const getSearchedFilms = async page => {
-  try {
-    const data = await MyApi.searchMovies(page).then(movies => {
-      return movies;
-    });
-    console.log('В функции getSearchedFilms data: ', data);
-    return data;
-  } catch (eror) {
-    throw error;
-  }
+export const getSearchedFilms = (page = 1) => {
+  const fetchData=MyApi.searchMovies(page)
+    .then(data => {
+      console.log('data',data);
+      return data;
+    })
+    .catch(error => console.log(error));
+  return fetchData;
 };
 
 // const btn1 = document.querySelector('.btn1');
@@ -218,11 +224,18 @@ function onSearch(e) {
  * Функция обработчик клика на кнопки WATCHED и QUEUE. вытягивает данные из библиотеки,
  * инициализирует пагинацию, рендерит
  */
-export const makeGalleryFromLibraryItems = e => {
+export const makeGalleryFromLibraryItems = async e => {
   enableLoader('.section-gallery', 'Loading...');
   const genres = getGenres();
-  const data = getLibraryItems(e);
+  let data = null;
+  try {
+    data = getLibraryItems(e);
+  }
+  catch (error) {
+    console.log(error);
+  }
   disableLoader('.section-gallery');
+
   paginationBarHide();
   
   if (data) {
@@ -254,12 +267,16 @@ export const makeGalleryFromLibraryItems = e => {
  * инициализирует пагинацию и рендерит галлерею)
  */
 export const makeGalleryFromThrendesFilms = async e => {
-  e.preventDefault();
-
   enableLoader('.section-gallery', 'Loading...');
   const genres = getGenres();
-  const data = await getThrendesFilms();
+  let data = null;
+  try {
+    data = await getThrendesFilms();
+  } catch (error) {
+    console.log(error);
+  }
   disableLoader('.section-gallery');
+
   paginationBarHide();
 
   if (data) {
@@ -287,27 +304,27 @@ export const makeGalleryFromThrendesFilms = async e => {
  */
 export const makeGalleryFromSearchedFilms = async e => {
   e.preventDefault();
-  console.log('запускаем функцию для поиска');
-
+  
   enableLoader('.section-gallery', 'Loading...');
   const genres = getGenres();
-  const data = await getSearchedFilms(); /**ПОМЕНЯТЬ ФУНКЦИЮ НА ТУ ЧТО ТЯНЕТ ДАННЫЕ С ПОИСКА**** */
+  let data = null;
+  try {
+    data = await getSearchedFilms();
+  } catch (error){
+    console.log(error)
+  }
   disableLoader('.section-gallery');
   paginationBarHide();
 
-  console.log('Попытка получить данные для инициализации пагинации',data);
-  console.log(data.results.length);
-
   if (data) {
-    const paginationSearchedFilms = paginationInit(data.results.length);
+    const paginationSearchedFilms = paginationInit(data.total_results);
     paginationSearchedFilms.on('afterMove', event => {
       paginationBarHide();
-
       clearMarkup(refs.gallery);
       setTimeout(scrollToHeader(), 0);
-      setTimeout(() => {
+      setTimeout(async () => {
         enableLoader('.section-gallery', 'Loading...');
-        /**const data = <НАЗВАНИЕ ФУНКЦИИ ПОЛУЧЕНИЯ ПОРЦИИ ТРЕНДОВЫХ ФИЛЬМОВ ПО ЗАДАНОМУ НОВМЕРУ СТРАНИЦЫ>(event.page);**/
+        const data = await getSearchedFilms(event.page);
         renderLibrary(genresTransformation(data, genres));
         paginationBarShow();
         disableLoader('.section-gallery');
