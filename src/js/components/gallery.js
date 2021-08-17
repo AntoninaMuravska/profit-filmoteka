@@ -17,6 +17,7 @@ refs.headerForm.addEventListener('submit', onSearch);
 refs.clearInputBtn.addEventListener('click', () => (refs.input.value = ''));
 
 export const MyApi = new MovieApi();
+export let paginationLibraryWatched;
 
 export const renderGallery = function () {
   try {
@@ -35,7 +36,7 @@ export const renderGallery = function () {
 };
 
 /*Функция добавления разметки*/
-function createMarkup(data) {
+export function createMarkup(data) {
   const movieCard = cardTpl(data);
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
   scrollReveal();
@@ -158,7 +159,8 @@ export const makeGalleryFromLibraryItems = async e => {
   paginationBarHide();
 
   if (data) {
-    const paginationLibraryWatched = paginationInit(data.total_results);
+    // const paginationLibraryWatched = paginationInit(data.total_results);
+    paginationLibraryWatched = paginationInit(data.total_results);
     paginationLibraryWatched.on('afterMove', event => {
       paginationBarHide();
       clearMarkup(refs.gallery);
@@ -198,7 +200,7 @@ export const makeGalleryFromThrendesFilms = async e => {
 
   paginationBarHide();
 
-  if (data) {
+  if (data && data.results.length) {
     const paginationThrendesFilms = paginationInit(data.total_results);
     paginationThrendesFilms.on('afterMove', event => {
       paginationBarHide();
@@ -223,7 +225,6 @@ export const makeGalleryFromThrendesFilms = async e => {
  */
 export const makeGalleryFromSearchedFilms = async e => {
   e.preventDefault();
-
   enableLoader('.section-gallery', 'Loading...');
   const genres = getGenres();
   let data = null;
@@ -234,8 +235,8 @@ export const makeGalleryFromSearchedFilms = async e => {
   }
   disableLoader('.section-gallery');
   paginationBarHide();
-
-  if (data && data.result) {
+  
+  if (data && data.results.length) {
     const paginationSearchedFilms = paginationInit(data.total_results);
     paginationSearchedFilms.on('afterMove', event => {
       paginationBarHide();
@@ -265,4 +266,18 @@ export const fetchGenres = async () => {
 export const empty = function () {
   refs.gallery.innerHTML =
     '<li class="empty"><p class="empty-text">there is nothing here...</p></li>';
+};
+
+/*Функция обновления текущей странички галлереи библиотеки при удалении из нее елемента*/
+export const updateGalleryFromLibraryFilms = page => {
+  const genres = getGenres();
+  paginationBarHide();
+  const data = loadNextPageFromLibrary(page);
+  
+  if (data) {
+    renderLibrary(genresTransformation(data, genres));
+    paginationBarShow();
+    return;
+  }
+  empty();
 };
