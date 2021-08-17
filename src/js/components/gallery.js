@@ -14,7 +14,7 @@ import { scrollToHeader } from './scrollup';
 import { loadNextPageFromLibrary } from './library-app';
 
 refs.headerForm.addEventListener('submit', onSearch);
-refs.clearInputBtn.addEventListener('click', () => refs.input.value = '');
+refs.clearInputBtn.addEventListener('click', () => (refs.input.value = ''));
 
 export const MyApi = new MovieApi();
 
@@ -30,10 +30,9 @@ export const renderGallery = function () {
       return dateTransformation(data);
     });
   } catch (error) {
-    throw new Error;
+    throw new Error();
   }
 };
-
 
 /*Функция добавления разметки*/
 function createMarkup(data) {
@@ -42,22 +41,18 @@ function createMarkup(data) {
   scrollReveal();
 }
 
-
-
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
   if (e.target.classList.contains('gallery')) {
     return;
   }
-  
+
   const cardRef = e.target.closest('.film-card___container');
   enableLoader('.modal-movie__backdrop', 'Loading...');
 
   openModal(cardRef.dataset.id);
   disableLoader('.modal-movie__backdrop');
 };
-
-
 
 //Отрисовка библиотеки
 export const renderLibrary = function (data) {
@@ -79,8 +74,6 @@ export const createMarkupHome = function () {
   scrollReveal();
 };
 
-
-
 /*Функция для удаления заданного по id елемента из галереи*/
 export const removeElemFromGallery = function (filmId) {
   const elemToRemoveRef = refs.gallery.querySelector(`li[data-id="${filmId}"]`);
@@ -92,20 +85,16 @@ export const removeElemFromGallery = function (filmId) {
   elemToRemoveRef.remove();
 };
 
-
-
 /*Функция определения названия текущей активной галереи*/
 export const getCurrentGalleryName = function () {
   const galleryName = document.querySelector('.header .nav__btn.is_active').dataset.name;
   return galleryName === 'home' ? 'Home' : 'MyLibrary';
 };
 
-
-
 /*
- * Функция для получения трендовых фильмов. если номер страницы не задан - тянет первую страницу, 
+ * Функция для получения трендовых фильмов. если номер страницы не задан - тянет первую страницу,
  * иначе - заданную
-*/
+ */
 export const getThrendesFilms = async (page = 1) => {
   const fetchData = MyApi.getTrendingMovies(page)
     .then(data => {
@@ -115,12 +104,10 @@ export const getThrendesFilms = async (page = 1) => {
   return fetchData;
 };
 
-
-
 /*
- * Функция для получения фильмов с помощью поиска. если номер страницы не задан - тянет первую страницу, 
+ * Функция для получения фильмов с помощью поиска. если номер страницы не задан - тянет первую страницу,
  * иначе - заданную
-*/
+ */
 
 export const getSearchedFilms = (page = 1) => {
   const fetchData = MyApi.searchMovies(page)
@@ -130,8 +117,6 @@ export const getSearchedFilms = (page = 1) => {
     .catch(error => console.log(error));
   return fetchData;
 };
-
-
 
 //функция отрисовки фильмов по ключевому слову
 function onSearch(e) {
@@ -150,12 +135,10 @@ function onSearch(e) {
     showWarningMessage(warningMessage);
   } else {
     MyApi.resetPage();
-    
+
     return MyApi.searchQuery(inputValue);
   }
 }
-
-
 
 /*
  * Функция обработчик клика на кнопки WATCHED и QUEUE. вытягивает данные из библиотеки,
@@ -252,7 +235,7 @@ export const makeGalleryFromSearchedFilms = async e => {
   disableLoader('.section-gallery');
   paginationBarHide();
 
-  if (data) {
+  if (data && data.result) {
     const paginationSearchedFilms = paginationInit(data.total_results);
     paginationSearchedFilms.on('afterMove', event => {
       paginationBarHide();
@@ -268,10 +251,18 @@ export const makeGalleryFromSearchedFilms = async e => {
     });
     renderLibrary(genresTransformation(data, genres));
     paginationBarShow();
+    return;
   }
+  empty();
 };
 
 /*Функция получения объекта с жанрами и помещения его в session-storage*/
 export const fetchGenres = async () => {
   MyApi.genresList();
+};
+
+//empty container
+export const empty = function () {
+  refs.gallery.innerHTML =
+    '<li class="empty"><p class="empty-text">there is nothing here...</p></li>';
 };
