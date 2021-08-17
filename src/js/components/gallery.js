@@ -46,8 +46,11 @@ function createMarkup(data) {
 
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
+  if (e.target.classList.contains('gallery')) {
+    return;
+  }
+  
   const cardRef = e.target.closest('.film-card___container');
-
   enableLoader('.modal-movie__backdrop', 'Loading...');
 
   openModal(cardRef.dataset.id);
