@@ -26,7 +26,17 @@ export const onButtonLibraryContainerClick = e => {
   };
 
   const filmId = Number(e.target.dataset.id);
+  console.log();
   const targetFilm = getFilm(filmId);
+
+
+  /***запрос на фильм на сервер, так как в сс его нет***/
+  if (!targetFilm) {
+    console.log('KOKOKO');
+    return;
+  }
+  
+  /**** */
   let librarySource;
   let nonTargetBtn;
 
@@ -184,12 +194,15 @@ const changingElemsProperties = (elemForEnabling, elemForDisabling, sourceLibrar
 /* Функция удаления елемента из библиотеки и из галлереи */
 const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home') => {
   library.removeData(filmId, librarySource);
-  
+  console.log(paginationLibraryWatched);
   if (activeGallery !== 'Home') {
     removeElemFromGallery(filmId);
     const currentPage = paginationLibraryWatched._currentPage;
     const totalItems = paginationLibraryWatched._options.totalItems - 1;
     paginationLibraryWatched.reset(totalItems);
+    if (currentPage > 1) {
+      paginationLibraryWatched.movePageTo(currentPage);
+    }
     updateGalleryFromLibraryFilms(currentPage);
   }
 };
