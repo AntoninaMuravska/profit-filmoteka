@@ -91,3 +91,10 @@ body.light-theme #pagination .tui-first-child,
 body.light-theme #pagination .tui-last-child {
   color: #000;
 }
+
+#pagination .tui-first,
+#pagination .tui-last {
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
