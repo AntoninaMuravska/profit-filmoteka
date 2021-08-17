@@ -6,11 +6,15 @@ const Theme = {
     DARK: 'dark-theme',
 };
 
+
+
 /* Функция замены идентификатора активной темы в localStorage */
 const replaceLocalStorageThemeEntry = (oldTheme, newTheme) => {
     localStorage.removeItem('Theme', oldTheme);
     localStorage.setItem('Theme', newTheme);
 };
+
+
 
 /* Функция применения темы при запуске страницы */
 export const applyTheme = () => {
@@ -36,6 +40,8 @@ export const applyTheme = () => {
             localStorage.setItem('Theme', 'LIGHT');
     }
 };
+
+
 
 /* Функция смены темы */
 export const onChangeThemeSwitcherClick = () => {

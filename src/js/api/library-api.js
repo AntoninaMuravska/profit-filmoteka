@@ -7,7 +7,6 @@ export default class LibraryApi {
     }
 
 
-
     /*метод для получения данных из указанной библиотеки в localStorage*/
     getData(libraryType) {
         const storageData = localStorage.getItem(libraryType);
@@ -22,7 +21,6 @@ export default class LibraryApi {
 
         return null;
     }
-
 
 
     /*метод для записи елемента в указанную библиотеку в localStorage*/
@@ -46,7 +44,6 @@ export default class LibraryApi {
 
         localStorage.setItem(libraryType,JSON.stringify(storageData));
     }
-
 
 
     /*метод для удаления елемента из указанной библиотеки в localStorage*/
@@ -75,7 +72,6 @@ export default class LibraryApi {
     }
 
 
-
     /*
      * Метод для получение порции елементов из библиотеки. По дефолту - до 20 шт.
      * Для получения определенного количества надо передать аргумент с количеством
@@ -97,7 +93,6 @@ export default class LibraryApi {
         
         return JSON.stringify(outputData);
     }
-
 
 
     /*метод для проверки наличия фильма в библиотеке пользователя*/
@@ -134,7 +129,6 @@ export default class LibraryApi {
     }    
 
 
-    
     /*метод для увеличения значения страницы для пагинации*/
     incrementPage() {
         this.page += 1;

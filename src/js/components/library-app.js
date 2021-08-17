@@ -65,6 +65,8 @@ export const onButtonLibraryContainerClick = e => {
   }
 };
 
+
+
 /*
  * Функция, возвращающая первые 20 елементов библиотеки.
  */
@@ -95,6 +97,8 @@ export const getLibraryItems = e => {
   library.incrementPage();
   return data;
 };
+
+
 
 /*
  * Функция для реализации пагинации. Подтягивает следующие 20 елементов из активной библиотеки.
@@ -127,6 +131,8 @@ export const loadMoreItems = () => {
   return data;
 };
 
+
+
 /*
  * Функция для автозапуска при открытии модалки. Проверяет библиотеку на наличие
  * текущего фильма по id и производит настройку кнопок модалки для корректного отображения
@@ -144,6 +150,8 @@ export const onModalOpenAutorun = (watchBtnLink, queueBtnLink, filmId) => {
   }
 };
 
+
+
 /*
  * Функция для изменения свойств кнопок (добавления елемента в библиотеку) для отключения одной и включения другой
  */
@@ -155,6 +163,8 @@ const changingElemsProperties = (elemForEnabling, elemForDisabling, sourceLibrar
   elemForDisabling.dataset.active = 'true';
   elemForDisabling.setAttribute('disabled', '');
 };
+
+
 
 /* Функция получения 1 елемента из библиотеки */
 const getSingleItem = () => {
@@ -179,9 +189,11 @@ const getSingleItem = () => {
     library.setEndStatus();
   }
 
-  // library.incrementPage();
+  /**/
   return data;
 };
+
+
 
 /* Функция удаления елемента из библиотеки и из галлереи */
 const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home') => {
