@@ -1,6 +1,6 @@
 import refs from './refs';
-import { makeGalleryFromLibraryItems, makeGalleryFromThrendesFilms } from './gallery';
-import { onSearch } from './search';
+import { makeGalleryFromLibraryItems, makeGalleryFromThrendesFilms, makeGalleryFromSearchedFilms } from './gallery';
+// import { onSearch } from './search';
 
 export const onHomeBtnClick = function (e) {
   e.preventDefault();
@@ -16,7 +16,7 @@ export const onHomeBtnClick = function (e) {
   refs.gallery.innerHTML = '';
   makeGalleryFromThrendesFilms(e);
 
-  refs.headerForm.addEventListener('submit', onSearch);
+  refs.headerForm.addEventListener('submit', makeGalleryFromSearchedFilms);
   refs.queueBtn.removeEventListener('click', onBtnClick);
   refs.watchedBtn.removeEventListener('click', onBtnClick);
 };
@@ -32,7 +32,7 @@ export const onLibraryBtnClick = function (e) {
     toggleClass(e);
   }
 
-  refs.headerForm.removeEventListener('submit', onSearch);
+  refs.headerForm.removeEventListener('submit', makeGalleryFromSearchedFilms);
   refs.queueBtn.addEventListener('click', onBtnClick);
   refs.watchedBtn.addEventListener('click', onBtnClick);
   refs.queueBtn.click(); //иммитация нажатия кнопки queue
