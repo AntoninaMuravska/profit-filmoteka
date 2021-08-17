@@ -131,4 +131,4 @@ var t;!function(e,n){"object"==typeof exports&&"object"==typeof module?module.ex
 },{"./refs":"EVoz","../api/fetch-api.js":"zEAs","../../templates/film-cards.hbs":"emJv","./genre-transformator.js":"rRl1","../components/date-transformation":"FLkS","./notification":"WOXE","./render-markup":"qtlO","./scroll-reveal":"QXkk"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/app.js"),require("./js/components/search");
 },{"./sass/main.scss":"clu1","./js/app.js":"QdeU","./js/components/search":"A7jH"}]},{},["Focm"], null)
-//# sourceMappingURL=/profit-filmoteka/src.d0ea58f5.js.map
+//# sourceMappingURL=/profit-filmoteka/src.6396c216.js.map
