@@ -203,7 +203,7 @@ const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home')
     if (currentPage > 1) {
       paginationLibraryWatched.movePageTo(currentPage);
     }
-    updateGalleryFromLibraryFilms(currentPage);
+    // updateGalleryFromLibraryFilms(currentPage);
   }
 };
 
