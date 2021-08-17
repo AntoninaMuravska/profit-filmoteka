@@ -87,7 +87,7 @@ export const removeElemFromGallery = function (filmId) {
 
 /*Функция определения названия текущей активной галереи*/
 export const getCurrentGalleryName = function () {
-  const galleryName = document.querySelector('.header .nav__link.is_active').dataset.name;
+  const galleryName = document.querySelector('.header .nav__btn.is_active').dataset.name;
   return galleryName === 'home' ? 'Home' : 'MyLibrary';
 };
 
