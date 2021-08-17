@@ -89,7 +89,7 @@ const addModalDetailedInfo = (containerLink,filmId) => {
       onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
     });
   } catch (error) {
-    throw new Error;   /********* РАЗОБРАТЬСЯ **** */
+    throw new Error; 
   }
 }
 
