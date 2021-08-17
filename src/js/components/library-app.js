@@ -1,8 +1,9 @@
 import LibraryApi from '../api/library-api';
-import { getFilm } from './session-storage';
+import { getFilm, saveFilms} from './session-storage';
 import { showWarningMessage, showFailureMessage, showSuccesMessage } from './notification';
 import { removeElemFromGallery, getCurrentGalleryName, updateGalleryFromLibraryFilms, empty } from './gallery';
 import { paginationLibraryWatched } from './gallery';
+
 
 
 const library = new LibraryApi();
@@ -26,17 +27,7 @@ export const onButtonLibraryContainerClick = e => {
   };
 
   const filmId = Number(e.target.dataset.id);
-  console.log();
-  const targetFilm = getFilm(filmId);
 
-
-  /***запрос на фильм на сервер, так как в сс его нет***/
-  if (!targetFilm) {
-    console.log('KOKOKO');
-    return;
-  }
-  
-  /**** */
   let librarySource;
   let nonTargetBtn;
 
@@ -51,6 +42,7 @@ export const onButtonLibraryContainerClick = e => {
   const isActive = elem.dataset.active;
 
   if (isActive === 'true') {
+    const targetFilm = getFilm(filmId);
     library.setData(targetFilm, librarySource);
     showSuccesMessage(`Фильм успешно добавлен в библиотеку ${librarySource.toUpperCase()}`);
     elem.dataset.active = 'false';
@@ -193,8 +185,11 @@ const changingElemsProperties = (elemForEnabling, elemForDisabling, sourceLibrar
 
 /* Функция удаления елемента из библиотеки и из галлереи */
 const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home') => {
+  const targetItem = library.getItem(filmId, librarySource);
+  
+  saveFilms([targetItem]);
   library.removeData(filmId, librarySource);
-  console.log(paginationLibraryWatched);
+  
   if (activeGallery !== 'Home') {
     removeElemFromGallery(filmId);
     const currentPage = paginationLibraryWatched._currentPage;
