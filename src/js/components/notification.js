@@ -10,7 +10,7 @@ Block.init({
 
 Notify.init({
   width: '240px',
-  position: 'right-bottom',
+  position: 'left-bottom',
   timeout: 3000,
   distance: '10px',
   opacity: 1,

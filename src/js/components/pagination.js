@@ -1,7 +1,10 @@
 import Pagination from 'tui-pagination';
 import refs from './refs';
 
+
+/*Функция инициализации пагинации */
 export const paginationInit = totalItems => {
+    
   const optionsTemplate = {
     totalItems: totalItems,
     itemsPerPage:20,
@@ -10,30 +13,25 @@ export const paginationInit = totalItems => {
     centerAlign: false
   };
 
+  const windowWidth = document.documentElement.clientWidth;
+  if (windowWidth < 768) {
+    optionsTemplate.visiblePages = 3;
+  }
+
   const pagination = new Pagination('pagination', optionsTemplate);
+
   return pagination;
 };
 
 
-// pagination.on('beforeMove', evt => {
-//   const { page } = evt;
-//   const result = ajax.call({page});
-
-//   if(result) {
-//     pagination.movePageTo(page);
-//   } else {
-//     return false;
-//   }
-// });
-
-// pagination.on('afterMove', ({ page }) => console.log(page));
-
-
+/* Функция скрытия строки пагинации*/
 export const paginationBarShow = () => {
   refs.paginationBar.classList.remove('is-notvisible');
 };
 
 
+/* Функция показа строки пагинации*/
 export const paginationBarHide = () => {
   refs.paginationBar.classList.add('is-notvisible');
 };
+

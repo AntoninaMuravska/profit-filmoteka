@@ -87,7 +87,7 @@ export const removeElemFromGallery = function (filmId) {
 
 /*Функция определения названия текущей активной галереи*/
 export const getCurrentGalleryName = function () {
-  const galleryName = document.querySelector('.header .nav__link.is_active').dataset.name;
+  const galleryName = document.querySelector('.header .nav__btn.is_active').dataset.name;
   return galleryName === 'home' ? 'Home' : 'MyLibrary';
 };
 
@@ -113,7 +113,6 @@ export const getCurrentGalleryName = function () {
 export const getThrendesFilms = async (page = 1) => {
   const fetchData=MyApi.getTrendingMovies(page)
     .then(data => {
-      console.log('data',data);
       return data;
     })
     .catch(error => console.log(error));
@@ -160,7 +159,6 @@ export const getThrendesFilms = async (page = 1) => {
 export const getSearchedFilms = (page = 1) => {
   const fetchData=MyApi.searchMovies(page)
     .then(data => {
-      console.log('data',data);
       return data;
     })
     .catch(error => console.log(error));
