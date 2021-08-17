@@ -20,13 +20,6 @@ export const paginationInit = totalItems => {
 
   const pagination = new Pagination('pagination', optionsTemplate);
 
-  if (windowWidth < 768) {
-    const lastBtnRef = document.querySelector('.tui-page-btn.tui-last');
-    const firstBtnRef = document.querySelector('.tui-page-btn.tui-first');
-    
-    [firstBtnRef, lastBtnRef].forEach(elem=>elem.classList.add('visually-hidden'));
-  }
-
   return pagination;
 };
 
