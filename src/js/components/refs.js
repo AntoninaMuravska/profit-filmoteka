@@ -13,5 +13,9 @@ export default {
   themeSwitcher: document.querySelector('#theme-switch-toggle'),
   footerLink: document.querySelector('.footer__link'),
   clearInputBtn: document.querySelector('.clear-input'),
-  paginationBar: document.querySelector('#pagination')
+  paginationBar: document.querySelector('#pagination'),
+  trendingBtn: document.querySelector('.trending-btn'),
+  popularBtn: document.querySelector('.popular-btn'),
+  topRatedBtn: document.querySelector('.toprated-btn'),
+  upcomingBtn: document.querySelector('.upcoming-btn')
 };
