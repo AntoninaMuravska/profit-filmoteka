@@ -51,16 +51,15 @@
 .header__logo {
   transition: 500ms;
 }
-
 .header__logo:hover {
   width: 30px;
   height: 30px;
   fill: #ff6b08;
 }
-
 .is_invisible {
   opacity: 0;
 }
+
 
 .logo {
   margin-left: 10px;
@@ -190,7 +189,6 @@
 
 .nav__link:hover {
   color: #ff6b01;
-}
 
 .header__button:hover,
 .header__button:focus {
@@ -244,7 +242,7 @@
   transition: 500ms;
   &:not(:last-child) {
     margin-right: 15px;
-  }
+
 
   &:not(:first-child) {
     margin-left: 15px;
