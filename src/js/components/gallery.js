@@ -113,7 +113,6 @@ export const getCurrentGalleryName = function () {
 export const getThrendesFilms = async (page = 1) => {
   const fetchData=MyApi.getTrendingMovies(page)
     .then(data => {
-      console.log('data',data);
       return data;
     })
     .catch(error => console.log(error));
@@ -160,7 +159,6 @@ export const getThrendesFilms = async (page = 1) => {
 export const getSearchedFilms = (page = 1) => {
   const fetchData=MyApi.searchMovies(page)
     .then(data => {
-      console.log('data',data);
       return data;
     })
     .catch(error => console.log(error));
