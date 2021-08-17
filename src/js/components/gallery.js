@@ -125,7 +125,7 @@ function onSearch(e) {
   let warningMessage = 'We do not know such a movie. Please, try again.';
 
   if (!inputValue) {
-    // clearMarkup(refs.gallery);
+    clearMarkup(refs.gallery);
     showWarningMessage(warningMessage);
     return;
   }
@@ -235,7 +235,7 @@ export const makeGalleryFromSearchedFilms = async e => {
   disableLoader('.section-gallery');
   paginationBarHide();
 
-  if (data.result) {
+  if (data && data.result) {
     const paginationSearchedFilms = paginationInit(data.total_results);
     paginationSearchedFilms.on('afterMove', event => {
       paginationBarHide();
