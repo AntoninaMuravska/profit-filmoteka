@@ -11,14 +11,10 @@ import { clearMarkup } from './render-markup';
 import { getLibraryItems } from './library-app';
 import { getGenres, getItemFromSessionStorage } from './session-storage';
 import { scrollToHeader } from './scrollup';
-
-/***/
-refs.headerForm.addEventListener('submit', onSearch);
-refs.clearInputBtn.addEventListener('click', () => {
-  refs.input.value = '';
-});
-/**/
 import { loadNextPageFromLibrary } from './library-app';
+
+refs.headerForm.addEventListener('submit', onSearch);
+refs.clearInputBtn.addEventListener('click', () => refs.input.value = '');
 
 export const MyApi = new MovieApi();
 
@@ -34,15 +30,19 @@ export const renderGallery = function () {
       return dateTransformation(data);
     });
   } catch (error) {
-    throw error;
+    throw new Error;
   }
 };
 
-function createMarkup(movies) {
-  const movieCard = cardTpl(movies);
+
+/*Функция добавления разметки*/
+function createMarkup(data) {
+  const movieCard = cardTpl(data);
   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
   scrollReveal();
 }
+
+
 
 /*Функция-обработчик клика на елемент галереи*/
 export const onGalleryItemClick = e => {
@@ -53,6 +53,8 @@ export const onGalleryItemClick = e => {
   openModal(cardRef.dataset.id);
   disableLoader('.modal-movie__backdrop');
 };
+
+
 
 //Отрисовка библиотеки
 export const renderLibrary = function (data) {
@@ -74,6 +76,8 @@ export const createMarkupHome = function () {
   scrollReveal();
 };
 
+
+
 /*Функция для удаления заданного по id елемента из галереи*/
 export const removeElemFromGallery = function (filmId) {
   const elemToRemoveRef = refs.gallery.querySelector(`li[data-id="${filmId}"]`);
@@ -85,31 +89,20 @@ export const removeElemFromGallery = function (filmId) {
   elemToRemoveRef.remove();
 };
 
+
+
 /*Функция определения названия текущей активной галереи*/
 export const getCurrentGalleryName = function () {
   const galleryName = document.querySelector('.header .nav__btn.is_active').dataset.name;
   return galleryName === 'home' ? 'Home' : 'MyLibrary';
 };
 
-// export const getThrendesFilms = function () {
-//   let fetchData = null;
-//   try {
-//     MyApi.getTrendingMovies().then(data => {
-//       MyApi.genresList().then(genresObj => {
-//         genresTransformation(MyApi.moviesObj, genresObj);
 
-//       });
-//       console.log('данные из запроса', data);
-//       fetchData = data;
-//       return dateTransformation(data);
-//     });
-//   } catch (error) {
-//     throw error;
-//   }
-//   console.log('возврат ', fetchData);
-//   return fetchData;
-// }
 
+/*
+ * Функция для получения трендовых фильмов. если номер страницы не задан - тянет первую страницу, 
+ * иначе - заданную
+*/
 export const getThrendesFilms = async (page = 1) => {
   const fetchData = MyApi.getTrendingMovies(page)
     .then(data => {
@@ -117,42 +110,14 @@ export const getThrendesFilms = async (page = 1) => {
     })
     .catch(error => console.log(error));
   return fetchData;
-
-  // if (page === 1) {
-  //   try {
-  //     const data = await MyApi.getTrendingMovies().then(movies => {
-  //       return movies;
-  //     });
-  //     // console.log(data)
-  //     return data;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // } else {
-  //   try {
-  //     const data = await MyApi.getTrendingMovies(page).then(movies => {
-  //       return movies;
-  //     });
-  //     // console.log('В функции getThrendesFilms data: ', data);
-  //     return data;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-  // MyApi.getTrendingMovies().then(data => {
-  //   MyApi.genresList().then(genresObj => {
-  //     genresTransformation(MyApi.moviesObj, genresObj);
-
-  //   });
-  //   console.log('данные из запроса', data);
-  //   fetchData = data;
-  //   return dateTransformation(data);
-  // });
-
-  // console.log('возврат ', fetchData);
-  // return fetchData;
 };
+
+
+
+/*
+ * Функция для получения фильмов с помощью поиска. если номер страницы не задан - тянет первую страницу, 
+ * иначе - заданную
+*/
 
 export const getSearchedFilms = (page = 1) => {
   const fetchData = MyApi.searchMovies(page)
@@ -163,8 +128,7 @@ export const getSearchedFilms = (page = 1) => {
   return fetchData;
 };
 
-// const btn1 = document.querySelector('.btn1');
-// btn1.addEventListener('click', getSearchedFilms(1))
+
 
 //функция отрисовки фильмов по ключевому слову
 function onSearch(e) {
@@ -178,43 +142,17 @@ function onSearch(e) {
     return;
   }
 
-  // MyApi.resetPage();
-
   if (inputValue.trim() === '') {
     clearMarkup(refs.gallery);
     showWarningMessage(warningMessage);
   } else {
     MyApi.resetPage();
-    // enableLoader();
+    
     return MyApi.searchQuery(inputValue);
-    // try {
-    //   MyApi.searchMovies().then(data => {
-    //     MyApi.genresList().then(genresObj => {
-    //       genresTransformation(MyApi.moviesObj, genresObj);
-    //       createSearchMarkup(data);
-
-    //       //Добавляет оформление пустого контейнера
-    // const filmCard = document.querySelector('.film-card');
-
-    // if (!filmCard) {
-    //   refs.gallery.innerHTML =
-    //     '<div class="empty"><div class="img-thumb"></div><p class="empty-text">there is nothing here...</p></div>';
-    // }
-    //     });
-    //     dateTransformation(data);
-    //   });
-    // } catch (error) {
-    //   throw error;
-    // }
   }
 }
 
-// function createSearchMarkup(movies) {
-//   const movieCard = cardTpl(movies);
-//   refs.gallery.innerHTML = '';
-//   refs.gallery.insertAdjacentHTML('beforeend', movieCard);
-//   scrollReveal();
-// }
+
 
 /*
  * Функция обработчик клика на кнопки WATCHED и QUEUE. вытягивает данные из библиотеки,

@@ -9,7 +9,14 @@ body.dark-theme {
 }
 
 .theme-switch {
+  margin-top: 15px;
   display: flex;
+  align-items: center;
+}
+
+.theme-switch .container {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
