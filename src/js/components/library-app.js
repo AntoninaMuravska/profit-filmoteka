@@ -1,7 +1,7 @@
 import LibraryApi from '../api/library-api';
 import { getFilm } from './session-storage';
 import { showWarningMessage, showFailureMessage, showSuccesMessage } from './notification';
-import { removeElemFromGallery, createMarkup, getCurrentGalleryName } from './gallery';
+import { removeElemFromGallery, createMarkup, getCurrentGalleryName, empty } from './gallery';
 
 const library = new LibraryApi();
 
@@ -56,15 +56,10 @@ export const onButtonLibraryContainerClick = e => {
     const filmCard = document.querySelector('.film-card');
 
     if (!filmCard) {
-      const filmCardRef = document.querySelector('.gallery');
-
-      filmCardRef.innerHTML =
-        '<li class="empty"><p class="empty-text">there is nothing here...</p></li>';
+      empty();
     }
   }
 };
-
-
 
 /*
  * Функция, возвращающая первые 20 елементов библиотеки.
@@ -97,8 +92,6 @@ export const getLibraryItems = e => {
   return data;
 };
 
-
-
 /*
  * Функция для реализации пагинации. Подтягивает следующие 20 елементов из активной библиотеки.
  */
@@ -130,8 +123,6 @@ export const loadMoreItems = () => {
   return data;
 };
 
-
-
 /*
  * Функция для автозапуска при открытии модалки. Проверяет библиотеку на наличие
  * текущего фильма по id и производит настройку кнопок модалки для корректного отображения
@@ -149,8 +140,6 @@ export const onModalOpenAutorun = (watchBtnLink, queueBtnLink, filmId) => {
   }
 };
 
-
-
 /*
  * Функция для изменения свойств кнопок (добавления елемента в библиотеку) для отключения одной и включения другой
  */
@@ -162,8 +151,6 @@ const changingElemsProperties = (elemForEnabling, elemForDisabling, sourceLibrar
   elemForDisabling.dataset.active = 'true';
   elemForDisabling.setAttribute('disabled', '');
 };
-
-
 
 /* Функция получения 1 елемента из библиотеки */
 const getSingleItem = () => {
@@ -191,8 +178,6 @@ const getSingleItem = () => {
   /**/
   return data;
 };
-
-
 
 /* Функция удаления елемента из библиотеки и из галлереи */
 const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home') => {
