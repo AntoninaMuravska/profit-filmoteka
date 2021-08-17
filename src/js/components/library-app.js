@@ -3,7 +3,6 @@ import { getFilm } from './session-storage';
 import { showWarningMessage, showFailureMessage, showSuccesMessage } from './notification';
 import { removeElemFromGallery, createMarkup, getCurrentGalleryName } from './gallery';
 
-
 const library = new LibraryApi();
 
 /*
@@ -60,7 +59,7 @@ export const onButtonLibraryContainerClick = e => {
       const filmCardRef = document.querySelector('.gallery');
 
       filmCardRef.innerHTML =
-        '<div class="empty"><div class="img-thumb"></div><p class="empty-text">your library is empty...</p></div>';
+        '<li class="empty"><p class="empty-text">there is nothing here...</p></li>';
     }
   }
 };
@@ -199,14 +198,12 @@ const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home')
   library.removeData(filmId, librarySource);
 };
 
-
-
 /*
  * Функция для реализации пагинации. Подтягивает следующие елементы из заданной страницы.
  */
-export const loadNextPageFromLibrary = (page) => {
+export const loadNextPageFromLibrary = page => {
   let data = null;
-  
+
   try {
     data = JSON.parse(library.fetchData(page));
   } catch (error) {

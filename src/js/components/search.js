@@ -48,7 +48,7 @@ import { scrollReveal } from './scroll-reveal';
 
 //           if (!filmCard) {
 //             refs.gallery.innerHTML =
-//               '<div class="empty"><div class="img-thumb"></div><p class="empty-text">The search has not given any results...</p></div>';
+//               '<li class="empty"><p class="empty-text">The search has not given any results...</p></li>';
 //           }
 //         });
 //         dateTransformation(data);

@@ -6,7 +6,7 @@ import openModal from './modal';
 import { dateTransformation } from './date-transformation';
 import { enableLoader, disableLoader, showWarningMessage } from './notification';
 import { scrollReveal } from './scroll-reveal';
-import { paginationInit, paginationBarShow, paginationBarHide} from './pagination';
+import { paginationInit, paginationBarShow, paginationBarHide } from './pagination';
 import { clearMarkup } from './render-markup';
 import { getLibraryItems } from './library-app';
 import { getGenres, getItemFromSessionStorage } from './session-storage';
@@ -111,7 +111,7 @@ export const getCurrentGalleryName = function () {
 // }
 
 export const getThrendesFilms = async (page = 1) => {
-  const fetchData=MyApi.getTrendingMovies(page)
+  const fetchData = MyApi.getTrendingMovies(page)
     .then(data => {
       return data;
     })
@@ -154,10 +154,8 @@ export const getThrendesFilms = async (page = 1) => {
   // return fetchData;
 };
 
-
-
 export const getSearchedFilms = (page = 1) => {
-  const fetchData=MyApi.searchMovies(page)
+  const fetchData = MyApi.searchMovies(page)
     .then(data => {
       return data;
     })
@@ -196,12 +194,12 @@ function onSearch(e) {
     //       createSearchMarkup(data);
 
     //       //Добавляет оформление пустого контейнера
-    //       const filmCard = document.querySelector('.film-card');
+    // const filmCard = document.querySelector('.film-card');
 
-    //       if (!filmCard) {
-    //         refs.gallery.innerHTML =
-    //           '<div class="empty"><div class="img-thumb"></div><p class="empty-text">The search has not given any results...</p></div>';
-    //       }
+    // if (!filmCard) {
+    //   refs.gallery.innerHTML =
+    //     '<div class="empty"><div class="img-thumb"></div><p class="empty-text">there is nothing here...</p></div>';
+    // }
     //     });
     //     dateTransformation(data);
     //   });
@@ -228,14 +226,13 @@ export const makeGalleryFromLibraryItems = async e => {
   let data = null;
   try {
     data = getLibraryItems(e);
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
   disableLoader('.section-gallery');
 
   paginationBarHide();
-  
+
   if (data) {
     const paginationLibraryWatched = paginationInit(data.total_results);
     paginationLibraryWatched.on('afterMove', event => {
@@ -255,9 +252,9 @@ export const makeGalleryFromLibraryItems = async e => {
     paginationBarShow();
     return;
   }
-  
+
   refs.gallery.innerHTML =
-    '<div class="empty"><div class="img-thumb"></div><p class="empty-text">your library is empty...</p></div>';
+    '<li class="empty"><p class="empty-text">there is nothing here...</p></li>';
 };
 
 /*
@@ -282,7 +279,7 @@ export const makeGalleryFromThrendesFilms = async e => {
     paginationThrendesFilms.on('afterMove', event => {
       paginationBarHide();
       clearMarkup(refs.gallery);
-      setTimeout(scrollToHeader(),0);
+      setTimeout(scrollToHeader(), 0);
       setTimeout(async () => {
         enableLoader('.section-gallery', 'Loading...');
         const data = await getThrendesFilms(event.page);
@@ -302,14 +299,14 @@ export const makeGalleryFromThrendesFilms = async e => {
  */
 export const makeGalleryFromSearchedFilms = async e => {
   e.preventDefault();
-  
+
   enableLoader('.section-gallery', 'Loading...');
   const genres = getGenres();
   let data = null;
   try {
     data = await getSearchedFilms();
-  } catch (error){
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
   disableLoader('.section-gallery');
   paginationBarHide();
