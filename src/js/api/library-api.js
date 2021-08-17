@@ -175,4 +175,23 @@ export default class LibraryApi {
     resetEndStatus() {
         this.isEndStatus = false;
     }
+
+
+    /*метод для получения елемента из указанной библиотеки в localStorage*/
+    getItem(filmId, libraryType) {
+        const storageData = this.getData(libraryType);
+
+        if (!storageData || storageData.total_results===0) {
+            return;
+        }
+        
+    const item = storageData.library.find(el => el.id === filmId);
+    
+        if (!item) {
+            return null;
+        }
+        return item;
+    }
 }
+
+
