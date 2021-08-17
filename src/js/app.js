@@ -3,6 +3,7 @@ import {
   onGalleryItemClick,
   makeGalleryFromLibraryItems,
   makeGalleryFromThrendesFilms,
+  makeGalleryFromSearchedFilms,
   fetchGenres,
 } from './components/gallery';
 import { applyTheme, onChangeThemeSwitcherClick } from './components/theme';
@@ -26,3 +27,5 @@ window.addEventListener('load', async e => {
   setTimeout(makeGalleryFromThrendesFilms,150,e);
   setTimeout(scrollUpInit,250);
 });
+
+refs.headerForm.addEventListener('submit', makeGalleryFromSearchedFilms);
