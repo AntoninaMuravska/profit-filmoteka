@@ -7,10 +7,12 @@ import refs from './refs';
 import { MyApi } from './gallery';
 import { getGenres } from './session-storage';
 import { scrollupBtnChangeVisibility } from './scrollup';
+import { themeSwitcherToggle } from './theme';
 
 
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
+  themeSwitcherToggle();
   refs.modal.classList.toggle('is-hidden');
   scrollupBtnChangeVisibility();
   disableBodyScroll(document.body);
@@ -37,6 +39,7 @@ const сloseModal = () => {
   refs.modal.firstElementChild.classList.toggle('is-hidden');
   refs.modal.classList.add('is-hidden');
   scrollupBtnChangeVisibility();
+  themeSwitcherToggle();
 };
 
 

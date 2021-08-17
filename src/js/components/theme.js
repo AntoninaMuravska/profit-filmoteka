@@ -55,3 +55,10 @@ export const onChangeThemeSwitcherClick = () => {
         replaceLocalStorageThemeEntry('DARK','LIGHT');
     }
 };
+
+
+/* Функция для скрытия/показа переключателя темы*/
+export const themeSwitcherToggle = () => {
+    const switchControlRef = document.querySelector('.theme-switch');
+    switchControlRef.classList.toggle('visually-hidden');
+};
