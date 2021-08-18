@@ -20,6 +20,17 @@ const openModal = async filmId => {
   clearMarkup(modalInfoContainer);
   addModalDetailedInfo(modalInfoContainer, filmId);
 
+
+ /**АКТЕРЫ****/
+  let actors = null;
+  try {
+    actors = await getActors(filmId);
+    refs.modal.querySelector('.actors-container').textContent = actors;
+  } catch (error) {
+    console.log(error);
+  }
+  
+
   refs.modal.firstElementChild.classList.remove('is-hidden');
   refs.modal.addEventListener('click', onButtonLibraryContainerClick);
   refs.modal.addEventListener('click', onModalCloseElemsClick);
@@ -75,7 +86,7 @@ export const getActors = async filmId => {
     .then(data => {
       let mainActors = data.slice(0, 5).join(', '); // получили строку из 5 главных актеров, эту инфо нужно вставить в карточку
       // console.log('data', data);                 // в табличке добавлено поле Actors и место под список актеров
-      console.log('mainActors:', mainActors);
+      // console.log('mainActors:', mainActors);
       return mainActors;
     })
     .catch(error => {
@@ -96,8 +107,6 @@ const addModalDetailedInfo = (containerLink, filmId) => {
           templateFilmDetailedInfo(genresTransformation(data, genres, 'all')),
         );
       }
-
-      getActors(filmId);  //========= подключила для теста, подтягивает строку с актерами
 
       const watchedBtnRef = refs.modal.querySelector('.watched-btn');
       const queueBtnRef = refs.modal.querySelector('.queue-btn');
