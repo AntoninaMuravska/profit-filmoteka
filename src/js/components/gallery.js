@@ -186,7 +186,6 @@ export const makeGalleryFromLibraryItems = async e => {
   paginationBarHide();
 
   if (data) {
-    // const paginationLibraryWatched = paginationInit(data.total_results);
     paginationLibraryWatched = paginationInit(data.total_results);
     paginationLibraryWatched.on('afterMove', event => {
       paginationBarHide();
@@ -195,6 +194,10 @@ export const makeGalleryFromLibraryItems = async e => {
       setTimeout(() => {
         enableLoader('.section-gallery', 'Loading...');
         const data = loadNextPageFromLibrary(event.page);
+        if (!data) {
+          disableLoader('.section-gallery', 'Loading...');
+          return;
+        }
         renderLibrary(genresTransformation(data, genres));
         
         if (!isOnlyOnePage(paginationLibraryWatched)) {
