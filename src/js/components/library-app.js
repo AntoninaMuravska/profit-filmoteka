@@ -191,14 +191,10 @@ const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home')
   library.removeData(filmId, librarySource);
   
   if (activeGallery !== 'Home') {
-    removeElemFromGallery(filmId);
-    const currentPage = paginationLibraryWatched._currentPage;
     const totalItems = paginationLibraryWatched._options.totalItems - 1;
-    paginationLibraryWatched.reset(totalItems);
-    if (currentPage > 1) {
-      paginationLibraryWatched.movePageTo(currentPage);
-    }
-    // updateGalleryFromLibraryFilms(currentPage);
+    const currentPage = paginationLibraryWatched._currentPage;
+    paginationLibraryWatched.setTotalItems(totalItems);
+    paginationLibraryWatched.movePageTo(currentPage);
   }
 };
 
