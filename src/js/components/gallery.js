@@ -16,8 +16,6 @@ import { loadNextPageFromLibrary } from './library-app';
 refs.headerForm.addEventListener('submit', onSearch);
 refs.clearInputBtn.addEventListener('click', () => (refs.input.value = ''));
 
-console.log(refs.trendingBtn)
-
 export const MyApi = new MovieApi();
 export let paginationLibraryWatched;
 
@@ -80,6 +78,7 @@ export const getCurrentGalleryName = function () {
   const galleryName = document.querySelector('.header .nav__btn.is_active').dataset.name;
   return galleryName === 'home' ? 'Home' : 'MyLibrary';
 };
+
 
 /*
  * Функция для получения трендовых фильмов. если номер страницы не задан - тянет первую страницу,
@@ -215,12 +214,27 @@ export const makeGalleryFromLibraryItems = async e => {
  * Функция-обработчик клика на нкопку Home (так же срабатывает на событии load) (отправляет запрос, получает данные,
  * инициализирует пагинацию и рендерит галлерею)
  */
-export const makeGalleryFromThrendesFilms = async e => {
+export const makeGalleryFromFilmsByCathegory = async (sortName) => {
   enableLoader('.section-gallery', 'Loading...');
   const genres = getGenres();
   let data = null;
   try {
-    data = await getThrendesFilms();
+    switch (sortName) {
+      case 'trending-btn':
+        data = await getThrendesFilms();
+        break;
+      case 'popular-btn':
+        data = await getPopularFilms();
+        break;
+      case 'toprated-btn':
+        data = await getTopRatedFilms();
+        break;
+      case 'upcoming-btn':
+        data = await getUpcomingFilms();
+        break;
+      default:
+        data = await getThrendesFilms();
+     }
   } catch (error) {
     console.log(error);
   }
@@ -229,14 +243,29 @@ export const makeGalleryFromThrendesFilms = async e => {
   paginationBarHide();
 
   if (data && data.results.length) {
-    const paginationThrendesFilms = paginationInit(data.total_results);
-    paginationThrendesFilms.on('afterMove', event => {
+    const paginationFilmsByGathegory = paginationInit(data.total_results);
+    paginationFilmsByGathegory.on('afterMove', event => {
       paginationBarHide();
       clearMarkup(refs.gallery);
       setTimeout(scrollToHeader(), 0);
       setTimeout(async () => {
         enableLoader('.section-gallery', 'Loading...');
-        const data = await getThrendesFilms(event.page);
+        switch (sortName) {
+          case 'trending-btn':
+            data = await getThrendesFilms(event.page);
+            break;
+          case 'popular-btn':
+            data = await getPopularFilms(event.page);
+            break;
+          case 'toprated-btn':
+            data = await getTopRatedFilms(event.page);
+            break;
+          case 'upcoming-btn':
+            data = await getUpcomingFilms(event.page);
+            break;
+          default:
+            data = await getThrendesFilms(event.page);
+        }
         renderLibrary(genresTransformation(data, genres));
         paginationBarShow();
         disableLoader('.section-gallery');
@@ -246,6 +275,38 @@ export const makeGalleryFromThrendesFilms = async e => {
     paginationBarShow();
   }
 };
+
+// export const makeGalleryFromThrendesFilms = async () => {
+//   enableLoader('.section-gallery', 'Loading...');
+//   const genres = getGenres();
+//   let data = null;
+//   try {
+//     data = await getThrendesFilms();
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   disableLoader('.section-gallery');
+
+//   paginationBarHide();
+
+//   if (data && data.results.length) {
+//     const paginationThrendesFilms = paginationInit(data.total_results);
+//     paginationThrendesFilms.on('afterMove', event => {
+//       paginationBarHide();
+//       clearMarkup(refs.gallery);
+//       setTimeout(scrollToHeader(), 0);
+//       setTimeout(async () => {
+//         enableLoader('.section-gallery', 'Loading...');
+//         const data = await getThrendesFilms(event.page);
+//         renderLibrary(genresTransformation(data, genres));
+//         paginationBarShow();
+//         disableLoader('.section-gallery');
+//       }, 100);
+//     });
+//     renderLibrary(genresTransformation(data, genres));
+//     paginationBarShow();
+//   }
+// };
 
 /*
  * Функция-обработчик клика на сабмит формы поиска (отправляет запрос, получает данные,
