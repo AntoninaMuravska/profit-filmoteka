@@ -17,5 +17,6 @@ export default {
   trendingBtn: document.querySelector('.trending-btn'),
   popularBtn: document.querySelector('.popular-btn'),
   topRatedBtn: document.querySelector('.toprated-btn'),
-  upcomingBtn: document.querySelector('.upcoming-btn')
+  upcomingBtn: document.querySelector('.upcoming-btn'),
+  actors: document.querySelector('.actors')
 };
