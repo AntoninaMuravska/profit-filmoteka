@@ -10,6 +10,7 @@ export default class MovieApi {
     this.BASE_URL = 'https://api.themoviedb.org/3/';
     this.genres = {};
     this.moviesObj = {};
+    this.actors = [];
     this.page = 1;
     this.query = '';
 
@@ -103,8 +104,11 @@ export default class MovieApi {
     const response = await axios.get(
       `${this.BASE_URL}movie/${movie_id}/credits?api_key=${this.API_KEY}&language=en-US`,
     );
-    const fetchData = response.data;
-    return fetchData;
+    const fetchData = response.data.cast;
+    this.actors = []; // обнуляем массив, чтоб не сохранялись данные предыдущего фильма
+    fetchData.forEach(el => this.actors.push(el.name))
+    // console.log(this.actors)
+    return this.actors;
   }
 
   searchQuery(query) {
@@ -117,4 +121,5 @@ export default class MovieApi {
 }
 
 // Тестовые запросы
-// const MyApi = new MovieApi();
+const MyApi = new MovieApi();
+MyApi.movieCast(500)

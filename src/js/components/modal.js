@@ -4,11 +4,10 @@ import { clearMarkup, appendMarkup } from './render-markup';
 import genresTransformation from './genre-transformator';
 import { onButtonLibraryContainerClick, onModalOpenAutorun } from './library-app';
 import refs from './refs';
-import { MyApi } from './gallery';
+import { getTopRatedFilms, MyApi } from './gallery';
 import { getGenres } from './session-storage';
 import { scrollupBtnChangeVisibility } from './scrollup';
 import { themeSwitcherToggle } from './theme';
-
 
 /*Функция, отвечающая за открытие и функционирование модалки*/
 const openModal = async filmId => {
@@ -28,8 +27,6 @@ const openModal = async filmId => {
 };
 export default openModal;
 
-
-
 /*Функция, отвечающая за закрытие модалки*/
 const сloseModal = () => {
   refs.modal.removeEventListener('click', onButtonLibraryContainerClick);
@@ -41,8 +38,6 @@ const сloseModal = () => {
   scrollupBtnChangeVisibility();
   themeSwitcherToggle();
 };
-
-
 
 /*Функция-обработчик клика на кнопку закрытия или пустую площадь модалки*/
 const onModalCloseElemsClick = e => {
@@ -65,8 +60,6 @@ const onModalCloseElemsClick = e => {
   сloseModal();
 };
 
-
-
 /*Функция-обработчик нажатия клавиши ESC на клавиатуре*/
 const onEscKeyPress = e => {
   if (e.code === 'Escape') {
@@ -74,25 +67,44 @@ const onEscKeyPress = e => {
   }
 };
 
-
+/*
+ * Функция для получения актеров по айди фильма
+ */
+export const getActors = async filmId => {
+  const fetchData = MyApi.movieCast(filmId)
+    .then(data => {
+      let mainActors = data.slice(0, 5).join(', '); // получили строку из 5 главных актеров, эту инфо нужно вставить в карточку
+      // console.log('data', data);                 // в табличке добавлено поле Actors и место под список актеров
+      console.log('mainActors:', mainActors);
+      return mainActors;
+    })
+    .catch(error => {
+      throw error;
+    });
+  return fetchData;
+};
 
 /*Функция для получения данных с детальной информацией про фильм с последующим рендерингом*/
-const addModalDetailedInfo = (containerLink,filmId) => {
+const addModalDetailedInfo = (containerLink, filmId) => {
   try {
     MyApi.movieDetails(filmId).then(data => {
       const genres = getGenres();
-        
+
       if (genres) {
-        appendMarkup(containerLink, templateFilmDetailedInfo(genresTransformation(data, genres, "all")));
+        appendMarkup(
+          containerLink,
+          templateFilmDetailedInfo(genresTransformation(data, genres, 'all')),
+        );
       }
-        
+
+      getActors(filmId);  //========= подключила для теста, подтягивает строку с актерами
+
       const watchedBtnRef = refs.modal.querySelector('.watched-btn');
       const queueBtnRef = refs.modal.querySelector('.queue-btn');
-        
+
       onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
     });
   } catch (error) {
-    throw new Error; 
+    throw new Error();
   }
-}
-
+};
