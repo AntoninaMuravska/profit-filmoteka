@@ -1,7 +1,7 @@
 import refs from './components/refs';
 import {
   onGalleryItemClick,
-  makeGalleryFromThrendesFilms,
+  makeGalleryFromFilmsByCathegory,
   makeGalleryFromSearchedFilms,
   fetchGenres,
 } from './components/gallery';
@@ -18,7 +18,6 @@ refs.headerForm.addEventListener('submit', makeGalleryFromSearchedFilms);
 document.addEventListener('DOMContentLoaded', applyTheme);
 window.addEventListener('load', async e => {
   setTimeout(fetchGenres,0);
-  setTimeout(makeGalleryFromThrendesFilms,150,e);
+  setTimeout(makeGalleryFromFilmsByCathegory,150,e);
   setTimeout(scrollUpInit,250);
 });
-
