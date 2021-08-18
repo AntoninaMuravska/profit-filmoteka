@@ -35,3 +35,11 @@ export const paginationBarHide = () => {
   refs.paginationBar.classList.add('is-notvisible');
 };
 
+/* Функция скрытия строки пагинации при 1 страничке*/
+export const isOnlyOnePage = (paginationItem) => {
+  let checkResult = false;
+  if (paginationItem._options.totalItems <= 20) {
+    checkResult = true;
+  }
+  return checkResult;
+};

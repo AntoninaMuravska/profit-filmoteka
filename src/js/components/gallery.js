@@ -6,7 +6,7 @@ import openModal from './modal';
 import { dateTransformation } from './date-transformation';
 import { enableLoader, disableLoader, showWarningMessage } from './notification';
 import { scrollReveal } from './scroll-reveal';
-import { paginationInit, paginationBarShow, paginationBarHide } from './pagination';
+import { paginationInit, paginationBarShow, paginationBarHide, isOnlyOnePage } from './pagination';
 import { clearMarkup } from './render-markup';
 import { getLibraryItems } from './library-app';
 import { getGenres } from './session-storage';
@@ -196,13 +196,19 @@ export const makeGalleryFromLibraryItems = async e => {
         enableLoader('.section-gallery', 'Loading...');
         const data = loadNextPageFromLibrary(event.page);
         renderLibrary(genresTransformation(data, genres));
-        paginationBarShow();
+        
+        if (!isOnlyOnePage(paginationLibraryWatched)) {
+          paginationBarShow();
+        }
         disableLoader('.section-gallery', 'Loading...');
       }, 100);
     });
 
     renderLibrary(genresTransformation(data, genres));
-    paginationBarShow();
+
+    if (!isOnlyOnePage(paginationLibraryWatched)) {
+      paginationBarShow();
+    }
     return;
   }
 
@@ -267,12 +273,18 @@ export const makeGalleryFromFilmsByCathegory = async (sortName) => {
             data = await getThrendesFilms(event.page);
         }
         renderLibrary(genresTransformation(data, genres));
-        paginationBarShow();
+        
+        if (!isOnlyOnePage(paginationFilmsByGathegory)) {
+          paginationBarShow();
+        }
         disableLoader('.section-gallery');
       }, 100);
     });
     renderLibrary(genresTransformation(data, genres));
-    paginationBarShow();
+
+    if (!isOnlyOnePage(paginationFilmsByGathegory)) {
+      paginationBarShow();
+    }
   }
 };
 
@@ -335,12 +347,18 @@ export const makeGalleryFromSearchedFilms = async e => {
         enableLoader('.section-gallery', 'Loading...');
         const data = await getSearchedFilms(event.page);
         renderLibrary(genresTransformation(data, genres));
-        paginationBarShow();
+        
+        if (!isOnlyOnePage(paginationSearchedFilms)) {
+          paginationBarShow();
+        }
         disableLoader('.section-gallery');
       }, 100);
     });
     renderLibrary(genresTransformation(data, genres));
-    paginationBarShow();
+    
+    if (!isOnlyOnePage(paginationSearchedFilms)) {
+      paginationBarShow();
+    }
     return;
   }
   empty();
