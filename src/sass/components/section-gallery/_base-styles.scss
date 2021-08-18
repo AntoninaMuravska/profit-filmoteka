@@ -13,11 +13,16 @@
 
 .empty {
   margin-left: 20px;
-  @media screen and(min-width: 768px) {
+
+  @media screen and (min-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 80px;
+  }
+
+  @media screen and(min-width: 1024px) {
     margin-left: auto;
     margin-right: 310px;
-
-    padding-top: 80px;
   }
 }
 
