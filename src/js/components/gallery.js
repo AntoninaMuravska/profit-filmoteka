@@ -16,6 +16,8 @@ import { loadNextPageFromLibrary } from './library-app';
 refs.headerForm.addEventListener('submit', onSearch);
 refs.clearInputBtn.addEventListener('click', () => (refs.input.value = ''));
 
+console.log(refs.trendingBtn)
+
 export const MyApi = new MovieApi();
 export let paginationLibraryWatched;
 
@@ -85,6 +87,45 @@ export const getCurrentGalleryName = function () {
  */
 export const getThrendesFilms = async (page = 1) => {
   const fetchData = MyApi.getTrendingMovies(page)
+    .then(data => {
+      return data;
+    })
+    .catch(error => console.log(error));
+  return fetchData;
+};
+
+/*
+ * Функция для получения популярных фильмов. если номер страницы не задан - тянет первую страницу,
+ * иначе - заданную
+ */
+export const getPopularFilms = async (page = 1) => {
+  const fetchData = MyApi.getPopularMovies(page)
+    .then(data => {
+      return data;
+    })
+    .catch(error => console.log(error));
+  return fetchData;
+};
+
+/*
+ * Функция для получения фильмов по рейтингу. если номер страницы не задан - тянет первую страницу,
+ * иначе - заданную
+ */
+export const getTopRatedFilms = async (page = 1) => {
+  const fetchData = MyApi.getTopRatedMovies(page)
+    .then(data => {
+      return data;
+    })
+    .catch(error => console.log(error));
+  return fetchData;
+};
+
+/*
+ * Функция для получения новинок. если номер страницы не задан - тянет первую страницу,
+ * иначе - заданную
+ */
+export const getUpcomingFilms = async (page = 1) => {
+  const fetchData = MyApi.getUpcomingMovies(page)
     .then(data => {
       return data;
     })
@@ -268,3 +309,10 @@ export const updateGalleryFromLibraryFilms = page => {
   }
   empty();
 };
+
+
+// refs.trendingBtn.addEventListener('click', makeGalleryFromThrendesFilms);  //========== по умолчанию
+// refs.popularBtn.addEventListener('click', makeGalleryFromPopularFilms);
+// refs.topRatedBtn.addEventListener('click', makeGalleryFromTopRatedFilms);
+// refs.upcomingBtn.addEventListener('click', makeGalleryFromUpcomingFilms);
+

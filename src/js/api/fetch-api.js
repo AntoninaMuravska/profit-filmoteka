@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { saveGenres, saveFilms } from '../components/session-storage';
+
+import { saveGenres, saveFilms, savePopularFilms } from '../components/session-storage';
+//import { saveGenres, saveFilms } from '../components/session-storage';
+
 
 export default class MovieApi {
   constructor() {
@@ -23,6 +26,10 @@ export default class MovieApi {
       `${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${page}`,
     );
     const fetchData = response.data;
+
+    //savePopularFilms(fetchData); //============ переименовать на saveTrendingFilms
+
+
 
     saveFilms(fetchData.results);
     return fetchData;
@@ -56,6 +63,48 @@ export default class MovieApi {
     this.genres = data;
     saveGenres(data);
     return this.genres;
+  }
+
+  //популярные фильмы
+  async getPopularMovies(page) {
+    const response = await axios.get(
+      `${this.BASE_URL}movie/popular?api_key=${this.API_KEY}&language=en-US&page=${page}`,
+    );
+    const fetchData = response.data;
+    // savePopularFilms(fetchData); =========== СОЗДАТЬ функцию для сохранения фильмов в СС
+    saveFilms(fetchData.results);
+    return fetchData;
+  }
+
+  //новинки
+  async getUpcomingMovies(page) {
+    const response = await axios.get(
+      `${this.BASE_URL}movie/upcoming?api_key=${this.API_KEY}&language=en-US&page=${page}`,
+    );
+    const fetchData = response.data;
+    // saveUpcomingFilms(fetchData); =========== СОЗДАТЬ функцию для сохранения фильмов в СС
+    saveFilms(fetchData.results);
+    return fetchData;
+  }
+
+  //фильмы по рейтингу
+  async getTopRatedMovies(page) {
+    const response = await axios.get(
+      `${this.BASE_URL}movie/top_rated?api_key=${this.API_KEY}&language=en-US&page=${page}`,
+    );
+    const fetchData = response.data;
+    // saveTopRatedFilms(fetchData); =========== СОЗДАТЬ функцию для сохранения фильмов в СС
+    saveFilms(fetchData.results);
+    return fetchData;
+  }
+
+  //список актеров по id фильма - добавить в карточку с деталями
+  async movieCast(movie_id) {
+    const response = await axios.get(
+      `${this.BASE_URL}movie/${movie_id}/credits?api_key=${this.API_KEY}&language=en-US`,
+    );
+    const fetchData = response.data;
+    return fetchData;
   }
 
   searchQuery(query) {
