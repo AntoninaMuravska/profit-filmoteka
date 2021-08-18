@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { saveGenres, saveFilms, savePopularFilms } from '../components/session-storage';
-
+import { saveGenres, saveFilms } from '../components/session-storage';
 
 export default class MovieApi {
   constructor() {
@@ -24,14 +23,16 @@ export default class MovieApi {
       `${this.BASE_URL}trending/movie/day?api_key=${this.API_KEY}&page=${page}`,
     );
     const fetchData = response.data;
-    savePopularFilms(fetchData);
+
     saveFilms(fetchData.results);
     return fetchData;
   }
 
   //поиск фильма
   async searchMovies(page) {
-    const response = await axios.get(`${this.BASE_URL}search/movie?query=${this.query}&api_key=${this.API_KEY}&language=en-US&page=${page}&include_adult=false`);
+    const response = await axios.get(
+      `${this.BASE_URL}search/movie?query=${this.query}&api_key=${this.API_KEY}&language=en-US&page=${page}&include_adult=false`,
+    );
     const fetchData = response.data;
     this.moviesObj = fetchData;
     saveFilms(fetchData.results);
@@ -44,7 +45,7 @@ export default class MovieApi {
       `${this.BASE_URL}movie/${movie_id}?api_key=${this.API_KEY}&language=en-US`,
     );
     const data = response.data;
-     return data;
+    return data;
   }
 
   //жанры
@@ -64,9 +65,7 @@ export default class MovieApi {
   resetPage() {
     return (this.page = 1);
   }
-
 }
 
 // Тестовые запросы
 // const MyApi = new MovieApi();
-
