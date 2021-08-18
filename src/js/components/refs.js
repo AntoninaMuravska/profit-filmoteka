@@ -11,9 +11,14 @@ export default {
   queueBtn: document.querySelector('[data-name="queue"]'),
   body: document.querySelector('body'),
   themeSwitcher: document.querySelector('#theme-switch-toggle'),
+  footerLink: document.querySelector('.footer__link'),
   clearInputBtn: document.querySelector('.clear-input'),
   paginationBar: document.querySelector('#pagination'),
+  trendingBtn: document.querySelector('.trending-btn'),
+  popularBtn: document.querySelector('.popular-btn'),
+  topRatedBtn: document.querySelector('.toprated-btn'),
+  upcomingBtn: document.querySelector('.upcoming-btn'),
   footerModal: document.querySelector('.footer-modal'),
-  footerLink: document.querySelector('.footer__link'),
   closeFooter: document.querySelector('.close')
-}
+};
+

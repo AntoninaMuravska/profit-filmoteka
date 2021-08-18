@@ -1,5 +1,5 @@
 import refs from './refs';
-import { makeGalleryFromLibraryItems, makeGalleryFromThrendesFilms, makeGalleryFromSearchedFilms } from './gallery';
+import { makeGalleryFromLibraryItems, makeGalleryFromFilmsByCathegory, makeGalleryFromSearchedFilms } from './gallery';
 // import { onSearch } from './search';
 
 export const onHomeBtnClick = function (e) {
@@ -14,7 +14,8 @@ export const onHomeBtnClick = function (e) {
   }
 
   refs.gallery.innerHTML = '';
-  makeGalleryFromThrendesFilms(e);
+  // makeGalleryFromThrendesFilms(e);
+  makeGalleryFromFilmsByCathegory(e);
 
   refs.headerForm.addEventListener('submit', makeGalleryFromSearchedFilms);
   refs.queueBtn.removeEventListener('click', onBtnClick);
@@ -66,3 +67,20 @@ function toggleClass(e) {
   refs.headerForm.classList.toggle('visually-hidden');
 }
 
+
+/*обработчик клика на кнопки запроса данных по категориям*/
+const activateSelectioCathegoryBtnsContainer = e => {
+  if (e.target.nodeName !== 'BUTTON') return;
+  [...e.target.parentNode.children].forEach(elem=>elem.classList.remove('is-active'));
+  e.target.classList.add('is-active');
+  const currentButton = e.target.dataset.name;
+  makeGalleryFromFilmsByCathegory(currentButton);
+}
+
+
+/*ДОБАВИТЬ НА ОТКРЫТИЕ 'HOME' (ПРИ ОТКРЫТИИ САЙТА ТОЖЕ НЕ ЗАБЫТЬ АКТИВИРОВАТЬ)*/
+const selectionBtnsContainer = document.querySelector('.selection-buttons');
+selectionBtnsContainer.addEventListener('click', activateSelectioCathegoryBtnsContainer);
+
+/*ДОБАВИТЬ НА ЗАКРЫТИЕ 'HOME' ИЛИ ПРИ ОТКРЫТИИ 'MyLIBRARY' ВНАЧАЛЕ. РОЗКОМЕНТИТЕ */
+// selectionBtnsContainer.removeEventListener('click', activateSelectioCathegoryBtnsContainer);

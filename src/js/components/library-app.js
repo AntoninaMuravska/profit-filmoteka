@@ -1,7 +1,10 @@
 import LibraryApi from '../api/library-api';
-import { getFilm } from './session-storage';
+import { getFilm, saveFilms} from './session-storage';
 import { showWarningMessage, showFailureMessage, showSuccesMessage } from './notification';
-import { removeElemFromGallery, createMarkup, getCurrentGalleryName, empty } from './gallery';
+import { removeElemFromGallery, getCurrentGalleryName, updateGalleryFromLibraryFilms, empty } from './gallery';
+import { paginationLibraryWatched } from './gallery';
+
+
 
 const library = new LibraryApi();
 
@@ -24,7 +27,7 @@ export const onButtonLibraryContainerClick = e => {
   };
 
   const filmId = Number(e.target.dataset.id);
-  const targetFilm = getFilm(filmId);
+
   let librarySource;
   let nonTargetBtn;
 
@@ -39,6 +42,7 @@ export const onButtonLibraryContainerClick = e => {
   const isActive = elem.dataset.active;
 
   if (isActive === 'true') {
+    const targetFilm = getFilm(filmId);
     library.setData(targetFilm, librarySource);
     showSuccesMessage(`Фильм успешно добавлен в библиотеку ${librarySource.toUpperCase()}`);
     elem.dataset.active = 'false';
@@ -153,46 +157,49 @@ const changingElemsProperties = (elemForEnabling, elemForDisabling, sourceLibrar
 };
 
 /* Функция получения 1 елемента из библиотеки */
-const getSingleItem = () => {
-  let data = null;
+// const getSingleItem = () => {
+//   let data = null;
 
-  if (library.isEndStatus) {
-    return data;
-  }
+//   if (library.isEndStatus) {
+//     return data;
+//   }
 
-  try {
-    data = JSON.parse(library.fetchData(1));
-  } catch (error) {
-    console.error(error);
-  }
+//   try {
+//     data = JSON.parse(library.fetchData(1));
+//   } catch (error) {
+//     console.error(error);
+//   }
 
-  if (!data) {
-    showFailureMessage('Упс, чтото пошло не так...');
-    return data;
-  }
+//   if (!data) {
+//     showFailureMessage('Упс, чтото пошло не так...');
+//     return data;
+//   }
 
-  if (data.page === data.total_pages) {
-    library.setEndStatus();
-  }
+//   if (data.page === data.total_pages) {
+//     library.setEndStatus();
+//   }
 
-  /**/
-  return data;
-};
+//   /**/
+//   return data;
+// };
 
 /* Функция удаления елемента из библиотеки и из галлереи */
 const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home') => {
+  const targetItem = library.getItem(filmId, librarySource);
+  
+  saveFilms([targetItem]);
+  library.removeData(filmId, librarySource);
+  
   if (activeGallery !== 'Home') {
     removeElemFromGallery(filmId);
-    const data = getSingleItem();
-
-    /** КАК БУДЕТ ФУНКЦИОНИРОВАТЬ ПАГИНАЦИЯ И БИБЛИОТЕКА НАПОЛНИТЬСЯ 20+ ЕЛЕМЕНТАМИ - ПОТЕСТИТЬ*/
-    // console.log('попытка получить фильм из библиотеки для замены. объект фильма:', data);
-    if (data) {
-      createMarkup(data);
+    const currentPage = paginationLibraryWatched._currentPage;
+    const totalItems = paginationLibraryWatched._options.totalItems - 1;
+    paginationLibraryWatched.reset(totalItems);
+    if (currentPage > 1) {
+      paginationLibraryWatched.movePageTo(currentPage);
     }
+    // updateGalleryFromLibraryFilms(currentPage);
   }
-
-  library.removeData(filmId, librarySource);
 };
 
 /*
@@ -200,15 +207,15 @@ const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home')
  */
 export const loadNextPageFromLibrary = page => {
   let data = null;
-
+  
   try {
-    data = JSON.parse(library.fetchData(page));
+    data = JSON.parse(library.fetchDataByPage(page));
   } catch (error) {
     console.error(error);
   }
 
   if (!data) {
-    showFailureMessage('Упс, чтото пошло не так...');
+    // showFailureMessage('Упс, чтото пошло не так...');
     return data;
   }
 

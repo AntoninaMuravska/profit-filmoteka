@@ -51,7 +51,6 @@ export default class LibraryApi {
         const storageData = this.getData(libraryType);
 
         if (!storageData || storageData.total_results===0) {
-            alert("The library is Empty!");
             return;
         }
         
@@ -65,7 +64,6 @@ export default class LibraryApi {
         });
 
         if (!isFound) {
-            alert('There is no such film in the library!');
             return;
         }
         localStorage.setItem(libraryType,JSON.stringify(storageData));
@@ -93,6 +91,30 @@ export default class LibraryApi {
         
         return JSON.stringify(outputData);
     }
+
+
+    /*
+     * Метод для получение конкретной порции елементов из библиотеки. 
+     * Принимает аргумент с запрашиваемой страничкой и количество елементов( дефолту - до 20 шт)
+    */
+    fetchDataByPage(page = 1, quantity=20) {
+        const storageData = this.getData(this.activeLibrary);
+
+        if (!storageData || storageData.total_results===0) {
+            return null;
+        }
+
+        const outputData = {
+            page: this.page,
+            // results: [...storageData.library.slice(((this.page - 1) * 20), (this.page - 1) * 20 + quantity)],
+            results: [...storageData.library.slice(((page - 1) * quantity), (page - 1) * quantity + quantity)],
+            total_pages: storageData.total_pages,
+            total_results: storageData.total_results
+        };
+        
+        return JSON.stringify(outputData);
+    }
+
 
 
     /*метод для проверки наличия фильма в библиотеке пользователя*/
@@ -153,4 +175,23 @@ export default class LibraryApi {
     resetEndStatus() {
         this.isEndStatus = false;
     }
+
+
+    /*метод для получения елемента из указанной библиотеки в localStorage*/
+    getItem(filmId, libraryType) {
+        const storageData = this.getData(libraryType);
+
+        if (!storageData || storageData.total_results===0) {
+            return;
+        }
+        
+    const item = storageData.library.find(el => el.id === filmId);
+    
+        if (!item) {
+            return null;
+        }
+        return item;
+    }
 }
+
+
