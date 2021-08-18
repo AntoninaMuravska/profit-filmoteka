@@ -17,8 +17,5 @@ export default {
   trendingBtn: document.querySelector('.trending-btn'),
   popularBtn: document.querySelector('.popular-btn'),
   topRatedBtn: document.querySelector('.toprated-btn'),
-  upcomingBtn: document.querySelector('.upcoming-btn'),
-  footerModal: document.querySelector('.footer-modal'),
-  closeFooter: document.querySelector('.close')
+  upcomingBtn: document.querySelector('.upcoming-btn')
 };
-
