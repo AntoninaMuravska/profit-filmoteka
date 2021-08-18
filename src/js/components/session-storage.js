@@ -3,14 +3,10 @@ const saveGenres = function (genres) {
   sessionStorage.setItem('genres', JSON.stringify(genres));
 };
 
-
-
 /*Функция для получения елемента с СС по зананному имени ключа */
 const getItemFromSessionStorage = function (key) {
   return JSON.parse(sessionStorage.getItem(key));
 };
-
-
 
 /*Функция для сохранения фильмов в СС */
 const saveFilms = function (array, key) {
@@ -34,29 +30,6 @@ const saveFilms = function (array, key) {
   sessionStorage.setItem(key, JSON.stringify(array));
 };
 
-
-
-/*Функция для сохранения трендовых фильмов в СС */
-const savePopularFilms = function (objFilms, key = 'popular') {
-  const arraySessionStorage = [];
-  const filmsPage = getItemFromSessionStorage(key);
-
-  if (filmsPage) {
-    arraySessionStorage.push(filmsPage);
-
-    if (objFilms.page === filmsPage.page) {
-      return;
-    }
-    arraySessionStorage.push(objFilms);
-    sessionStorage.setItem(key, JSON.stringify(arraySessionStorage));
-    return;
-  }
-
-  sessionStorage.setItem(key, JSON.stringify(objFilms));
-};
-
-
-
 /*Функция для получения одного фильма из СС */
 const getFilm = function (id) {
   const films = sessionStorage.getItem('movies');
@@ -74,8 +47,6 @@ const getFilm = function (id) {
   return null;
 };
 
-
-
 /*Функция для получения объекта с жанрами из СС */
 const getGenres = function () {
   const genres = sessionStorage.getItem('genres');
@@ -90,4 +61,4 @@ const getGenres = function () {
   return null;
 };
 
-export { saveGenres, saveFilms, savePopularFilms, getFilm, getGenres, getItemFromSessionStorage };
+export { saveGenres, saveFilms, getFilm, getGenres, getItemFromSessionStorage };

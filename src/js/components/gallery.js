@@ -9,7 +9,7 @@ import { scrollReveal } from './scroll-reveal';
 import { paginationInit, paginationBarShow, paginationBarHide } from './pagination';
 import { clearMarkup } from './render-markup';
 import { getLibraryItems } from './library-app';
-import { getGenres, getItemFromSessionStorage } from './session-storage';
+import { getGenres } from './session-storage';
 import { scrollToHeader } from './scrollup';
 import { loadNextPageFromLibrary } from './library-app';
 
@@ -59,19 +59,6 @@ export const onGalleryItemClick = e => {
 export const renderLibrary = function (data) {
   dateTransformation(data.results);
   refs.gallery.innerHTML = cardTpl(data.results);
-  scrollReveal();
-};
-
-//рисует галерею при нажатии HOME
-export const createMarkupHome = function () {
-  const arrayFilms = getItemFromSessionStorage('popular');
-  const genres = getGenres();
-
-  genresTransformation(arrayFilms, genres);
-  dateTransformation(arrayFilms.results);
-
-  const movieCard = cardTpl(arrayFilms.results);
-  refs.gallery.insertAdjacentHTML('beforeend', movieCard);
   scrollReveal();
 };
 
@@ -235,7 +222,7 @@ export const makeGalleryFromSearchedFilms = async e => {
   }
   disableLoader('.section-gallery');
   paginationBarHide();
-  
+
   if (data && data.results.length) {
     const paginationSearchedFilms = paginationInit(data.total_results);
     paginationSearchedFilms.on('afterMove', event => {
@@ -273,7 +260,7 @@ export const updateGalleryFromLibraryFilms = page => {
   const genres = getGenres();
   paginationBarHide();
   const data = loadNextPageFromLibrary(page);
-  
+
   if (data) {
     renderLibrary(genresTransformation(data, genres));
     paginationBarShow();
