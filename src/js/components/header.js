@@ -63,9 +63,15 @@ function toggleClass(e) {
   refs.libraryBtn.classList.toggle('is_active');
   refs.homeBtn.classList.toggle('is_active');
   refs.headerForm.classList.toggle('is_invisible');
-  refs.watchedBtn.classList.toggle('is_invisible');
-  refs.queueBtn.classList.toggle('is_invisible');
+  refs.watchedBtn.classList.toggle('visually-hidden');
+  refs.queueBtn.classList.toggle('visually-hidden');
+  // refs.watchedBtn.classList.toggle('is_invisible');
+  // refs.queueBtn.classList.toggle('is_invisible');
   refs.headerForm.classList.toggle('visually-hidden');
+  refs.trendingBtn.classList.toggle('visually-hidden');
+  refs.popularBtn.classList.toggle('visually-hidden');
+  refs.topRatedBtn.classList.toggle('visually-hidden');
+  refs.upcomingBtn.classList.toggle('visually-hidden');
 }
 
 
