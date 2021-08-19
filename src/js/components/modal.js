@@ -85,28 +85,6 @@ export const getActors = async filmId => {
 };
 
 /*Функция для получения данных с детальной информацией про фильм с последующим рендерингом*/
-// const addModalDetailedInfo = (containerLink, filmId) => {
-//   try {
-//     MyApi.movieDetails(filmId).then(data => {
-//       const genres = getGenres();
-
-//       if (genres) {
-//         appendMarkup(
-//           containerLink,
-//           templateFilmDetailedInfo(genresTransformation(data, genres, 'all')),
-//         );
-//       }
-
-//       const watchedBtnRef = refs.modal.querySelector('.watched-btn');
-//       const queueBtnRef = refs.modal.querySelector('.queue-btn');
-
-//       onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
-//     });
-//   } catch (error) {
-//     throw new Error();
-//   }
-// };
-
 const addModalDetailedInfo = async (containerLink, filmId) => {
   try {
     const data = await MyApi.movieDetails(filmId);

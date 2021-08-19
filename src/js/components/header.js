@@ -1,6 +1,6 @@
 import refs from './refs';
 import { makeGalleryFromLibraryItems, makeGalleryFromFilmsByCathegory, makeGalleryFromSearchedFilms } from './gallery';
-// import { onSearch } from './search';
+
 
 export const onHomeBtnClick = function (e) {
   e.preventDefault();
@@ -14,7 +14,6 @@ export const onHomeBtnClick = function (e) {
   }
 
   refs.gallery.innerHTML = '';
-  // makeGalleryFromThrendesFilms(e);
   makeGalleryFromFilmsByCathegory(e);
 
   refs.headerForm.addEventListener('submit', makeGalleryFromSearchedFilms);
@@ -40,8 +39,8 @@ export const onLibraryBtnClick = function (e) {
 };
 
 function onBtnClick(e) {
-  toggleClass(e); //добавляет/удаляет классы с кнопок
-  makeGalleryFromLibraryItems(e); //рендерит разметку
+  toggleClass(e); 
+  makeGalleryFromLibraryItems(e); 
 }
 
 //функция добавляет/удаляет классы с кнопок
