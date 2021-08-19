@@ -4,7 +4,7 @@ import { clearMarkup, appendMarkup } from './render-markup';
 import genresTransformation from './genre-transformator';
 import { onButtonLibraryContainerClick, onModalOpenAutorun } from './library-app';
 import refs from './refs';
-import { getTopRatedFilms, MyApi } from './gallery';
+import { MyApi } from './gallery';
 import { getGenres } from './session-storage';
 import { scrollupBtnChangeVisibility } from './scrollup';
 import { themeSwitcherToggle } from './theme';
@@ -19,16 +19,6 @@ const openModal = async filmId => {
   const modalInfoContainer = refs.modal.querySelector('.modal-movie__info');
   clearMarkup(modalInfoContainer);
   addModalDetailedInfo(modalInfoContainer, filmId);
-
-  /**АКТЕРЫ****/
-  let actors = null;
-  try {
-    actors = await getActors(filmId);
-    setTimeout(() => (refs.modal.querySelector('.actors-container').textContent = actors), 0.1);
-    // refs.modal.querySelector('.actors-container').textContent = actors;
-  } catch (error) {
-    console.log(error);
-  }
 
   refs.modal.firstElementChild.classList.remove('is-hidden');
   refs.modal.addEventListener('click', onButtonLibraryContainerClick);
@@ -95,24 +85,49 @@ export const getActors = async filmId => {
 };
 
 /*Функция для получения данных с детальной информацией про фильм с последующим рендерингом*/
-const addModalDetailedInfo = (containerLink, filmId) => {
+// const addModalDetailedInfo = (containerLink, filmId) => {
+//   try {
+//     MyApi.movieDetails(filmId).then(data => {
+//       const genres = getGenres();
+
+//       if (genres) {
+//         appendMarkup(
+//           containerLink,
+//           templateFilmDetailedInfo(genresTransformation(data, genres, 'all')),
+//         );
+//       }
+
+//       const watchedBtnRef = refs.modal.querySelector('.watched-btn');
+//       const queueBtnRef = refs.modal.querySelector('.queue-btn');
+
+//       onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
+//     });
+//   } catch (error) {
+//     throw new Error();
+//   }
+// };
+
+const addModalDetailedInfo = async (containerLink, filmId) => {
   try {
-    MyApi.movieDetails(filmId).then(data => {
-      const genres = getGenres();
+    const data = await MyApi.movieDetails(filmId);
+    const actors = await getActors(filmId);
+    const genres = getGenres();
 
-      if (genres) {
-        appendMarkup(
-          containerLink,
-          templateFilmDetailedInfo(genresTransformation(data, genres, 'all')),
-        );
-      }
+    data.actors = actors;
 
-      const watchedBtnRef = refs.modal.querySelector('.watched-btn');
-      const queueBtnRef = refs.modal.querySelector('.queue-btn');
+    if (genres) {
+        appendMarkup(containerLink,templateFilmDetailedInfo(genresTransformation(data, genres, 'all')));  
+    }
+    
+    const watchedBtnRef = refs.modal.querySelector('.watched-btn');
+    const queueBtnRef = refs.modal.querySelector('.queue-btn');
 
-      onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
-    });
+    onModalOpenAutorun(watchedBtnRef, queueBtnRef, data.id);
   } catch (error) {
-    throw new Error();
+    console.log(error);
   }
 };
+
+
+
+
