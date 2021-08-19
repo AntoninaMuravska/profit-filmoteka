@@ -19,6 +19,7 @@ export default {
   topRatedBtn: document.querySelector('.toprated-btn'),
   upcomingBtn: document.querySelector('.upcoming-btn'),
   actors: document.querySelector('.actors'),
+  closeFooter: document.querySelector('.close'),
   footerModal: document.querySelector('.footer_modal')
 };
 
