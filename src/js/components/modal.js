@@ -20,16 +20,15 @@ const openModal = async filmId => {
   clearMarkup(modalInfoContainer);
   addModalDetailedInfo(modalInfoContainer, filmId);
 
-
- /**АКТЕРЫ****/
+  /**АКТЕРЫ****/
   let actors = null;
   try {
     actors = await getActors(filmId);
-    refs.modal.querySelector('.actors-container').textContent = actors;
+    setTimeout(() => (refs.modal.querySelector('.actors-container').textContent = actors), 0.1);
+    // refs.modal.querySelector('.actors-container').textContent = actors;
   } catch (error) {
     console.log(error);
   }
-  
 
   refs.modal.firstElementChild.classList.remove('is-hidden');
   refs.modal.addEventListener('click', onButtonLibraryContainerClick);
