@@ -205,3 +205,63 @@
 .is_invisible {
   opacity: 0;
 }
+
+.selection-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  @media screen and(max-width: 767px) {
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+
+  @media screen and(min-width: 768px) {
+    margin-bottom: 30px;
+  }
+}
+
+.gallery-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 30px;
+
+  font-size: 12px;
+  line-height: 1.167;
+  color: #ffffff;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  transition: color 250ms linear, background-color 250ms linear, border-color 250ms linear;
+
+  @media screen and(max-width: 767px) {
+    margin-bottom: 10px;
+  }
+}
+
+.gallery-btn:not(:last-child) {
+  @media screen and(min-width: 768px) {
+    margin-right: 30px;
+  }
+}
+
+.gallery-btn:nth-child(2n + 1) {
+  @media screen and(max-width: 767px) {
+    margin-right: 10px;
+  }
+}
+
+body.light-theme .gallery-btn:hover,
+body.light-theme .gallery-btn:focus,
+body.dark-theme .gallery-btn:hover,
+body.dark-theme .gallery-btn:focus,
+body.light-theme .gallery-btn .is-active,
+body.dark-theme .gallery-btn .is-active {
+  color: #ffffff;
+  background-color: var(--background-btn);
+  border-color: var(--background-btn);
+}
