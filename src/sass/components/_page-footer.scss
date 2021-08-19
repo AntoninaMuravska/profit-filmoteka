@@ -1,5 +1,4 @@
 .footer__container {
-  // padding-top: 30px;
   padding-bottom: 30px;
   text-align: center;
 }
@@ -13,11 +12,17 @@
 
 .footer__link {
   display: inline-block;
-  font-size: 16px;
-  color: #333333;
+  font-size: 20px;
+  color: #ff6b08;
 }
 
 .footer__link:hover,
 .footer__link:hover {
-  color: #ff6b08;
+  cursor: pointer;
+  color: #333333;
+}
+
+body.dark-theme .footer__link:hover,
+body.dark-theme .footer__link:hover {
+  color: #fff;
 }

@@ -4,9 +4,10 @@ const closeBackdrop = document.querySelector('.footer-backdrop');
 const theme = document.querySelector('.theme-switch');
 
 export const closeOpenFooterModal = function (e) {
-    console.log('клик по ссылку в футере');
-    refs.footerModal.classList.toggle('is-hidden');
-    theme.classList.toggle('no-display');
-    closeBackdrop.classList.toggle('is-hidden');
+  console.log('клик по ссылку в футере');
+  refs.footerModal.classList.toggle('is-hidden');
+  theme.classList.toggle('no-display');
+  closeBackdrop.classList.toggle('is-hidden');
+  document.body.style.overflow.toggle('hidden');
 };
 
