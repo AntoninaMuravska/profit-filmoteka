@@ -22,18 +22,33 @@
       </ul>
     </div>
 
-    <form class="header__form">
-      <input
-        class="header__input"
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Search movies"
-      />
-      <button type="submit" class="header__button"></button>
-      <span class="material-icons clear-input"> clear </span>
-    </form>
-
+    <div class="home-container">
+      <form class="header__form">
+        <input
+          class="header__input"
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search movies"
+        />
+        <button type="submit" class="header__button"></button>
+        <span class="material-icons clear-input"> clear </span>
+      </form>
+      <div class="selection-buttons">
+        <button type="button" class="gallery-btn trending-btn" data-name="trending-btn">
+          Trending
+        </button>
+        <button type="button" class="gallery-btn popular-btn" data-name="popular-btn">
+          Popular
+        </button>
+        <button type="button" class="gallery-btn toprated-btn" data-name="toprated-btn">
+          Top Rated
+        </button>
+        <button type="button" class="gallery-btn upcoming-btn" data-name="upcoming-btn">
+          Upcoming
+        </button>
+      </div>
+    </div>
     <div class="header__library-buttons">
       <button type="submit" class="header__library-button is_invisible" data-name="watched">
         Watched
