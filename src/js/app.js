@@ -11,7 +11,6 @@ refs.libraryBtn.addEventListener('click', onLibraryBtnClick);
 refs.themeSwitcher.addEventListener('change', onChangeThemeSwitcherClick);
 refs.closeFooter.addEventListener('click', closeOpenFooterModal);
 refs.footerLink.addEventListener('click', closeOpenFooterModal);
-refs.headerForm.addEventListener('submit', makeGalleryFromSearchedFilms);
 
 document.addEventListener('DOMContentLoaded', applyTheme);
 window.addEventListener('load', () => {
