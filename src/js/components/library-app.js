@@ -1,7 +1,7 @@
 import LibraryApi from '../api/library-api';
 import { getFilm, saveFilms} from './session-storage';
 import { showWarningMessage, showFailureMessage, showSuccesMessage } from './notification';
-import { removeElemFromGallery, getCurrentGalleryName, updateGalleryFromLibraryFilms, empty } from './gallery';
+import { getCurrentGalleryName, empty } from './gallery';
 import { paginationLibraryWatched } from './gallery';
 
 
@@ -156,32 +156,6 @@ const changingElemsProperties = (elemForEnabling, elemForDisabling, sourceLibrar
   elemForDisabling.setAttribute('disabled', '');
 };
 
-/* Функция получения 1 елемента из библиотеки */
-// const getSingleItem = () => {
-//   let data = null;
-
-//   if (library.isEndStatus) {
-//     return data;
-//   }
-
-//   try {
-//     data = JSON.parse(library.fetchData(1));
-//   } catch (error) {
-//     console.error(error);
-//   }
-
-//   if (!data) {
-//     showFailureMessage('Упс, чтото пошло не так...');
-//     return data;
-//   }
-
-//   if (data.page === data.total_pages) {
-//     library.setEndStatus();
-//   }
-
-//   /**/
-//   return data;
-// };
 
 /* Функция удаления елемента из библиотеки и из галлереи */
 const smartRemovingFromLibrary = (filmId, librarySource, activeGallery = 'Home') => {
@@ -211,7 +185,6 @@ export const loadNextPageFromLibrary = page => {
   }
 
   if (!data) {
-    // showFailureMessage('Упс, чтото пошло не так...');
     return data;
   }
 

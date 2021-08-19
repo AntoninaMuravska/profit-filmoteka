@@ -35,6 +35,7 @@ export const renderGallery = function () {
   }
 };
 
+
 /*Функция добавления разметки*/
 export function createMarkup(data) {
   const movieCard = cardTpl(data);
@@ -61,6 +62,7 @@ export const renderLibrary = function (data) {
   refs.gallery.innerHTML = cardTpl(data.results);
   scrollReveal();
 };
+
 
 /*Функция для удаления заданного по id елемента из галереи*/
 export const removeElemFromGallery = function (filmId) {
@@ -93,6 +95,7 @@ export const getThrendesFilms = async (page = 1) => {
   return fetchData;
 };
 
+
 /*
  * Функция для получения популярных фильмов. если номер страницы не задан - тянет первую страницу,
  * иначе - заданную
@@ -105,6 +108,7 @@ export const getPopularFilms = async (page = 1) => {
     .catch(error => console.log(error));
   return fetchData;
 };
+
 
 /*
  * Функция для получения фильмов по рейтингу. если номер страницы не задан - тянет первую страницу,
@@ -119,6 +123,7 @@ export const getTopRatedFilms = async (page = 1) => {
   return fetchData;
 };
 
+
 /*
  * Функция для получения новинок. если номер страницы не задан - тянет первую страницу,
  * иначе - заданную
@@ -131,6 +136,7 @@ export const getUpcomingFilms = async (page = 1) => {
     .catch(error => console.log(error));
   return fetchData;
 };
+
 
 /*
  * Функция для получения фильмов с помощью поиска. если номер страницы не задан - тянет первую страницу,
@@ -145,6 +151,7 @@ export const getSearchedFilms = (page = 1) => {
     .catch(error => console.log(error));
   return fetchData;
 };
+
 
 //функция отрисовки фильмов по ключевому слову
 function onSearch(e) {
@@ -167,6 +174,7 @@ function onSearch(e) {
     return MyApi.searchQuery(inputValue);
   }
 }
+
 
 /*
  * Функция обработчик клика на кнопки WATCHED и QUEUE. вытягивает данные из библиотеки,
@@ -218,6 +226,7 @@ export const makeGalleryFromLibraryItems = async e => {
   refs.gallery.innerHTML =
     '<li class="empty"><p class="empty-text">there is nothing here...</p></li>';
 };
+
 
 /*
  * Функция-обработчик клика на нкопку Home (так же срабатывает на событии load) (отправляет запрос, получает данные,
@@ -291,37 +300,6 @@ export const makeGalleryFromFilmsByCathegory = async (sortName) => {
   }
 };
 
-// export const makeGalleryFromThrendesFilms = async () => {
-//   enableLoader('.section-gallery', 'Loading...');
-//   const genres = getGenres();
-//   let data = null;
-//   try {
-//     data = await getThrendesFilms();
-//   } catch (error) {
-//     console.log(error);
-//   }
-//   disableLoader('.section-gallery');
-
-//   paginationBarHide();
-
-//   if (data && data.results.length) {
-//     const paginationThrendesFilms = paginationInit(data.total_results);
-//     paginationThrendesFilms.on('afterMove', event => {
-//       paginationBarHide();
-//       clearMarkup(refs.gallery);
-//       setTimeout(scrollToHeader(), 0);
-//       setTimeout(async () => {
-//         enableLoader('.section-gallery', 'Loading...');
-//         const data = await getThrendesFilms(event.page);
-//         renderLibrary(genresTransformation(data, genres));
-//         paginationBarShow();
-//         disableLoader('.section-gallery');
-//       }, 100);
-//     });
-//     renderLibrary(genresTransformation(data, genres));
-//     paginationBarShow();
-//   }
-// };
 
 /*
  * Функция-обработчик клика на сабмит формы поиска (отправляет запрос, получает данные,
@@ -367,6 +345,7 @@ export const makeGalleryFromSearchedFilms = async e => {
   empty();
 };
 
+
 /*Функция получения объекта с жанрами и помещения его в session-storage*/
 export const fetchGenres = async () => {
   MyApi.genresList();
@@ -377,6 +356,7 @@ export const empty = function () {
   refs.gallery.innerHTML =
     '<li class="empty"><p class="empty-text">there is nothing here...</p></li>';
 };
+
 
 /*Функция обновления текущей странички галлереи библиотеки при удалении из нее елемента*/
 export const updateGalleryFromLibraryFilms = page => {
@@ -392,9 +372,4 @@ export const updateGalleryFromLibraryFilms = page => {
   empty();
 };
 
-
-// refs.trendingBtn.addEventListener('click', makeGalleryFromThrendesFilms);  //========== по умолчанию
-// refs.popularBtn.addEventListener('click', makeGalleryFromPopularFilms);
-// refs.topRatedBtn.addEventListener('click', makeGalleryFromTopRatedFilms);
-// refs.upcomingBtn.addEventListener('click', makeGalleryFromUpcomingFilms);
 
