@@ -37,9 +37,19 @@
         <td class='movie-card__cell'><b>{{genres}}</b></td>
       </tr>
       <tr>
+        {{#if actors}}
         <td class='movie-card__cell actors'>Actors</td>
         <td class='movie-card__cell'>{{actors}}</td>
+        {{/if}}
       </tr>
+        <tr>
+          {{#if homepage}}
+          <td class='movie-card__cell'>Home page</td>
+          <td class='movie-card__cell'>
+            <a class="movie-card__link" href="{{homepage}}" target="_blank" rel="noopener noreferrer">&lt&lt link &gt&gt</a>
+          </td>
+          {{/if}}
+        </tr>
     </table>
 
     <h3 class='movie-card__subtitle'><b>About</b></h3>
