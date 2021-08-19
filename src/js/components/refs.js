@@ -12,8 +12,6 @@ export default {
   body: document.querySelector('body'),
   themeSwitcher: document.querySelector('#theme-switch-toggle'),
   footerLink: document.querySelector('.footer__link'),
-  closeFooter: document.querySelector('.close'),
-  footerModal: document.querySelector('.footer_modal'),
   clearInputBtn: document.querySelector('.clear-input'),
   paginationBar: document.querySelector('#pagination'),
   trendingBtn: document.querySelector('.trending-btn'),
@@ -21,5 +19,4 @@ export default {
   topRatedBtn: document.querySelector('.toprated-btn'),
   upcomingBtn: document.querySelector('.upcoming-btn'),
   actors: document.querySelector('.actors')
-    
 };
