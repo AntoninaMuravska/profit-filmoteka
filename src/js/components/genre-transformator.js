@@ -6,7 +6,6 @@
 
 const genresTransformation = (dataObj, genresObj, genresLimit = 2) => {
   const data = { ...dataObj };
-  console.log(data);
   const isUnlimit = genresLimit === 'all' ? true : false;
 
   const genresChanging = (arr, { genres } = genresObj) => {
