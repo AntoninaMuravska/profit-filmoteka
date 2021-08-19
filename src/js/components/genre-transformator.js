@@ -6,6 +6,7 @@
 
 const genresTransformation = (dataObj, genresObj, genresLimit = 2) => {
   const data = { ...dataObj };
+  console.log(data);
   const isUnlimit = genresLimit === 'all' ? true : false;
 
   const genresChanging = (arr, { genres } = genresObj) => {
@@ -28,10 +29,18 @@ const genresTransformation = (dataObj, genresObj, genresLimit = 2) => {
 
   if (!isUnlimit) {
     data.results.map(elem => {
-      elem.genre_ids = genresChanging(elem.genre_ids, genresObj).join(', ');
+      if (elem.genre_ids.length === 0){
+        elem.genre_ids = "Unknown";
+      } else {
+        elem.genre_ids = genresChanging(elem.genre_ids, genresObj).join(', ');
+      }
     });
   } else {
-    data.genres = [...data.genres].map(elem => elem.name).join(', ');
+    if (data.genres.length === 0) {
+      data.genres = "Unknown";
+    } else {
+      data.genres = [...data.genres].map(elem => elem.name).join(', ');
+    }
   }
 
   return data;
