@@ -22,6 +22,7 @@ export default {
   closeFooter: document.querySelector('.close'),
   footerModal: document.querySelector('.footer_modal'),
   galleryButtons: document.querySelectorAll('.gallery-btn'),
-  selectionButtons: document.querySelector('.selection-buttons')
+  selectionButtons: document.querySelector('.selection-buttons'),
+  footerBackdrop: document.querySelector('.footer-backdrop')
 };
 
