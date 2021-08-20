@@ -13,13 +13,7 @@ export const paginationInit = totalItems => {
     centerAlign: false
   };
 
-  const windowWidth = document.documentElement.clientWidth;
-  if (windowWidth < 768) {
-    optionsTemplate.visiblePages = 3;
-  }
-
   const pagination = new Pagination('pagination', optionsTemplate);
-
   return pagination;
 };
 
