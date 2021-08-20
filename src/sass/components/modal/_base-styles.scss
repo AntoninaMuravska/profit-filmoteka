@@ -10,13 +10,11 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+
   background-color: var(--backdrop-background);
   opacity: 1;
   transition: var(--animation-duration) var(--timing-function);
-
-  @media screen and (max-width: 1023px) {
-    overflow-x: scroll;
-  }
+  overflow-x: scroll;
 }
 
 .modal-movie {
@@ -39,8 +37,8 @@
   box-shadow: 0px 5px 21px 10px rgba(38, 40, 41, 0.2);
 
   @media screen and (min-width: 768px) {
-    top: 50%;
-    transform: translate(-50%, -50%);
+    // top: 50%;
+    transform: translate(-50%, 20px);
     padding: 42px 30px 40px 28px;
     width: 618px;
     min-height: 420px;
@@ -96,4 +94,32 @@
 .modal-movie.is-hidden {
   opacity: 0;
   transition: opacity 250ms linear;
+}
+
+body.light-theme .modal-movie__backdrop::-webkit-scrollbar-track {
+  background-color: rgb(70, 70, 70, 0.1);
+}
+
+body.light-theme .modal-movie__backdrop::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f5f5f5;
+}
+
+body.light-theme .modal-movie__backdrop::-webkit-scrollbar-thumb {
+  background-color: rgb(20, 20, 20, 0.5);
+  border-radius: 5px;
+}
+
+body.dark-theme .modal-movie__backdrop::-webkit-scrollbar-track {
+  background-color: rgba(50, 50, 50, 1);
+}
+
+body.dark-theme .modal-movie__backdrop::-webkit-scrollbar {
+  width: 8px;
+  background-color: #929292;
+}
+
+body.dark-theme .modal-movie__backdrop::-webkit-scrollbar-thumb {
+  background-color: rgba(133, 130, 130, 0.3);
+  border-radius: 5px;
 }
