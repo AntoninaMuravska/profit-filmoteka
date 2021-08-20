@@ -1,6 +1,9 @@
 import refs from './refs';
-import { makeGalleryFromLibraryItems, makeGalleryFromFilmsByCathegory, makeGalleryFromSearchedFilms } from './gallery';
-
+import {
+  makeGalleryFromLibraryItems,
+  makeGalleryFromFilmsByCathegory,
+  makeGalleryFromSearchedFilms,
+} from './gallery';
 
 export const onHomeBtnClick = function (e) {
   const ratings = document.querySelectorAll('.rating');
@@ -11,11 +14,10 @@ export const onHomeBtnClick = function (e) {
     toggleClass(e);
   }
 
-  
   const selectionBtnsContainer = document.querySelector('.selection-buttons');
   selectionBtnsContainer.addEventListener('click', activateSelectionCathegoryBtnsContainer);
   selectionBtnsContainer.firstElementChild.click();
- 
+
   refs.headerForm.addEventListener('submit', makeGalleryFromSearchedFilms);
   refs.queueBtn.removeEventListener('click', onBtnClick);
   refs.watchedBtn.removeEventListener('click', onBtnClick);
@@ -30,10 +32,9 @@ export const onLibraryBtnClick = function (e) {
     toggleClass(e);
   }
 
-  
   const selectionBtnsContainer = document.querySelector('.selection-buttons');
   selectionBtnsContainer.removeEventListener('click', activateSelectionCathegoryBtnsContainer);
-  
+
   refs.headerForm.removeEventListener('submit', makeGalleryFromSearchedFilms);
   refs.queueBtn.addEventListener('click', onBtnClick);
   refs.watchedBtn.addEventListener('click', onBtnClick);
@@ -41,8 +42,8 @@ export const onLibraryBtnClick = function (e) {
 };
 
 function onBtnClick(e) {
-  toggleClass(e); 
-  makeGalleryFromLibraryItems(e); 
+  toggleClass(e);
+  makeGalleryFromLibraryItems(e);
 }
 
 //функция добавляет/удаляет классы с кнопок
@@ -72,13 +73,14 @@ function toggleClass(e) {
   refs.upcomingBtn.classList.toggle('visually-hidden');
 }
 
-
 /*обработчик клика на кнопки запроса данных по категориям*/
 const activateSelectionCathegoryBtnsContainer = e => {
   if (e.target.nodeName !== 'BUTTON') return;
-  [...e.target.parentNode.children].forEach(elem=>elem.classList.remove('is-active'));
+  const buttonsArray = [...e.target.parentNode.children];
+  buttonsArray.forEach(elem => {
+    elem.classList.remove('is-active');
+  });
   e.target.classList.add('is-active');
   const currentButton = e.target.dataset.name;
   makeGalleryFromFilmsByCathegory(currentButton);
-}
-
+};

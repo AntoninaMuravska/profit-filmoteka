@@ -20,6 +20,8 @@ export default {
   upcomingBtn: document.querySelector('.upcoming-btn'),
   actors: document.querySelector('.actors'),
   closeFooter: document.querySelector('.close'),
-  footerModal: document.querySelector('.footer_modal')
+  footerModal: document.querySelector('.footer_modal'),
+  galleryButtons: document.querySelectorAll('.gallery-btn'),
+  selectionButtons: document.querySelector('.selection-buttons')
 };
 
