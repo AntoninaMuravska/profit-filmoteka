@@ -13,10 +13,10 @@ refs.closeFooter.addEventListener('click', closeOpenFooterModal);
 refs.footerLink.addEventListener('click', closeOpenFooterModal);
 
 document.addEventListener('DOMContentLoaded', applyTheme);
+window.addEventListener('load',fetchGenres);
 window.addEventListener('load', () => {
-  setTimeout(fetchGenres,0);
   setTimeout(() => {
     refs.homeBtn.click();
     scrollUpInit();
-  }, 50);
+  }, 100);
 });
