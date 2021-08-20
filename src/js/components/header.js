@@ -11,11 +11,11 @@ export const onHomeBtnClick = function (e) {
     toggleClass(e);
   }
 
-  /*ДОБАВИТЬ НА ОТКРЫТИЕ 'HOME' (ПРИ ОТКРЫТИИ САЙТА ТОЖЕ НЕ ЗАБЫТЬ АКТИВИРОВАТЬ)*/
+  
   const selectionBtnsContainer = document.querySelector('.selection-buttons');
   selectionBtnsContainer.addEventListener('click', activateSelectionCathegoryBtnsContainer);
   selectionBtnsContainer.firstElementChild.click();
-  /****/
+ 
   refs.headerForm.addEventListener('submit', makeGalleryFromSearchedFilms);
   refs.queueBtn.removeEventListener('click', onBtnClick);
   refs.watchedBtn.removeEventListener('click', onBtnClick);
@@ -30,10 +30,10 @@ export const onLibraryBtnClick = function (e) {
     toggleClass(e);
   }
 
-  /****Снятие листенера */
+  
   const selectionBtnsContainer = document.querySelector('.selection-buttons');
   selectionBtnsContainer.removeEventListener('click', activateSelectionCathegoryBtnsContainer);
-  /***/
+  
   refs.headerForm.removeEventListener('submit', makeGalleryFromSearchedFilms);
   refs.queueBtn.addEventListener('click', onBtnClick);
   refs.watchedBtn.addEventListener('click', onBtnClick);
@@ -82,10 +82,3 @@ const activateSelectionCathegoryBtnsContainer = e => {
   makeGalleryFromFilmsByCathegory(currentButton);
 }
 
-
-/*ДОБАВИТЬ НА ОТКРЫТИЕ 'HOME' (ПРИ ОТКРЫТИИ САЙТА ТОЖЕ НЕ ЗАБЫТЬ АКТИВИРОВАТЬ)*/
-// const selectionBtnsContainer = document.querySelector('.selection-buttons');
-// selectionBtnsContainer.addEventListener('click', activateSelectionCathegoryBtnsContainer);
-
-/*ДОБАВИТЬ НА ЗАКРЫТИЕ 'HOME' ИЛИ ПРИ ОТКРЫТИИ 'MyLIBRARY' ВНАЧАЛЕ. РОЗКОМЕНТИТЕ */
-// selectionBtnsContainer.removeEventListener('click', activateSelectioCathegoryBtnsContainer);
