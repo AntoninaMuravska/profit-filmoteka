@@ -73,9 +73,7 @@ const onEscKeyPress = e => {
 export const getActors = async filmId => {
   const fetchData = MyApi.movieCast(filmId)
     .then(data => {
-      let mainActors = data.slice(0, 5).join(', '); // получили строку из 5 главных актеров, эту инфо нужно вставить в карточку
-      // console.log('data', data);                 // в табличке добавлено поле Actors и место под список актеров
-      // console.log('mainActors:', mainActors);
+      let mainActors = data.slice(0, 5).join(', '); 
       return mainActors;
     })
     .catch(error => {
