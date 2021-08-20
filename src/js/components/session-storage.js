@@ -39,7 +39,7 @@ const getFilm = function (id) {
       if (availabilityFilm) {
         return availabilityFilm;
       }
-      console.log('Упс....такого нет (((');
+      console.log('Oops .... there is no such thing((');
     } catch (error) {
       console.error('Get state error: ', error.message);
     }

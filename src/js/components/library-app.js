@@ -44,14 +44,14 @@ export const onButtonLibraryContainerClick = e => {
   if (isActive === 'true') {
     const targetFilm = getFilm(filmId);
     library.setData(targetFilm, librarySource);
-    showSuccesMessage(`Фильм успешно добавлен в библиотеку ${librarySource.toUpperCase()}`);
+    showSuccesMessage(`The movie was successfully added to the ${librarySource.toUpperCase()} library `);
     elem.dataset.active = 'false';
     elem.textContent = `remove from ${librarySource}`;
     nonTargetBtn.setAttribute('disabled', '');
   } else {
     const currentGallery = getCurrentGalleryName();
     smartRemovingFromLibrary(filmId, librarySource, currentGallery);
-    showSuccesMessage(`Фильм успешно удален из библиотеки ${librarySource.toUpperCase()}`);
+    showSuccesMessage(`Movie successfully removed from ${librarySource.toUpperCase()} library `);
     elem.dataset.active = 'true';
     elem.textContent = `add to ${librarySource}`;
     nonTargetBtn.removeAttribute('disabled');
@@ -83,12 +83,12 @@ export const getLibraryItems = e => {
   }
 
   if (!data) {
-    showFailureMessage('Ваша текущая галерея пуста!');
+    showFailureMessage('Your current library is empty!');
     return data;
   }
 
   if (data.page === data.total_pages) {
-    showWarningMessage('Это последние элементы в текущей галерее!');
+    showWarningMessage('These are the last items in the current gallery!');
     library.setEndStatus();
   }
 
@@ -103,7 +103,7 @@ export const loadMoreItems = () => {
   let data = null;
 
   if (library.isEndStatus) {
-    showFailureMessage('В вашей библиотеке больше нет элементов!');
+    showFailureMessage('There are no more items in your library!');
     return data;
   }
 
@@ -114,12 +114,12 @@ export const loadMoreItems = () => {
   }
 
   if (!data) {
-    showFailureMessage('Упс, чтото пошло не так...');
+    showFailureMessage('Oops, something went wrong...');
     return data;
   }
 
   if (data.page === data.total_pages) {
-    showWarningMessage('Это последние элементы в текущей галерее!');
+    showWarningMessage('These are the last items in the current gallery!');
     library.setEndStatus();
   }
 
@@ -189,7 +189,7 @@ export const loadNextPageFromLibrary = page => {
   }
 
   if (data.page === data.total_pages) {
-    showWarningMessage('Это последние элементы в текущей галерее!');
+    showWarningMessage('These are the last items in the current gallery!');
     library.setEndStatus();
   }
 
