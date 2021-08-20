@@ -1,6 +1,6 @@
 import refs from './refs';
 
-const { body:bodyRef, themeSwitcher:themeSwitcherRef,modal:modalRef } = refs;
+const { body:bodyRef, themeSwitcher:themeSwitcherRef,modal:modalRef, footerModal:footerModalRef } = refs;
 const Theme = {
     LIGHT: 'light-theme',
     DARK: 'dark-theme',
@@ -25,18 +25,21 @@ export const applyTheme = () => {
             themeSwitcherRef.checked = false;
             bodyRef.classList.add(Theme.LIGHT);
             modalRef.firstElementChild.classList.add(Theme.LIGHT);
+            footerModalRef.classList.add(Theme.LIGHT);
             break;
 
         case 'DARK':
             themeSwitcherRef.checked = true;
             bodyRef.classList.add(Theme.DARK);
             modalRef.firstElementChild.classList.add(Theme.DARK);
+            footerModalRef.classList.add(Theme.DARK);
             break;
 
         default:
             themeSwitcherRef.checked = false;
             bodyRef.classList.add(Theme.LIGHT);
             modalRef.firstElementChild.classList.add(Theme.LIGHT);
+            footerModalRef.classList.add(Theme.LIGHT);
             localStorage.setItem('Theme', 'LIGHT');
     }
 };
@@ -48,11 +51,13 @@ export const onChangeThemeSwitcherClick = () => {
     if (themeSwitcherRef.checked) {
         bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
         modalRef.firstElementChild.classList.replace(Theme.LIGHT, Theme.DARK);
+        footerModalRef.classList.replace(Theme.LIGHT, Theme.DARK);
         replaceLocalStorageThemeEntry('LIGHT','DARK');
     } else {
         bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
         modalRef.firstElementChild.classList.replace(Theme.DARK, Theme.LIGHT);
-        replaceLocalStorageThemeEntry('DARK','LIGHT');
+        footerModalRef.classList.replace(Theme.DARK, Theme.LIGHT);
+        replaceLocalStorageThemeEntry('DARK', 'LIGHT');
     }
 };
 
