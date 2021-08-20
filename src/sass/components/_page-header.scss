@@ -8,6 +8,7 @@
 
   padding-top: 46px;
   padding-bottom: 46px;
+  height: 230px;
 
   @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
     only screen and (min--moz-device-pixel-ratio: 1.5),
@@ -22,7 +23,6 @@
 }
 
 .back_library {
- 
   padding-bottom: 75px;
   background-color: rgba(24, 22, 22, 0.8);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
@@ -35,7 +35,6 @@
     only screen and (min-resolution: 144dpi) {
     background-image: url(../images/Rectangle_library_2x.jpg);
   }
-
 }
 
 .header__nav {
@@ -172,7 +171,7 @@
 }
 
 .header__library-buttons {
- position: relative;
+  position: relative;
   display: flex;
   justify-content: center;
 }
@@ -197,7 +196,7 @@
   border: 1px solid rgb(179, 16, 16);
 }
 
-.btn-first-absolute{
+.btn-first-absolute {
   position: absolute;
   left: 0;
   bottom: 5px;
@@ -207,12 +206,11 @@
     bottom: 0;
   }
   @media screen and (min-width: 1024px) {
-    left:  300px;
-   
+    left: 300px;
   }
 }
 
-.btn-second-absolute{
+.btn-second-absolute {
   position: absolute;
   right: 0;
   bottom: 5px;
@@ -224,7 +222,6 @@
 
   @media screen and (min-width: 1024px) {
     right: 300px;
-   
   }
 }
 
@@ -258,7 +255,6 @@
   align-items: center;
 
   width: 100px;
-  height: 30px;
 
   font-size: 12px;
   line-height: 1.167;
@@ -271,6 +267,11 @@
 
   @media screen and(max-width: 767px) {
     margin-bottom: 10px;
+    height: 20px;
+  }
+
+  @media screen and(min-width: 767px) {
+    height: 30px;
   }
 }
 
