@@ -4,9 +4,7 @@ import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
 const closeBackdrop = document.querySelector('.footer-backdrop');
 const theme = document.querySelector('.theme-switch');
 
-
 export const closeOpenFooterModal = function (e) {
- 
   refs.footerModal.classList.toggle('is-hidden');
   theme.classList.toggle('no-display');
   closeBackdrop.classList.toggle('is-hidden');
@@ -22,21 +20,21 @@ export const closeOpenFooterModal = function (e) {
 
 function onPressEscape(e) {
   if (e.code === 'Escape') {
-    closeModal()
+    closeModal();
   }
 }
 
-refs.footerBackdrop.addEventListener('click', onBackdropClick)
+refs.footerBackdrop.addEventListener('click', onBackdropClick);
 
 function onBackdropClick(e) {
   if (e.target === e.currentTarget) {
-    closeModal()
+    closeModal();
   }
 }
 
 function closeModal() {
+  enableBodyScroll(document.body);
   refs.footerModal.classList.add('is-hidden');
   theme.classList.add('no-display');
   closeBackdrop.classList.add('is-hidden');
 }
-
