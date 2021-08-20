@@ -12,6 +12,7 @@
   height: 40px;
   font-weight: 700;
   border: none;
+  border-radius: 5px;
   background-color: inherit;
 }
 
@@ -128,4 +129,11 @@ body.light-theme #pagination .tui-last-child {
 
 .tui-pagination .tui-page-btn {
   margin: 0;
+}
+
+body.light-theme #pagination .tui-first,
+body.light-theme #pagination .tui-last,
+body.light-theme #pagination .tui-prev,
+body.light-theme #pagination .tui-next {
+  background-color: #f7f7f7;
 }
